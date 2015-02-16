@@ -1,7 +1,8 @@
+package com.logexplorer.test;
 import java.io.Serializable;
 
 
-public class SimplClass implements Serializable {
+public class SimpleClass implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	protected int abc = 123;

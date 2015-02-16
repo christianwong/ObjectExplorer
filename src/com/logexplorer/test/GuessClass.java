@@ -1,3 +1,4 @@
+package com.logexplorer.test;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class GuessClass implements Serializable {
 	private Map<?, ?> aMap;
 	
 	@SuppressWarnings("unused")
-	private SimplClass aSimplClass = new SimplClass();
+	private SimpleClass aSimplClass = new SimpleClass();
 	
 	public int getaInteger() {
 		return aInteger;
