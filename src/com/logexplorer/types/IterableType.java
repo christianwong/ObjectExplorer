@@ -21,8 +21,9 @@ public class IterableType extends AbstractType {
 	public void processChilds() {
 		
 		Iterator<?> iterator = ((Iterable<?>) object).iterator();
+		int index = 0;
 		while(iterator.hasNext()) {
-			String name = Integer.toString(iterator.hashCode());
+			String name = Integer.toString(index++);
 			Object child = iterator.next();
 			
 			addChild(name, child);
