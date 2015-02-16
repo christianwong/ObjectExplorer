@@ -1,4 +1,4 @@
-package com.amdocs.logexplorer.types;
+package com.logexplorer.types;
 
 
 public abstract class AbstractType {

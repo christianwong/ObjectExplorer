@@ -1,4 +1,4 @@
-package com.amdocs.logexplorer.util;
+package com.logexplorer.util;
 
 import java.lang.reflect.Field;
 

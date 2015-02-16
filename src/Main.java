@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amdocs.logexplorer.factory.TypeFactory;
-import com.amdocs.logexplorer.types.AbstractType;
-import com.amdocs.logexplorer.util.TypeUtils;
+import com.logexplorer.factory.TypeFactory;
+import com.logexplorer.types.AbstractType;
+import com.logexplorer.util.TypeUtils;
 
 public class Main {
 
