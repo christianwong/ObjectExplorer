@@ -8,7 +8,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Object object = Tester.run(FILENAME);
-		TypeFactory.getType("OBJECT", object);
+		TypeFactory.getType("bin_object", object);
 	}
 
 }
