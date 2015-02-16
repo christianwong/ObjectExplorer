@@ -2,8 +2,10 @@ package com.amdocs.logexplorer.factory;
 
 import com.amdocs.logexplorer.types.AbstractType;
 import com.amdocs.logexplorer.types.ArrayType;
+import com.amdocs.logexplorer.types.BasicType;
 import com.amdocs.logexplorer.types.IterableType;
 import com.amdocs.logexplorer.types.MapType;
+import com.amdocs.logexplorer.types.ObjectType;
 
 public class TypeFactory {
 	
@@ -17,18 +19,13 @@ public class TypeFactory {
 			type = new IterableType(object);
 		} else if (MapType.isMap(object)) {
 			type = new MapType(object);
-		} else if (object instanceof Object) {
-			processObjectToString("OBJ", object);
+		} else if (BasicType.isBasicType(object)) {
+			type = new BasicType(object);
 		} else {
-			processObjectToString("ANY", object);
+			type = new ObjectType(object);
 		}
 		
 		return type;
-	}
-
-	private static void processObjectToString(String str, Object object) {
-		Class<?> type = null;//field.getType();
-		System.out.println(" + ("+str+":" + type + ") " + object.toString());
 	}
 
 }

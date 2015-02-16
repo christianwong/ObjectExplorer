@@ -15,9 +15,8 @@ public class MapType extends AbstractType {
 	}
 	
 	protected void processObject() {
-		Class<?> type = null;
 		
-		System.out.print(" + (MP:" + type + ") [ ");
+		System.out.print(" + (MAP) [ ");
 		
 		Map<?,?> map = (Map<?, ?>) object;
 		Iterator<?> iterator = map.keySet().iterator();

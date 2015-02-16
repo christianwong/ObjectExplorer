@@ -1,6 +1,5 @@
 package com.amdocs.logexplorer.types;
 
-import java.lang.reflect.Type;
 import java.util.Iterator;
 
 public class IterableType extends AbstractType {
@@ -15,9 +14,8 @@ public class IterableType extends AbstractType {
 	}
 	
 	protected void processObject() {
-		Type genericType = null;
 		
-		System.out.print(" + (IT:" + genericType + ") [ ");
+		System.out.print(" + (ITERABLE) [ ");
 		
 		Iterator<?> iterator = ((Iterable<?>) object).iterator();
 		while(iterator.hasNext()) {

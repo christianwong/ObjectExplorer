@@ -13,7 +13,7 @@ public class ArrayType extends AbstractType {
 	}
 	
 	protected void processObject() {
-		System.out.print(" + (AR:array) [ ");
+		System.out.print(" + (ARRAY) [ ");
 		
 		for (int i = 0; i < Array.getLength(object); i++) {
 			Object arrayElement = Array.get(object, i);

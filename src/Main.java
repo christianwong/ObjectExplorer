@@ -23,21 +23,18 @@ public class Main {
 	}
 
 	private static void analyzeObject(Object object) {
-		Class<? extends Object> objClass = object.getClass();
-
-		String canonicalName = objClass.getCanonicalName();
-		System.out.println("Canonical name: " + canonicalName);
 		
-		String name = objClass.getName();
-		System.out.println("name: "+ name);
-
+		Class<? extends Object> objClass = object.getClass();
 		Field[] fields = objClass.getDeclaredFields();
 		System.out.println("object has "+fields.length+" declared fields.");
+		
 		processFields(object, fields);
 	}
 
 	private static void processFields(Object object, Field[] fields) {
 		for (Field field : fields) {
+			
+			System.out.println("#Field is type: "+field.getGenericType());
 			
 			boolean accessible = TypeUtils.enableAccessible(field);
 			
