@@ -2,10 +2,10 @@ package com.logexplorer.types;
 
 import java.lang.reflect.Array;
 
+import com.logexplorer.consts.TypeConstants;
+
 public class ArrayType extends AbstractType {
 	
-	private static final String ATTR_LENGTH = "length";
-
 	public ArrayType(String name, Object object) {
 		super(name, object);
 	}
@@ -21,7 +21,8 @@ public class ArrayType extends AbstractType {
 	@Override
 	public void processChilds() {
 		int length = Array.getLength(object);
-		addChild(ATTR_LENGTH, length);
+		addChild(TypeConstants.ATTR_LENGTH, length);
+		
 		for (int idx = 0; idx < length; idx++) {
 			String name = Integer.toString(idx);
 			Object child = Array.get(object, idx);
