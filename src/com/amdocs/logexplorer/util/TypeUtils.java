@@ -16,4 +16,16 @@ public class TypeUtils {
 		return value;
 	}
 	
+	public static void resetAccessible(Field field, boolean accessible) {
+		field.setAccessible(accessible);
+	}
+
+	public static boolean enableAccessible(Field field) {
+		boolean accessible = field.isAccessible();
+		if(!accessible) {
+			field.setAccessible(true);
+		}
+		return accessible;
+	}
+	
 }

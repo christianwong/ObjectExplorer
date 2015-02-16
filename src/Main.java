@@ -10,6 +10,7 @@ import java.util.Map;
 
 import com.amdocs.logexplorer.factory.TypeFactory;
 import com.amdocs.logexplorer.types.AbstractType;
+import com.amdocs.logexplorer.util.TypeUtils;
 
 public class Main {
 
@@ -37,7 +38,13 @@ public class Main {
 
 	private static void processFields(Object object, Field[] fields) {
 		for (Field field : fields) {
-			AbstractType type = TypeFactory.getType(field, object);
+			
+			boolean accessible = TypeUtils.enableAccessible(field);
+			
+			Object value = TypeUtils.getFieldValue(object, field);
+			AbstractType type = TypeFactory.getType(value);
+			
+			TypeUtils.resetAccessible(field, accessible);
 		}
 	}
 

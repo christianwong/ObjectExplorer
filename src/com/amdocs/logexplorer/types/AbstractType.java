@@ -1,17 +1,18 @@
 package com.amdocs.logexplorer.types;
 
-import java.lang.reflect.Field;
 
 public abstract class AbstractType {
 
 	protected Object object;
-	protected Field field;
 	
 	@SuppressWarnings("unused")
 	private AbstractType() {}
-	protected AbstractType(Object object, Field field) {
+	
+	public AbstractType(Object object) {
 		this.object = object;
-		this.field = field;
+		processObject();
 	}
+	
+	protected abstract void processObject();
 
 }

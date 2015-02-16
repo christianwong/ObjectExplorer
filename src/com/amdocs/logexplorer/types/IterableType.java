@@ -1,39 +1,25 @@
 package com.amdocs.logexplorer.types;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.Iterator;
 
-import com.amdocs.logexplorer.util.TypeUtils;
-
 public class IterableType extends AbstractType {
 
-	public IterableType(Object object, Field field) {
-		super(object, field);
-		
-		processIterable();
+	public IterableType(Object object) {
+		super(object);
 	}
 
-	public static boolean isIterable(Object object, Field field) {
+	public static boolean isIterable(Object object) {
 		
-		Object value = TypeUtils.getFieldValue(object, field);
-		if (null == value) {
-			return false;
-		}
-		
-		return value instanceof Iterable;
+		return object instanceof Iterable;
 	}
 	
-	private void processIterable() {
-		Object value = TypeUtils.getFieldValue(object, field);
-		Type genericType = field.getGenericType();
-		if (null == value) {
-			return;
-		}
+	protected void processObject() {
+		Type genericType = null;
 		
-		System.out.print("   =(IT:" + genericType + ") [ ");
+		System.out.print(" + (IT:" + genericType + ") [ ");
 		
-		Iterator<?> iterator = ((Iterable<?>) value).iterator();
+		Iterator<?> iterator = ((Iterable<?>) object).iterator();
 		while(iterator.hasNext()) {
 			System.out.print(iterator.next()+" ");
 		}

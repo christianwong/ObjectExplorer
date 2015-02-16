@@ -1,37 +1,22 @@
 package com.amdocs.logexplorer.types;
 
 import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-
-import com.amdocs.logexplorer.util.TypeUtils;
 
 public class ArrayType extends AbstractType {
 	
-	public ArrayType(Object object, Field field) {
-		super(object, field);
-		
-		processArray();
+	public ArrayType(Object object) {
+		super(object);
 	}
 
-	public static boolean isArray(Object object, Field field) {
-		
-		Object value = TypeUtils.getFieldValue(object, field);
-		if (null == value) {
-			return false;
-		}
-		
-		return value.getClass().isArray();
+	public static boolean isArray(Object object) {
+		return object.getClass().isArray();
 	}
 	
-	private void processArray() {
-		Object value = TypeUtils.getFieldValue(object, field);
-		if (null == value) {
-			return;
-		}
-		System.out.print("   =(AR:array) [ ");
+	protected void processObject() {
+		System.out.print(" + (AR:array) [ ");
 		
-		for (int i = 0; i < Array.getLength(value); i++) {
-			Object arrayElement = Array.get(value, i);
+		for (int i = 0; i < Array.getLength(object); i++) {
+			Object arrayElement = Array.get(object, i);
 			System.out.print(arrayElement+" ");
 		}
 		
