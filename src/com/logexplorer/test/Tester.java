@@ -31,6 +31,18 @@ public class Tester {
 		return someObject;
 	}
 
+	private static void writeBinaryObject(String filename, Object object) {
+		try {
+			FileOutputStream fout = new FileOutputStream(filename);
+			ObjectOutputStream oos = new ObjectOutputStream(fout);
+			oos.writeObject(object);
+			oos.close();
+			fout.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	private static void createObject(String filename) {
 		GuessClass gc = new GuessClass();
 		gc.setaInteger(123);
@@ -58,16 +70,7 @@ public class Tester {
 		aComplexMap.put("SimplerClass", new SimpleClass());
 		gc.setaComplexMap(aComplexMap);
 
-		// serialize the Queue
-		System.out.println("serializing theData");
-		try {
-			FileOutputStream fout = new FileOutputStream(filename);
-			ObjectOutputStream oos = new ObjectOutputStream(fout);
-			oos.writeObject(gc);
-			oos.close();
-			fout.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		writeBinaryObject(filename, gc);
 	}
+
 }
