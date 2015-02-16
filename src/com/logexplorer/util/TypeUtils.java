@@ -2,7 +2,10 @@ package com.logexplorer.util;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import com.logexplorer.types.AbstractType;
 
 public class TypeUtils {
 	
@@ -77,6 +80,30 @@ public class TypeUtils {
 		}
 		
 		return name;
+	}
+
+	public static void print(AbstractType type) {
+		print(type, 0);
+	}
+	
+	private static void print(AbstractType type, int level) {
+		String name = type.getDisplayName();
+		String value = type.getDisplayValue();
+		List<AbstractType> childs = type.getChilds();
+		
+		String indentation = "";
+		for(int idx=0; idx<level; idx++) {
+			if (idx==level-1) {
+				indentation += " |- ";
+			} else {
+				indentation += " | ";
+			}
+		}
+		
+		System.out.println(indentation+name+":"+value);
+		for(AbstractType child : childs) {
+			print(child, level+1);
+		}
 	}
 	
 }

@@ -24,7 +24,7 @@ public class BasicType extends AbstractType {
 	public void processChilds() {}
 
 	@Override
-	protected String getDisplayValue() {
+	public String getDisplayValue() {
 		return object.toString();
 	}
 

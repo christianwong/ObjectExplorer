@@ -20,18 +20,18 @@ public abstract class AbstractType {
 		this.name = name;
 		this.object = object;
 		childs = new ArrayList<AbstractType>();
-		processObject();
+		//processObject();
 	}
 	
 	public List<AbstractType> getChilds() {
-		System.out.println("CHILDS:BEGIN");
+		//System.out.println("CHILDS:BEGIN");
 		
 		//remove all childs to process again.
 		childs.clear();
 
 		processChilds();
 
-		System.out.println("CHILDS:END");
+		//System.out.println("CHILDS:END");
 		return childs;
 	}
 	
@@ -40,10 +40,14 @@ public abstract class AbstractType {
 		childs.add(type);
 	}
 	
-	protected String getDisplayValue() {
+	public String getDisplayValue() {
 		return TypeUtils.formatClassName(object.getClass().toString());
 	}
-
+	
+	public String getDisplayName() {
+		return name;
+	}
+	
 	protected abstract void processObject();
 	protected abstract void processChilds();
 

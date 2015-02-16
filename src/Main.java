@@ -1,5 +1,7 @@
 import com.logexplorer.factory.TypeFactory;
 import com.logexplorer.test.Tester;
+import com.logexplorer.types.AbstractType;
+import com.logexplorer.util.TypeUtils;
 
 public class Main {
 
@@ -8,7 +10,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Object object = Tester.run(FILENAME);
-		TypeFactory.getType("bin_object", object);
+		AbstractType type = TypeFactory.getType("bin_object", object);
+		TypeUtils.print(type);
 	}
 
 }
