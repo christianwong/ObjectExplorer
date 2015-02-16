@@ -3,7 +3,6 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,21 +30,9 @@ public class Main {
 		String name = objClass.getName();
 		System.out.println("name: "+ name);
 
-//		Method[] methods = objClass.getMethods();
-//		processMethods(canonicalName, methods);
-
 		Field[] fields = objClass.getDeclaredFields();
 		System.out.println("object has "+fields.length+" declared fields.");
 		processFields(object, fields);
-	}
-
-	private static void processMethods(String canonicalName, Method[] methods) {
-		for (Method method : methods) {
-			String methodname = method.toString();
-			if (methodname.contains(canonicalName)) {
-				System.out.println(" + method: " + methodname);
-			}
-		}
 	}
 
 	private static void processFields(Object object, Field[] fields) {

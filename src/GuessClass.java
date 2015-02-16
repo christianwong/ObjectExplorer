@@ -16,6 +16,7 @@ public class GuessClass implements Serializable {
 	private List<?> aArrayList;
 	private Map<?, ?> aMap;
 	
+	@SuppressWarnings("unused")
 	private SimplClass aSimplClass = new SimplClass();
 	
 	public int getaInteger() {
