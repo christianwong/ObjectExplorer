@@ -53,6 +53,11 @@ public class Tester {
 		aMap.put("three", new Integer(3));
 		gc.setaMap(aMap);
 
+		Map<String, SimpleClass> aComplexMap = new HashMap<String, SimpleClass>();
+		aComplexMap.put("SimpleClass", new SimpleClass());
+		aComplexMap.put("SimplerClass", new SimpleClass());
+		gc.setaComplexMap(aComplexMap);
+
 		// serialize the Queue
 		System.out.println("serializing theData");
 		try {

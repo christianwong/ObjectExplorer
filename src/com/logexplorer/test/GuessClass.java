@@ -16,6 +16,7 @@ public class GuessClass implements Serializable {
 	private int aIntArray[];
 	private List<?> aArrayList;
 	private Map<?, ?> aMap;
+	private Map<?, ?> aComplexMap;
 	
 	@SuppressWarnings("unused")
 	private SimpleClass aSimplClass = new SimpleClass();
@@ -82,6 +83,14 @@ public class GuessClass implements Serializable {
 
 	public void setaMap(Map<?, ?> aMap) {
 		this.aMap = aMap;
+	}
+
+	public Map<?, ?> getaComplexMap() {
+		return aComplexMap;
+	}
+
+	public void setaComplexMap(Map<?, ?> aComplexMap) {
+		this.aComplexMap = aComplexMap;
 	}
 
 }
