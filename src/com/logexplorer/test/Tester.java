@@ -55,6 +55,12 @@ public class Tester {
 		iarray[1] = 2;
 		iarray[2] = 3;
 		gc.setaIntArray(iarray);
+		
+		SimpleClass simpleArray[] = new SimpleClass[2];
+		simpleArray[0] = new SimpleClass();
+		simpleArray[1] = new SimpleClass();
+		gc.setaSimpleClass(simpleArray);
+		
 		List<String> aArrayList = new ArrayList<String>();
 		aArrayList.add("first");
 		aArrayList.add("seccond");
