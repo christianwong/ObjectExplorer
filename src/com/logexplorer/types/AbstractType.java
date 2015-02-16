@@ -40,6 +40,11 @@ public abstract class AbstractType {
 		childs.add(type);
 	}
 	
+	protected void addFirstChild(String name, Object child) {
+		AbstractType type = TypeFactory.getType(name, child);
+		childs.add(0, type);
+	}
+	
 	public String getDisplayValue() {
 		return TypeUtils.formatClassName(object.getClass().toString());
 	}

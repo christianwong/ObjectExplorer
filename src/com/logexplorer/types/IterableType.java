@@ -2,6 +2,8 @@ package com.logexplorer.types;
 
 import java.util.Iterator;
 
+import com.logexplorer.consts.TypeConstants;
+
 public class IterableType extends AbstractType {
 
 	public IterableType(String name, Object object) {
@@ -29,6 +31,7 @@ public class IterableType extends AbstractType {
 			addChild(name, child);
 		}
 		
+		addFirstChild(TypeConstants.ATTR_LENGTH, index);
 	}
 
 }
