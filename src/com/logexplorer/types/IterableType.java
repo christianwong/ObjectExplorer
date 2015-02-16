@@ -4,8 +4,8 @@ import java.util.Iterator;
 
 public class IterableType extends AbstractType {
 
-	public IterableType(Object object) {
-		super(object);
+	public IterableType(String name, Object object) {
+		super(name, object);
 	}
 
 	public static boolean isIterable(Object object) {
@@ -14,15 +14,20 @@ public class IterableType extends AbstractType {
 	}
 	
 	protected void processObject() {
-		
-		System.out.print(" + (ITERABLE) [ ");
+		System.out.println(" ##ITERABLE:"+name);
+	}
+
+	@Override
+	public void processChilds() {
 		
 		Iterator<?> iterator = ((Iterable<?>) object).iterator();
 		while(iterator.hasNext()) {
-			System.out.print(iterator.next()+" ");
+			String name = Integer.toString(iterator.hashCode());
+			Object child = iterator.next();
+			
+			addChild(name, child);
 		}
 		
-		System.out.println("]");
 	}
 
 }

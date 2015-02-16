@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class MapType extends AbstractType {
 
-	public MapType(Object object) {
-		super(object);
+	public MapType(String name, Object object) {
+		super(name, object);
 	}
 
 	public static boolean isMap(Object object) {
@@ -15,17 +15,19 @@ public class MapType extends AbstractType {
 	}
 	
 	protected void processObject() {
-		
-		System.out.print(" + (MAP) [ ");
-		
+		System.out.println(" ##MAP:"+name);
+	}
+
+	@Override
+	public void processChilds() {
 		Map<?,?> map = (Map<?, ?>) object;
 		Iterator<?> iterator = map.keySet().iterator();
 		while(iterator.hasNext()) {
-			String key = (String) iterator.next();
-			System.out.print(key+"->"+map.get(key).toString()+" ");
+			String name = (String) iterator.next();
+			Object child = map.get(name);
+			
+			addChild(name, child);
 		}
-		
-		System.out.println("]");
 	}
 
 }

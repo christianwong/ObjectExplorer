@@ -1,10 +1,11 @@
 package com.logexplorer.types;
 
 
+
 public class BasicType extends AbstractType {
 
-	public BasicType(Object object) {
-		super(object);
+	public BasicType(String name, Object object) {
+		super(name, object);
 	}
 	
 	public static boolean isBasicType(Object object) {
@@ -16,7 +17,10 @@ public class BasicType extends AbstractType {
 
 	@Override
 	protected void processObject() {
-		System.out.println(" + (BASIC) "+object.toString());
+		System.out.println(" ##BASIC:"+name+"="+object.toString());
 	}
+
+	@Override
+	public void processChilds() {}
 
 }
