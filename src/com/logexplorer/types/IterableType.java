@@ -14,7 +14,7 @@ public class IterableType extends AbstractType {
 	}
 	
 	protected void processObject() {
-		System.out.println(" ##ITERABLE:"+name);
+		System.out.println(" ##ITERABLE:"+name+"="+getDisplayValue());
 	}
 
 	@Override

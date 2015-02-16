@@ -13,7 +13,7 @@ public class ObjectType extends AbstractType {
 	
 	@Override
 	protected void processObject() {
-		System.out.println(" ##OBJECT:"+name);
+		System.out.println(" ##OBJECT:"+name+"="+getDisplayValue());
 	}
 
 	@Override

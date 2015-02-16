@@ -13,7 +13,7 @@ public class ArrayType extends AbstractType {
 	}
 	
 	protected void processObject() {
-		System.out.println(" ##ARRAY:"+name);
+		System.out.println(" ##ARRAY:"+name+"="+getDisplayValue());
 	}
 
 	@Override
@@ -23,7 +23,6 @@ public class ArrayType extends AbstractType {
 			Object child = Array.get(object, idx);
 			addChild(name, child);
 		}
-
 	}
 
 }

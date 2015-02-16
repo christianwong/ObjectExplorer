@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.logexplorer.factory.TypeFactory;
+import com.logexplorer.util.TypeUtils;
 
 
 public abstract class AbstractType {
@@ -39,6 +40,10 @@ public abstract class AbstractType {
 		childs.add(type);
 	}
 	
+	protected String getDisplayValue() {
+		return TypeUtils.formatClassName(object.getClass().toString());
+	}
+
 	protected abstract void processObject();
 	protected abstract void processChilds();
 

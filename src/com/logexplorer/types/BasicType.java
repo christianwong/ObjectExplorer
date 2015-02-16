@@ -17,10 +17,15 @@ public class BasicType extends AbstractType {
 
 	@Override
 	protected void processObject() {
-		System.out.println(" ##BASIC:"+name+"="+object.toString());
+		System.out.println(" ##BASIC:"+name+"="+getDisplayValue());
 	}
 
 	@Override
 	public void processChilds() {}
+
+	@Override
+	protected String getDisplayValue() {
+		return object.toString();
+	}
 
 }
