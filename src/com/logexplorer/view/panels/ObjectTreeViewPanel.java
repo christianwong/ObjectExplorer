@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 
 import com.logexplorer.model.types.AbstractType;
 
@@ -35,11 +36,22 @@ public class ObjectTreeViewPanel extends JPanel {
 		// add childs to tree
 		for (AbstractType child : type.getChilds()) {
 			DefaultMutableTreeNode dummyChild = new DefaultMutableTreeNode(child.getDisplayName());
+//			dummyChild.add(new DefaultMutableTreeNode("dummy"));
 			root.add(dummyChild);
 		}
 		
 		// set up the tree
 		tree = new JTree(root);
+		tree.setShowsRootHandles(true);
+		
+		// Hide icons from tree
+		DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+		renderer.setLeafIcon(null);
+		renderer.setClosedIcon(null);
+		renderer.setOpenIcon(null);
+		renderer.setDisabledIcon(null);
+		tree.setCellRenderer(renderer);
+		
 		add(tree, BorderLayout.CENTER);
 		add(new JScrollPane(tree));
 	}
