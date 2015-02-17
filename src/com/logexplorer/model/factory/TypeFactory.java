@@ -1,11 +1,11 @@
-package com.logexplorer.factory;
+package com.logexplorer.model.factory;
 
-import com.logexplorer.types.AbstractType;
-import com.logexplorer.types.ArrayType;
-import com.logexplorer.types.BasicType;
-import com.logexplorer.types.IterableType;
-import com.logexplorer.types.MapType;
-import com.logexplorer.types.ObjectType;
+import com.logexplorer.model.types.AbstractType;
+import com.logexplorer.model.types.ArrayType;
+import com.logexplorer.model.types.BasicType;
+import com.logexplorer.model.types.IterableType;
+import com.logexplorer.model.types.MapType;
+import com.logexplorer.model.types.ObjectType;
 
 public class TypeFactory {
 	

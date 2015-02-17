@@ -1,10 +1,10 @@
-package com.logexplorer.util;
+package com.logexplorer.model.util;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
-import com.logexplorer.consts.TypeConstants;
-import com.logexplorer.types.AbstractType;
+import com.logexplorer.model.consts.TypeConstants;
+import com.logexplorer.model.types.AbstractType;
 
 public class TypeUtils {
 	

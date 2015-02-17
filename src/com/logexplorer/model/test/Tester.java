@@ -1,4 +1,4 @@
-package com.logexplorer.test;
+package com.logexplorer.model.test;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

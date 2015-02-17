@@ -1,4 +1,4 @@
-package com.logexplorer.types;
+package com.logexplorer.model.types;
 
 import java.util.Iterator;
 import java.util.Map;

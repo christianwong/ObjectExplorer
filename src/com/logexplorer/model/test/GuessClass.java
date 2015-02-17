@@ -1,4 +1,4 @@
-package com.logexplorer.test;
+package com.logexplorer.model.test;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;

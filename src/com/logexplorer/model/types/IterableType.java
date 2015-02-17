@@ -1,8 +1,8 @@
-package com.logexplorer.types;
+package com.logexplorer.model.types;
 
 import java.util.Iterator;
 
-import com.logexplorer.consts.TypeConstants;
+import com.logexplorer.model.consts.TypeConstants;
 
 public class IterableType extends AbstractType {
 

@@ -1,4 +1,4 @@
-package com.logexplorer.consts;
+package com.logexplorer.model.consts;
 
 import java.util.HashMap;
 import java.util.Map;

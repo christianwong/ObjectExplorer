@@ -1,4 +1,4 @@
-package com.logexplorer.types;
+package com.logexplorer.model.types;
 
 
 

@@ -1,10 +1,10 @@
-package com.logexplorer.types;
+package com.logexplorer.model.types;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.logexplorer.factory.TypeFactory;
-import com.logexplorer.util.TypeUtils;
+import com.logexplorer.model.factory.TypeFactory;
+import com.logexplorer.model.util.TypeUtils;
 
 
 public abstract class AbstractType {

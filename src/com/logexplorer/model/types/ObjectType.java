@@ -1,8 +1,8 @@
-package com.logexplorer.types;
+package com.logexplorer.model.types;
 
 import java.lang.reflect.Field;
 
-import com.logexplorer.util.TypeUtils;
+import com.logexplorer.model.util.TypeUtils;
 
 
 public class ObjectType extends AbstractType {

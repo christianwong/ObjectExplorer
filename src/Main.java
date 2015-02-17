@@ -1,7 +1,7 @@
-import com.logexplorer.factory.TypeFactory;
-import com.logexplorer.test.Tester;
-import com.logexplorer.types.AbstractType;
-import com.logexplorer.util.TypeUtils;
+import com.logexplorer.model.factory.TypeFactory;
+import com.logexplorer.model.test.Tester;
+import com.logexplorer.model.types.AbstractType;
+import com.logexplorer.model.util.TypeUtils;
 
 public class Main {
 
