@@ -41,7 +41,7 @@ public class TypeUtils {
 			return basicType;
 		}
 		
-		// Remove "class" from name
+		// Remove ";" from name
 		if (name.endsWith(TypeConstants.COLON)) {
 			name = name.substring(0, name.length()-1);
 		}
