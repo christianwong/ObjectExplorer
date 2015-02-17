@@ -14,6 +14,18 @@ public class ObjectTreeViewPanel extends JFrame {
 	private JTree tree;
 
 	public ObjectTreeViewPanel(AbstractType type) {
+		
+		initTree(type);
+		add(new JScrollPane(tree));
+		
+		// set up the frame
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("ObjectTreeViewPanel");
+		this.pack();
+		this.setVisible(true);
+	}
+
+	private void initTree(AbstractType type) {
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode(type.getDisplayName());
 
 		// add childs to tree
@@ -25,13 +37,6 @@ public class ObjectTreeViewPanel extends JFrame {
 		// set up the tree
 		tree = new JTree(root);
 		add(tree);
-		add(new JScrollPane(tree));
-		
-		// set up the frame
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("ObjectTreeViewPanel");
-		this.pack();
-		this.setVisible(true);
 	}
 	
 	public static void demo(final AbstractType type) {
