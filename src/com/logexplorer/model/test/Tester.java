@@ -57,8 +57,9 @@ public class Tester {
 		gc.setaIntArray(iarray);
 		
 		SimpleClass simpleArray[] = new SimpleClass[2];
-		simpleArray[0] = new SimpleClass();
-		simpleArray[1] = new SimpleClass();
+		SimpleClass simpleClass = new SimpleClass();
+		simpleArray[0] = simpleClass;
+		simpleArray[1] = simpleClass;
 		gc.setaSimpleClass(simpleArray);
 		
 		List<String> aArrayList = new ArrayList<String>();
