@@ -47,4 +47,6 @@ public class ObjectTreeViewPanel extends JFrame {
 				new ObjectTreeViewPanel(type);
 			}
 		});
-	}}
+	}
+	
+}

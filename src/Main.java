@@ -2,7 +2,7 @@ import com.logexplorer.model.factory.TypeFactory;
 import com.logexplorer.model.test.Tester;
 import com.logexplorer.model.types.AbstractType;
 import com.logexplorer.model.util.TypeUtils;
-import com.logexplorer.view.panels.ObjectTreeViewPanel;
+import com.logexplorer.view.panels.ObjectTextViewPanel;
 
 public class Main {
 
@@ -15,7 +15,8 @@ public class Main {
 		TypeUtils.print(type);
 
 //		TreeDemo.run();
-		ObjectTreeViewPanel.demo(type);
+//		ObjectTreeViewPanel.demo(type);
+		ObjectTextViewPanel.demo();
 	}
 
 }
