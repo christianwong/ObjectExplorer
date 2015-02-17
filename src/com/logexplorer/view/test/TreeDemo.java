@@ -87,7 +87,7 @@ public class TreeDemo extends JFrame {
         selectedLabel.setText(prefix+":"+selectedNode.getUserObject().toString());
 	}
 
-	public static void main(String[] args) {
+	public static void run() {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
