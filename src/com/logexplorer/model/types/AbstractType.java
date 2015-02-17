@@ -26,20 +26,9 @@ public abstract class AbstractType {
 	}
 	
 	public List<AbstractType> getChilds() {
-		//remove all childs to process again.
-		childs.clear();
+		resetChilds();
 		processChilds();
 		return childs;
-	}
-	
-	protected void addChild(String name, Object child) {
-		AbstractType type = TypeFactory.getType(name, child);
-		childs.add(type);
-	}
-	
-	protected void addFirstChild(String name, Object child) {
-		AbstractType type = TypeFactory.getType(name, child);
-		childs.add(0, type);
 	}
 	
 	public String getDisplayValue() {
@@ -50,7 +39,21 @@ public abstract class AbstractType {
 		return name;
 	}
 	
+	public void resetChilds() {
+		childs.clear();
+	}
+	
 	protected abstract void processObject();
 	protected abstract void processChilds();
 
+	protected void addChild(String name, Object child) {
+		AbstractType type = TypeFactory.getType(name, child);
+		childs.add(type);
+	}
+	
+	protected void addFirstChild(String name, Object child) {
+		AbstractType type = TypeFactory.getType(name, child);
+		childs.add(0, type);
+	}
+	
 }
