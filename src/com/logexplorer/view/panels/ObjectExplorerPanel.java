@@ -10,7 +10,7 @@ import javax.swing.SwingUtilities;
 
 import com.logexplorer.model.types.AbstractType;
 
-public class ObjectExplorerPanel extends JFrame {
+public class ObjectExplorerPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private ObjectSearchBarPanel searchPanel;
@@ -19,7 +19,7 @@ public class ObjectExplorerPanel extends JFrame {
 	
 	public ObjectExplorerPanel(AbstractType type) {	
 		
-		setMinimumSize(new Dimension(300,300));
+		setLayout(new BorderLayout());
 
 		// init components
 		searchPanel = new ObjectSearchBarPanel();
@@ -39,9 +39,7 @@ public class ObjectExplorerPanel extends JFrame {
 		bodyPanel.add(textPanel);
 				
 		// set up the frame
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("ObjectExplorerPanel");
-		this.pack();
+		setMinimumSize(new Dimension(300,300));
 		this.setVisible(true);
 	}
 	
@@ -49,7 +47,12 @@ public class ObjectExplorerPanel extends JFrame {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				new ObjectExplorerPanel(type);
+				JFrame frame = new JFrame();
+				frame.add(new ObjectExplorerPanel(type), BorderLayout.CENTER);
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setTitle("Panel Demo");
+				frame.pack();
+				frame.setVisible(true);
 			}
 		});
 	}

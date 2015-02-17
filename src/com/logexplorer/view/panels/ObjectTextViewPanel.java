@@ -40,7 +40,7 @@ public class ObjectTextViewPanel extends JPanel {
 		this.setMinimumSize(new Dimension(600,600));
 		this.setVisible(true);
 	}
-
+	
 	public static void demo() {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
