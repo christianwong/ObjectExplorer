@@ -1,7 +1,5 @@
 package com.logexplorer.model.types;
 
-
-
 public class BasicType extends AbstractType {
 
 	public BasicType(String name, Object object) {
