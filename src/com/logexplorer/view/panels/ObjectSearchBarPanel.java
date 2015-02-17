@@ -1,14 +1,16 @@
 package com.logexplorer.view.panels;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-public class ObjectSearchBarPanel extends JFrame {
+public class ObjectSearchBarPanel extends JPanel {
 
 	private static final String GO = "Go!";
 	private static final String VALUE = "value";
@@ -51,10 +53,7 @@ public class ObjectSearchBarPanel extends JFrame {
 		searchButton.setEnabled(false);
 		add(searchButton);
 				
-		// set up the frame
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("ObjectSearchBarPanel");
-		this.pack();
+		// set up the panel
 		this.setVisible(true);
 	}
 	
@@ -62,7 +61,12 @@ public class ObjectSearchBarPanel extends JFrame {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				new ObjectSearchBarPanel();
+				JFrame frame = new JFrame();
+				frame.add(new ObjectSearchBarPanel(), BorderLayout.CENTER);
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setTitle("Panel Demo");
+				frame.pack();
+				frame.setVisible(true);
 			}
 		});
 	}
