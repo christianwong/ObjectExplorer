@@ -15,8 +15,8 @@ public class ObjectTreeViewPanel extends JFrame {
 
 	public ObjectTreeViewPanel(AbstractType type) {
 		
+		// init components
 		initTree(type);
-		add(new JScrollPane(tree));
 		
 		// set up the frame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,6 +37,7 @@ public class ObjectTreeViewPanel extends JFrame {
 		// set up the tree
 		tree = new JTree(root);
 		add(tree);
+		add(new JScrollPane(tree));
 	}
 	
 	public static void demo(final AbstractType type) {
