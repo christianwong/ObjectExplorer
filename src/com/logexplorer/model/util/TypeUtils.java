@@ -77,28 +77,42 @@ public class TypeUtils {
 		return name;
 	}
 
-	public static void print(AbstractType type) {
-		print(type, 0);
+	public static String describeFullType(AbstractType type) {
+		return describeType(type, true, 0);
 	}
 	
-	private static void print(AbstractType type, int level) {
+	public static String describeKnownType(AbstractType type) {
+		return describeType(type, false, 0);
+	}
+
+	private static String describeType(AbstractType type, boolean forceExpand, int level) {
 		String name = type.getDisplayName();
 		String value = type.getDisplayValue();
-		List<AbstractType> childs = type.getChilds();
 		
+		String indentation = getIndentation(level);
+		String typeString = indentation+name+":"+value;
+
+		if (forceExpand || type.hasChilds()) {
+			List<AbstractType> childs = type.getChilds();
+
+			for(AbstractType child : childs) {
+				typeString += "\n"+describeType(child, forceExpand, level+1);
+			}
+		}
+		
+		return typeString;
+	}
+
+	private static String getIndentation(int level) {
 		String indentation = "";
-		for(int idx=0; idx<level; idx++) {
-			if (idx==level-1) {
+		for (int idx = 0; idx < level; idx++) {
+			if (idx == level - 1) {
 				indentation += " |- ";
 			} else {
 				indentation += " | ";
 			}
 		}
-		
-		System.out.println(indentation+name+":"+value);
-		for(AbstractType child : childs) {
-			print(child, level+1);
-		}
+		return indentation;
 	}
 	
 }

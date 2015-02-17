@@ -24,8 +24,6 @@ public class TypeFactory {
 		} else {
 			type = new ObjectType(name, object);
 		}
-		
-		type.getChilds();
 		return type;
 	}
 

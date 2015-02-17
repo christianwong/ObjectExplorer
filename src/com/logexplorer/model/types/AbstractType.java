@@ -31,6 +31,10 @@ public abstract class AbstractType {
 		return childs;
 	}
 	
+	public boolean hasChilds() {
+		return !childs.isEmpty();
+	}
+	
 	public String getDisplayValue() {
 		return TypeUtils.formatClassName(object.getClass().toString())+":"+objectID;
 	}
