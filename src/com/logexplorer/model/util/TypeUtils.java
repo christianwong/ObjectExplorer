@@ -41,26 +41,39 @@ public class TypeUtils {
 			return basicType;
 		}
 		
-		// Remove ";" from name
-		if (name.endsWith(TypeConstants.COLON)) {
-			name = name.substring(0, name.length()-1);
-		}
+		name = removeColon(name);
+		name = removeClass(name);
+		name = processArray(name);
+		name = removePackageInformation(name);
 		
-		// Remove "class" from name
-		if (name.startsWith(TypeConstants.CLASS)) {
-			name = name.substring(TypeConstants.CLASS.length());
-		}
-		
-		// Process Array
-		if (name.startsWith(TypeConstants.ARRAY_NOTATION)) {
-			name = formatClassName(name.substring(TypeConstants.ARRAY_NOTATION.length()))+"[]"; 
-		}
+		return name;
+	}
 
-		// Remove package information
+	private static String removePackageInformation(String name) {
 		if (name.contains(TypeConstants.DOT)) {
 			name = name.substring(name.lastIndexOf(TypeConstants.DOT)+1);
 		}
-		
+		return name;
+	}
+
+	private static String processArray(String name) {
+		if (name.startsWith(TypeConstants.ARRAY_NOTATION)) {
+			name = formatClassName(name.substring(TypeConstants.ARRAY_NOTATION.length()))+"[]"; 
+		}
+		return name;
+	}
+
+	private static String removeClass(String name) {
+		if (name.startsWith(TypeConstants.CLASS)) {
+			name = name.substring(TypeConstants.CLASS.length());
+		}
+		return name;
+	}
+
+	private static String removeColon(String name) {
+		if (name.endsWith(TypeConstants.COLON)) {
+			name = name.substring(0, name.length()-1);
+		}
 		return name;
 	}
 
