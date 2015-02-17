@@ -11,6 +11,7 @@ public abstract class AbstractType {
 
 	protected String name;
 	protected Object object;
+	protected String objectID;
 	protected List<AbstractType> childs;
 	
 	@SuppressWarnings("unused")
@@ -19,19 +20,15 @@ public abstract class AbstractType {
 	public AbstractType(String name, Object object) {
 		this.name = name;
 		this.object = object;
-		childs = new ArrayList<AbstractType>();
+		this.objectID = Integer.toString(System.identityHashCode(object));
+		this.childs = new ArrayList<AbstractType>();
 		//processObject();
 	}
 	
 	public List<AbstractType> getChilds() {
-		//System.out.println("CHILDS:BEGIN");
-		
 		//remove all childs to process again.
 		childs.clear();
-
 		processChilds();
-
-		//System.out.println("CHILDS:END");
 		return childs;
 	}
 	
@@ -46,7 +43,7 @@ public abstract class AbstractType {
 	}
 	
 	public String getDisplayValue() {
-		return TypeUtils.formatClassName(object.getClass().toString());
+		return TypeUtils.formatClassName(object.getClass().toString())+":"+objectID;
 	}
 	
 	public String getDisplayName() {
