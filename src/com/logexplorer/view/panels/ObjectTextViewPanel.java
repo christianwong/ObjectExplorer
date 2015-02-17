@@ -29,9 +29,11 @@ public class ObjectTextViewPanel extends JPanel {
 		add(knownObjectLabel, BorderLayout.NORTH);
 		
 		knownObjectText = new JTextArea();
+		knownObjectText.setEnabled(false);
 		add(knownObjectText, BorderLayout.CENTER);
 		
 		viewFullObjectButton = new JButton(VIEW_FULL_OBJECT);
+		viewFullObjectButton.setEnabled(false);
 		add(viewFullObjectButton, BorderLayout.SOUTH);
 		
 		// set up the panel

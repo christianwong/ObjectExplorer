@@ -2,8 +2,10 @@ package com.logexplorer.view.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import com.logexplorer.model.types.AbstractType;
@@ -23,11 +25,18 @@ public class ObjectExplorerPanel extends JFrame {
 		searchPanel = new ObjectSearchBarPanel();
 		add(searchPanel, BorderLayout.NORTH);
 		
+		GridLayout bodyPanelLayout = new GridLayout(1,2);
+		bodyPanelLayout.setHgap(5);
+
+		JPanel bodyPanel = new JPanel();
+		bodyPanel.setLayout(bodyPanelLayout);
+		add(bodyPanel, BorderLayout.CENTER);
+		
 		treePanel = new ObjectTreeViewPanel(type);
-		add(treePanel, BorderLayout.CENTER);
+		bodyPanel.add(treePanel);
 		
 		textPanel = new ObjectTextViewPanel();
-		add(textPanel, BorderLayout.EAST);
+		bodyPanel.add(textPanel);
 				
 		// set up the frame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
