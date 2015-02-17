@@ -6,12 +6,12 @@ import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-public class ViewTester extends JFrame {
+public class TreeDemo extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JTree tree;
 
-	public ViewTester() {
+	public TreeDemo() {
 		// create the root node
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("bin_object : GuessClass");
 		
@@ -51,7 +51,7 @@ public class ViewTester extends JFrame {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				new ViewTester();
+				new TreeDemo();
 			}
 		});
 	}
