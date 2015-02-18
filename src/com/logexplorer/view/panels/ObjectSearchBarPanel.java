@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import com.logexplorer.view.events.SearchCallback;
+import com.logexplorer.view.utils.ViewUtils;
 
 public class ObjectSearchBarPanel extends JPanel {
 
@@ -72,14 +73,12 @@ public class ObjectSearchBarPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				if (attributeText.getText().trim().isEmpty()) {
-					attributeText.setText(STAR);
-				}
-				
-				if (valueText.getText().trim().isEmpty()) {
-					valueText.setText(STAR);
-				}
-				
+				System.out.println("searchButton:actionPerformed called. Attribute is: '"+attributeText.getText()+
+						"', value is: '"+valueText.getText()+"', callback is: "+callback+".");
+
+				ViewUtils.setDefaultValue(attributeLabel, STAR);
+				ViewUtils.setDefaultValue(valueLabel, STAR);
+
 				if (callback != null) {
 					callback.onSearch(attributeText.getText(), valueText.getText());
 				}
