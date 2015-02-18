@@ -18,13 +18,16 @@ public class ControllerTest {
 	private SearchCallback searchCallback;
 	
 	private ObjectExplorerPanel view;
+	private AbstractType type;
 	private JFrame frame;
 	
 	public ControllerTest(AbstractType type) {
+		this.type = type;
+		
 		initCallbacks();
 
 		// set up view
-		view = new ObjectExplorerPanel(type);
+		view = new ObjectExplorerPanel(this.type);
 		view.setNodeCallback(nodeCallback);
 		view.setTextViewCallback(textViewCallback);
 		
@@ -42,18 +45,19 @@ public class ControllerTest {
 		nodeCallback = new NodeCallback() {
 			
 			@Override
-			public void onExpandNode() {
-				System.out.println("onExpandNode called");
+			public void onExpandNode(String code) {
+				System.out.println("onExpandNode called: "+code);
 			}
 			
 			@Override
-			public void onCollapseNode() {
-				System.out.println("onCollapseNode called");
+			public void onCollapseNode(String code) {
+				System.out.println("onCollapseNode called: "+code);
 			}
 			
 			@Override
-			public void onClickNode() {
-				System.out.println("onClickNode called");
+			public void onClickNode(String code) {
+//				String description = TypeUtils.describeKnownType(type);
+				view.setKnownObjectText(code);
 			}
 		};
 		

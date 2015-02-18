@@ -12,6 +12,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.TreePath;
 
 import com.logexplorer.model.types.AbstractType;
 import com.logexplorer.view.events.NodeCallback;
@@ -71,15 +72,19 @@ public class ObjectTreeViewPanel extends JPanel {
 
 			@Override
 			public void treeExpanded(TreeExpansionEvent event) {
+				TreePath path = event.getPath();
+				String code = path.getLastPathComponent().toString();
 				if (null != callback) {
-					callback.onExpandNode();
+					callback.onExpandNode(code);
 				}
 			}
 
 			@Override
 			public void treeCollapsed(TreeExpansionEvent event) {
+				TreePath path = event.getPath();
+				String code = path.getLastPathComponent().toString();
 				if (null != callback) {
-					callback.onCollapseNode();
+					callback.onCollapseNode(code);
 				}
 			}
 		});
@@ -87,9 +92,11 @@ public class ObjectTreeViewPanel extends JPanel {
 		tree.addTreeSelectionListener(new TreeSelectionListener() {
 
 			@Override
-			public void valueChanged(TreeSelectionEvent e) {
+			public void valueChanged(TreeSelectionEvent event) {
+				TreePath path = event.getPath();
+				String code = path.getLastPathComponent().toString();
 				if (null != callback) {
-					callback.onClickNode();
+					callback.onClickNode(code);
 				}
 			}
 

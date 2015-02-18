@@ -63,4 +63,8 @@ public class ObjectTextViewPanel extends JPanel {
 		this.callback = callback;
 	}
 	
+	public void setKnownObjectText(String description) {
+		knownObjectText.setText(description);
+	}
+	
 }

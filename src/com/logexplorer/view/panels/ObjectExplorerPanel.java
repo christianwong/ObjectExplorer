@@ -56,4 +56,8 @@ public class ObjectExplorerPanel extends JPanel {
 		searchPanel.setSearchCallback(callback);
 	}
 	
+	public void setKnownObjectText(String description) {
+		textPanel.setKnownObjectText(description);
+	}
+	
 }

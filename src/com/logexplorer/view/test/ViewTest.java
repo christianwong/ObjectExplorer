@@ -24,18 +24,18 @@ public class ViewTest {
 		nodeCallback = new NodeCallback() {
 			
 			@Override
-			public void onExpandNode() {
-				System.out.println("onExpandNode called");
+			public void onExpandNode(String code) {
+				System.out.println("onExpandNode called: "+code);
 			}
 			
 			@Override
-			public void onCollapseNode() {
-				System.out.println("onCollapseNode called");
+			public void onCollapseNode(String code) {
+				System.out.println("onCollapseNode called: "+code);
 			}
 			
 			@Override
-			public void onClickNode() {
-				System.out.println("onClickNode called");
+			public void onClickNode(String code) {
+				System.out.println("onClickNode called: "+code);
 			}
 		};
 		
