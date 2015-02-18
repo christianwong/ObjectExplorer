@@ -3,11 +3,9 @@ package com.logexplorer.view.panels;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
-import javax.swing.SwingUtilities;
 import javax.swing.event.TreeExpansionEvent;
 import javax.swing.event.TreeExpansionListener;
 import javax.swing.event.TreeSelectionEvent;
@@ -97,38 +95,6 @@ public class ObjectTreeViewPanel extends JPanel {
 	
 	public void setNodeCallback(final NodeCallback callback) {
 		this.callback  = callback;
-	}
-	
-	public static void demo(final AbstractType type) {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				JFrame frame = new JFrame();
-				ObjectTreeViewPanel panel = new ObjectTreeViewPanel(type);
-//				panel.setNodeCallback(new NodeCallback() {
-//					
-//					@Override
-//					public void onExpandNode() {
-//						System.out.println("ObjectTreeViewPanel:onExpandNode called!");
-//					}
-//					
-//					@Override
-//					public void onCollapseNode() {
-//						System.out.println("ObjectTreeViewPanel:onCollapseNode called!");
-//					}
-//					
-//					@Override
-//					public void onClickNode() {
-//						System.out.println("ObjectTreeViewPanel:onClickNode called!");
-//					}
-//				});
-				frame.add(panel, BorderLayout.CENTER);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.setTitle("Panel Demo");
-				frame.pack();
-				frame.setVisible(true);
-			}
-		});
 	}
 	
 }

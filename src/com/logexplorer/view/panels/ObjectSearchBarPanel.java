@@ -1,16 +1,13 @@
 package com.logexplorer.view.panels;
 
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 import com.logexplorer.view.events.SearchCallback;
 import com.logexplorer.view.utils.ViewUtils;
@@ -90,26 +87,4 @@ public class ObjectSearchBarPanel extends JPanel {
 		this.callback = callback;
 	}
 	
-	public static void demo() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				JFrame frame = new JFrame();
-				ObjectSearchBarPanel panel = new ObjectSearchBarPanel();
-//				panel.setSearchCallback(new SearchCallback() {
-//					
-//					@Override
-//					public void onSearch(String attribute, String value) {
-//						System.out.println("SearchCallback called!! attribute:'"+attribute+"', value'"+value+"'.");
-//					}
-//				});
-				frame.add(panel, BorderLayout.CENTER);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.setTitle("Panel Demo");
-				frame.pack();
-				frame.setVisible(true);
-			}
-		});
-	}
-
 }

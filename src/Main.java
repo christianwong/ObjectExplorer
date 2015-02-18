@@ -2,7 +2,7 @@ import com.logexplorer.model.factory.TypeFactory;
 import com.logexplorer.model.test.Tester;
 import com.logexplorer.model.types.AbstractType;
 import com.logexplorer.model.util.TypeUtils;
-import com.logexplorer.view.panels.ObjectExplorerPanel;
+import com.logexplorer.view.test.ViewTest;
 
 public class Main {
 
@@ -23,10 +23,10 @@ public class Main {
 		System.out.println("###### FULL TYPE\n"+fullType);
 
 //		TreeDemo.run();
-//		ObjectTreeViewPanel.demo(type);
-//		ObjectTextViewPanel.demo();
-//		ObjectSearchBarPanel.demo();
-		ObjectExplorerPanel.demo(type);
+//		ViewTest.runTreeDemo(type);
+//		ViewTest.runTextDemo();
+//		ViewTest.runSearchDemo();
+		ViewTest.run(type);
 	}
 
 }

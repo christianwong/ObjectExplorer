@@ -6,11 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
 
 import com.logexplorer.view.events.TextViewCallback;
 
@@ -65,26 +63,4 @@ public class ObjectTextViewPanel extends JPanel {
 		this.callback = callback;
 	}
 	
-	public static void demo() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				JFrame frame = new JFrame();
-				ObjectTextViewPanel panel = new ObjectTextViewPanel();
-//				panel.setTextViewCallback(new TextViewCallback() {
-//					
-//					@Override
-//					public void onViewFullObject() {
-//						System.out.println("TextViewCallback called!");
-//					}
-//				});
-				frame.add(panel, BorderLayout.CENTER);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.setTitle("Panel Demo");
-				frame.pack();
-				frame.setVisible(true);
-			}
-		});
-	}
-
 }
