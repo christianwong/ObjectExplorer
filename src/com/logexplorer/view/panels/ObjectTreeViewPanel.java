@@ -18,6 +18,7 @@ import com.logexplorer.view.events.NodeCallback;
 
 public class ObjectTreeViewPanel extends JPanel {
 
+	private static final String DUMMY_LEAF = "dummy";
 	private static final long serialVersionUID = 1L;
 	private JTree tree;
 	private NodeCallback callback;
@@ -41,7 +42,7 @@ public class ObjectTreeViewPanel extends JPanel {
 		for (AbstractType child : type.getChilds()) {
 			DefaultMutableTreeNode dummyChild = new DefaultMutableTreeNode(child.getDisplayName());
 			if (child.hasChilds()) {
-				dummyChild.add(new DefaultMutableTreeNode("dummy"));
+				dummyChild.add(new DefaultMutableTreeNode(DUMMY_LEAF));
 			}
 			root.add(dummyChild);
 		}
