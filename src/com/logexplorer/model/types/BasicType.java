@@ -26,4 +26,9 @@ public class BasicType extends AbstractType {
 		return object.toString();
 	}
 
+	@Override
+	public boolean hasChilds() {
+		return false;
+	}
+
 }

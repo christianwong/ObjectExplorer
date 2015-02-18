@@ -18,8 +18,7 @@ public class ObjectType extends AbstractType {
 
 	@Override
 	public void processChilds() {
-		Class<? extends Object> objClass = object.getClass();
-		Field[] fields = objClass.getDeclaredFields();
+		Field[] fields = getFields();
 		
 		for (Field field : fields) {
 			
@@ -31,6 +30,16 @@ public class ObjectType extends AbstractType {
 			
 			TypeUtils.resetAccessible(field, accessible);
 		}
+	}
+
+	private Field[] getFields() {
+		Class<? extends Object> objClass = object.getClass();
+		return objClass.getDeclaredFields();
+	}
+
+	@Override
+	public boolean hasChilds() {
+		return getFields().length > 0;
 	}
 
 }

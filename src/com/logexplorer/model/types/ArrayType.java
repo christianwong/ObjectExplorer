@@ -30,4 +30,9 @@ public class ArrayType extends AbstractType {
 		}
 	}
 
+	@Override
+	public boolean hasChilds() {
+		return true;
+	}
+
 }

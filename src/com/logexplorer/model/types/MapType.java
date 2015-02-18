@@ -3,6 +3,8 @@ package com.logexplorer.model.types;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.logexplorer.model.consts.TypeConstants;
+
 public class MapType extends AbstractType {
 
 	public MapType(String name, Object object) {
@@ -20,6 +22,7 @@ public class MapType extends AbstractType {
 
 	@Override
 	public void processChilds() {
+		
 		Map<?,?> map = (Map<?, ?>) object;
 		Iterator<?> iterator = map.keySet().iterator();
 		while(iterator.hasNext()) {
@@ -28,6 +31,13 @@ public class MapType extends AbstractType {
 			
 			addChild(name, child);
 		}
+		
+		addFirstChild(TypeConstants.ATTR_LENGTH, map.keySet().size());
+	}
+
+	@Override
+	public boolean hasChilds() {
+		return true;
 	}
 
 }

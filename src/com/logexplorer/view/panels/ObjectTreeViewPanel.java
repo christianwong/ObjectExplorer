@@ -23,14 +23,14 @@ public class ObjectTreeViewPanel extends JPanel {
 	private NodeCallback callback;
 
 	public ObjectTreeViewPanel(AbstractType type) {
-		
+
 		setLayout(new BorderLayout());
-		
+
 		// init components
 		initTree(type);
-		
+
 		// set up the frame
-		this.setMinimumSize(new Dimension(500,600));
+		this.setMinimumSize(new Dimension(500, 600));
 		this.setVisible(true);
 	}
 
@@ -40,7 +40,9 @@ public class ObjectTreeViewPanel extends JPanel {
 		// add childs to tree
 		for (AbstractType child : type.getChilds()) {
 			DefaultMutableTreeNode dummyChild = new DefaultMutableTreeNode(child.getDisplayName());
-//			dummyChild.add(new DefaultMutableTreeNode("dummy"));
+			if (child.hasChilds()) {
+				dummyChild.add(new DefaultMutableTreeNode("dummy"));
+			}
 			root.add(dummyChild);
 		}
 		
@@ -65,14 +67,14 @@ public class ObjectTreeViewPanel extends JPanel {
 	private void initCallbacks() {
 		callback = null;
 		tree.addTreeExpansionListener(new TreeExpansionListener() {
-			
+
 			@Override
 			public void treeExpanded(TreeExpansionEvent event) {
-				if (null!= callback) {
+				if (null != callback) {
 					callback.onExpandNode();
 				}
 			}
-			
+
 			@Override
 			public void treeCollapsed(TreeExpansionEvent event) {
 				if (null != callback) {
@@ -80,21 +82,21 @@ public class ObjectTreeViewPanel extends JPanel {
 				}
 			}
 		});
-		
+
 		tree.addTreeSelectionListener(new TreeSelectionListener() {
-			
+
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
-				if (null!= callback) {
+				if (null != callback) {
 					callback.onClickNode();
 				}
 			}
 
 		});
 	}
-	
+
 	public void setNodeCallback(final NodeCallback callback) {
-		this.callback  = callback;
+		this.callback = callback;
 	}
-	
+
 }
