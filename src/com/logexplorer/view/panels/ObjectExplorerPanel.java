@@ -9,6 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import com.logexplorer.model.types.AbstractType;
+import com.logexplorer.view.events.NodeCallback;
+import com.logexplorer.view.events.SearchCallback;
+import com.logexplorer.view.events.TextViewCallback;
 
 public class ObjectExplorerPanel extends JPanel {
 
@@ -43,16 +46,63 @@ public class ObjectExplorerPanel extends JPanel {
 		this.setVisible(true);
 	}
 	
+	public void setNodeCallback(final NodeCallback callback) {
+		treePanel.setNodeCallback(callback);
+	}
+	
+	public void setTextViewCallback(final TextViewCallback callback) {
+		textPanel.setTextViewCallback(callback);
+	}
+	
+	public void setSearchCallback(final SearchCallback callback) {
+		searchPanel.setSearchCallback(callback);
+	}
+	
 	public static void demo(final AbstractType type) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				JFrame frame = new JFrame();
-				frame.add(new ObjectExplorerPanel(type), BorderLayout.CENTER);
+				ObjectExplorerPanel panel = new ObjectExplorerPanel(type);
+				frame.add(panel, BorderLayout.CENTER);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setTitle("Panel Demo");
 				frame.pack();
 				frame.setVisible(true);
+				
+				panel.setNodeCallback(new NodeCallback() {
+					
+					@Override
+					public void onExpandNode() {
+						System.out.println("onExpandNode called");
+					}
+					
+					@Override
+					public void onCollapseNode() {
+						System.out.println("onCollapseNode called");
+					}
+					
+					@Override
+					public void onClickNode() {
+						System.out.println("onClickNode called");
+					}
+				});
+				
+				panel.setTextViewCallback(new TextViewCallback() {
+					
+					@Override
+					public void onViewFullObject() {
+						System.out.println("onViewFullObject called");
+					}
+				});
+				
+				panel.setSearchCallback(new SearchCallback() {
+					
+					@Override
+					public void onSearch(String attribute, String value) {
+						System.out.println("setSearchCallback('"+attribute+"', '"+value+"') called");
+					}
+				});
 			}
 		});
 	}
