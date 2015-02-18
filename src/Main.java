@@ -2,6 +2,7 @@ import com.logexplorer.model.factory.TypeFactory;
 import com.logexplorer.model.test.Tester;
 import com.logexplorer.model.types.AbstractType;
 import com.logexplorer.model.util.TypeUtils;
+import com.logexplorer.view.panels.ObjectExplorerPanel;
 
 public class Main {
 
@@ -11,15 +12,13 @@ public class Main {
 		
 		Object object = Tester.run(FILENAME);
 		AbstractType type = TypeFactory.getType("bin_object", object);
-		
-		// expand root type
-		type.getChilds();
-		
-		String knownType = TypeUtils.describeKnownType(type);
-		System.out.println("###### KNOWN TYPE\n"+knownType);
-		
-		String fullType = TypeUtils.describeFullType(type);
-		System.out.println("###### FULL TYPE\n"+fullType);
+		TypeUtils.print(type);
+
+//		TreeDemo.run();
+//		ObjectTreeViewPanel.demo(type);
+//		ObjectTextViewPanel.demo();
+//		ObjectSearchBarPanel.demo();
+		ObjectExplorerPanel.demo(type);
 	}
 
 }
