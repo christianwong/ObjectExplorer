@@ -12,7 +12,15 @@ public class Main {
 		
 		Object object = Tester.run(FILENAME);
 		AbstractType type = TypeFactory.getType("bin_object", object);
-		TypeUtils.print(type);
+		
+		// expand root type
+		type.getChilds();
+		
+		String knownType = TypeUtils.describeKnownType(type);
+		System.out.println("###### KNOWN TYPE\n"+knownType);
+		
+		String fullType = TypeUtils.describeFullType(type);
+		System.out.println("###### FULL TYPE\n"+fullType);
 
 //		TreeDemo.run();
 //		ObjectTreeViewPanel.demo(type);
