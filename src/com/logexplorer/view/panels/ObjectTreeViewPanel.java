@@ -22,6 +22,7 @@ public class ObjectTreeViewPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTree tree;
+	private NodeCallback callback;
 
 	public ObjectTreeViewPanel(AbstractType type) {
 		
@@ -57,43 +58,28 @@ public class ObjectTreeViewPanel extends JPanel {
 		renderer.setDisabledIcon(null);
 		tree.setCellRenderer(renderer);
 		
-		// TODO - remove from here
-		setNodeCallback(new NodeCallback() {
-			
-			@Override
-			public void onExpandNode() {
-				System.out.println("ObjectTreeViewPanel:onExpandNode called!");
-			}
-			
-			@Override
-			public void onCollapseNode() {
-				System.out.println("ObjectTreeViewPanel:onCollapseNode called!");
-			}
-			
-			@Override
-			public void onClickNode() {
-				System.out.println("ObjectTreeViewPanel:onClickNode called!");
-			}
-		});
+		initCallbacks();
 		
 		add(tree, BorderLayout.CENTER);
 		add(new JScrollPane(tree));
 	}
-	
-	public void setNodeCallback(final NodeCallback callback) {
 
-		// TODO - need to remove previous listeners
-		
+	private void initCallbacks() {
+		callback = null;
 		tree.addTreeExpansionListener(new TreeExpansionListener() {
 			
 			@Override
 			public void treeExpanded(TreeExpansionEvent event) {
-				callback.onExpandNode();
+				if (null!= callback) {
+					callback.onExpandNode();
+				}
 			}
 			
 			@Override
 			public void treeCollapsed(TreeExpansionEvent event) {
-				callback.onCollapseNode();
+				if (null != callback) {
+					callback.onCollapseNode();
+				}
 			}
 		});
 		
@@ -101,12 +87,16 @@ public class ObjectTreeViewPanel extends JPanel {
 			
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
-				callback.onClickNode();
+				if (null!= callback) {
+					callback.onClickNode();
+				}
 			}
 
 		});
-
-
+	}
+	
+	public void setNodeCallback(final NodeCallback callback) {
+		this.callback  = callback;
 	}
 	
 	public static void demo(final AbstractType type) {

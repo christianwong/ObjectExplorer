@@ -28,6 +28,7 @@ public class ObjectSearchBarPanel extends JPanel {
 	private JLabel valueLabel;
 	private JTextField valueText;
 	private JButton searchButton;
+	private SearchCallback callback;
 	
 	public ObjectSearchBarPanel() {
 		
@@ -57,30 +58,27 @@ public class ObjectSearchBarPanel extends JPanel {
 //		searchButton.setEnabled(false);
 		add(searchButton);
 		
-		// TODO - Remove from here
-		setSearchCallback(new SearchCallback() {
-			
-			@Override
-			public void onSearch(String attribute, String value) {
-				System.out.println("SearchCallback called!! attribute:'"+attribute+"', value'"+value+"'.");
-			}
-		});
+		initCallbacks();
 				
 		// set up the panel
 		this.setVisible(true);
 	}
-	
-	public void setSearchCallback(final SearchCallback callback) {
-		
-		// TODO - remove previous listeners
-		
+
+	private void initCallbacks() {
+		callback = null;
 		searchButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				callback.onSearch(attributeText.getText(), valueText.getText());
+				if (callback != null) {
+					callback.onSearch(attributeText.getText(), valueText.getText());
+				}
 			}
 		});
+	}
+	
+	public void setSearchCallback(final SearchCallback callback) {
+		this.callback = callback;
 	}
 	
 	public static void demo() {

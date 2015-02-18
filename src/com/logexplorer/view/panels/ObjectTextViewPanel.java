@@ -23,6 +23,7 @@ public class ObjectTextViewPanel extends JPanel {
 	private JLabel knownObjectLabel;
 	private JTextArea knownObjectText;
 	private JButton viewFullObjectButton;
+	private TextViewCallback callback;
 	
 	public ObjectTextViewPanel() {
 		
@@ -40,31 +41,28 @@ public class ObjectTextViewPanel extends JPanel {
 //		viewFullObjectButton.setEnabled(false);
 		add(viewFullObjectButton, BorderLayout.SOUTH);
 		
-		// TODO - remove from here
-		setTextViewCallback(new TextViewCallback() {
-			
-			@Override
-			public void onViewFullObject() {
-				System.out.println("TextViewCallback called!");
-			}
-		});
+		initCallbacks();
 		
 		// set up the panel
 		this.setMinimumSize(new Dimension(600,600));
 		this.setVisible(true);
 	}
-	
-	public void setTextViewCallback(final TextViewCallback callback) {
-		
-		// TODO - remove previous listeners
-		
+
+	private void initCallbacks() {
+		callback = null;
 		viewFullObjectButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				callback.onViewFullObject();
+				if (null != callback) {
+					callback.onViewFullObject();
+				}
 			}
 		});
+	}
+	
+	public void setTextViewCallback(final TextViewCallback callback) {
+		this.callback = callback;
 	}
 	
 	public static void demo() {
