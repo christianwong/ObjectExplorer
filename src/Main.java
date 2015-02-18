@@ -1,8 +1,8 @@
+import com.logexplorer.controller.test.ControllerTest;
 import com.logexplorer.model.factory.TypeFactory;
 import com.logexplorer.model.test.Tester;
 import com.logexplorer.model.types.AbstractType;
 import com.logexplorer.model.util.TypeUtils;
-import com.logexplorer.view.test.ViewTest;
 
 public class Main {
 
@@ -26,7 +26,9 @@ public class Main {
 //		ViewTest.runTreeDemo(type);
 //		ViewTest.runTextDemo();
 //		ViewTest.runSearchDemo();
-		ViewTest.run(type);
+//		ViewTest.run(type);
+		
+		ControllerTest.run(type);
 	}
 
 }
