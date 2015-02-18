@@ -13,11 +13,32 @@ import com.logexplorer.view.panels.ObjectExplorerPanel;
 
 public class ControllerTest {
 
-	private static NodeCallback nodeCallback;
-	private static TextViewCallback textViewCallback;
-	private static SearchCallback searchCallback;
+	private NodeCallback nodeCallback;
+	private TextViewCallback textViewCallback;
+	private SearchCallback searchCallback;
 	
-	static {
+	private ObjectExplorerPanel view;
+	private JFrame frame;
+	
+	public ControllerTest(AbstractType type) {
+		initCallbacks();
+
+		// set up view
+		view = new ObjectExplorerPanel(type);
+		view.setNodeCallback(nodeCallback);
+		view.setTextViewCallback(textViewCallback);
+		
+		// set up callbacks
+		view.setNodeCallback(nodeCallback);
+		view.setTextViewCallback(textViewCallback);
+		view.setSearchCallback(searchCallback);
+
+		// set up frame
+		frame = new JFrame();
+		frame.add(view, BorderLayout.CENTER);
+}
+
+	private void initCallbacks() {
 		nodeCallback = new NodeCallback() {
 			
 			@Override
@@ -53,21 +74,19 @@ public class ControllerTest {
 		};
 	}
 	
+	public void show() {
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("Panel Demo");
+		frame.pack();
+		frame.setVisible(true);
+	}
+	
 	public static void run(final AbstractType type) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				JFrame frame = new JFrame();
-				ObjectExplorerPanel panel = new ObjectExplorerPanel(type);
-				frame.add(panel, BorderLayout.CENTER);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.setTitle("Panel Demo");
-				frame.pack();
-				frame.setVisible(true);
-				
-				panel.setNodeCallback(nodeCallback);
-				panel.setTextViewCallback(textViewCallback);
-				panel.setSearchCallback(searchCallback);
+				ControllerTest controller = new ControllerTest(type);
+				controller.show();
 			}
 		});
 	}
