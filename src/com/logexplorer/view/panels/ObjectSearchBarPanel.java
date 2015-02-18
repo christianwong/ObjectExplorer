@@ -16,6 +16,7 @@ import com.logexplorer.view.events.SearchCallback;
 
 public class ObjectSearchBarPanel extends JPanel {
 
+	private static final String STAR = "*";
 	private static final String GO = "Go!";
 	private static final String VALUE = "value";
 	private static final String ATTRIBUTE = "attribute";
@@ -42,7 +43,7 @@ public class ObjectSearchBarPanel extends JPanel {
 //		attributeLabel.setEnabled(false);
 		add(attributeLabel);
 		
-		attributeText = new JTextField(15);
+		attributeText = new JTextField(STAR, 15);
 //		attributeText.setEnabled(false);
 		add(attributeText);
 		
@@ -50,7 +51,7 @@ public class ObjectSearchBarPanel extends JPanel {
 //		valueLabel.setEnabled(false);
 		add(valueLabel);
 		
-		valueText = new JTextField(15);
+		valueText = new JTextField(STAR, 15);
 //		valueText.setEnabled(false);
 		add(valueText);
 		
@@ -70,6 +71,15 @@ public class ObjectSearchBarPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				if (attributeText.getText().trim().isEmpty()) {
+					attributeText.setText(STAR);
+				}
+				
+				if (valueText.getText().trim().isEmpty()) {
+					valueText.setText(STAR);
+				}
+				
 				if (callback != null) {
 					callback.onSearch(attributeText.getText(), valueText.getText());
 				}
