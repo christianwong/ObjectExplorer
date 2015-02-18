@@ -2,6 +2,8 @@ package com.logexplorer.view.panels;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+
+import com.logexplorer.view.events.SearchCallback;
 
 public class ObjectSearchBarPanel extends JPanel {
 
@@ -34,27 +38,49 @@ public class ObjectSearchBarPanel extends JPanel {
 		add(searchLabel);
 		
 		attributeLabel = new JLabel(ATTRIBUTE);
-		attributeLabel.setEnabled(false);
+//		attributeLabel.setEnabled(false);
 		add(attributeLabel);
 		
 		attributeText = new JTextField(15);
-		attributeText.setEnabled(false);
+//		attributeText.setEnabled(false);
 		add(attributeText);
 		
 		valueLabel = new JLabel(VALUE);
-		valueLabel.setEnabled(false);
+//		valueLabel.setEnabled(false);
 		add(valueLabel);
 		
 		valueText = new JTextField(15);
-		valueText.setEnabled(false);
+//		valueText.setEnabled(false);
 		add(valueText);
 		
 		searchButton = new JButton(GO);
-		searchButton.setEnabled(false);
+//		searchButton.setEnabled(false);
 		add(searchButton);
+		
+		// TODO - Remove from here
+		setSearchCallback(new SearchCallback() {
+			
+			@Override
+			public void onSearch(String attribute, String value) {
+				System.out.println("SearchCallback called!! attribute:'"+attribute+"', value'"+value+"'.");
+			}
+		});
 				
 		// set up the panel
 		this.setVisible(true);
+	}
+	
+	public void setSearchCallback(final SearchCallback callback) {
+		
+		// TODO - remove previous listeners
+		
+		searchButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				callback.onSearch(attributeText.getText(), valueText.getText());
+			}
+		});
 	}
 	
 	public static void demo() {
@@ -62,7 +88,15 @@ public class ObjectSearchBarPanel extends JPanel {
 			@Override
 			public void run() {
 				JFrame frame = new JFrame();
-				frame.add(new ObjectSearchBarPanel(), BorderLayout.CENTER);
+				ObjectSearchBarPanel panel = new ObjectSearchBarPanel();
+//				panel.setSearchCallback(new SearchCallback() {
+//					
+//					@Override
+//					public void onSearch(String attribute, String value) {
+//						System.out.println("SearchCallback called!! attribute:'"+attribute+"', value'"+value+"'.");
+//					}
+//				});
+				frame.add(panel, BorderLayout.CENTER);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setTitle("Panel Demo");
 				frame.pack();

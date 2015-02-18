@@ -8,10 +8,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
+import javax.swing.event.TreeExpansionEvent;
+import javax.swing.event.TreeExpansionListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
 import com.logexplorer.model.types.AbstractType;
+import com.logexplorer.view.events.NodeCallback;
 
 public class ObjectTreeViewPanel extends JPanel {
 
@@ -52,8 +57,56 @@ public class ObjectTreeViewPanel extends JPanel {
 		renderer.setDisabledIcon(null);
 		tree.setCellRenderer(renderer);
 		
+		// TODO - remove from here
+		setNodeCallback(new NodeCallback() {
+			
+			@Override
+			public void onExpandNode() {
+				System.out.println("ObjectTreeViewPanel:onExpandNode called!");
+			}
+			
+			@Override
+			public void onCollapseNode() {
+				System.out.println("ObjectTreeViewPanel:onCollapseNode called!");
+			}
+			
+			@Override
+			public void onClickNode() {
+				System.out.println("ObjectTreeViewPanel:onClickNode called!");
+			}
+		});
+		
 		add(tree, BorderLayout.CENTER);
 		add(new JScrollPane(tree));
+	}
+	
+	public void setNodeCallback(final NodeCallback callback) {
+
+		// TODO - need to remove previous listeners
+		
+		tree.addTreeExpansionListener(new TreeExpansionListener() {
+			
+			@Override
+			public void treeExpanded(TreeExpansionEvent event) {
+				callback.onExpandNode();
+			}
+			
+			@Override
+			public void treeCollapsed(TreeExpansionEvent event) {
+				callback.onCollapseNode();
+			}
+		});
+		
+		tree.addTreeSelectionListener(new TreeSelectionListener() {
+			
+			@Override
+			public void valueChanged(TreeSelectionEvent e) {
+				callback.onClickNode();
+			}
+
+		});
+
+
 	}
 	
 	public static void demo(final AbstractType type) {
@@ -61,7 +114,25 @@ public class ObjectTreeViewPanel extends JPanel {
 			@Override
 			public void run() {
 				JFrame frame = new JFrame();
-				frame.add(new ObjectTreeViewPanel(type), BorderLayout.CENTER);
+				ObjectTreeViewPanel panel = new ObjectTreeViewPanel(type);
+//				panel.setNodeCallback(new NodeCallback() {
+//					
+//					@Override
+//					public void onExpandNode() {
+//						System.out.println("ObjectTreeViewPanel:onExpandNode called!");
+//					}
+//					
+//					@Override
+//					public void onCollapseNode() {
+//						System.out.println("ObjectTreeViewPanel:onCollapseNode called!");
+//					}
+//					
+//					@Override
+//					public void onClickNode() {
+//						System.out.println("ObjectTreeViewPanel:onClickNode called!");
+//					}
+//				});
+				frame.add(panel, BorderLayout.CENTER);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setTitle("Panel Demo");
 				frame.pack();
