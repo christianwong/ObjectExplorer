@@ -70,9 +70,6 @@ public class ObjectSearchBarPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				System.out.println("searchButton:actionPerformed called. Attribute is: '"+attributeText.getText()+
-						"', value is: '"+valueText.getText()+"', callback is: "+callback+".");
-
 				ViewUtils.setDefaultValue(attributeLabel, STAR);
 				ViewUtils.setDefaultValue(valueLabel, STAR);
 
