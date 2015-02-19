@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import com.logexplorer.model.types.AbstractType;
+import com.logexplorer.model.util.TypeUtils;
 import com.logexplorer.view.events.NodeCallback;
 import com.logexplorer.view.events.SearchCallback;
 import com.logexplorer.view.events.TextViewCallback;
@@ -56,8 +57,8 @@ public class ControllerTest {
 			
 			@Override
 			public void onClickNode(String code) {
-//				String description = TypeUtils.describeKnownType(type);
-				view.setKnownObjectText(code);
+				String description = TypeUtils.describeKnownType(type);
+				view.setKnownObjectText(code+"\n\n"+description);
 			}
 		};
 		

@@ -38,23 +38,23 @@ public class ObjectSearchBarPanel extends JPanel {
 		add(searchLabel);
 		
 		attributeLabel = new JLabel(ATTRIBUTE);
-//		attributeLabel.setEnabled(false);
+		attributeLabel.setEnabled(false);
 		add(attributeLabel);
 		
 		attributeText = new JTextField(STAR, 15);
-//		attributeText.setEnabled(false);
+		attributeText.setEnabled(false);
 		add(attributeText);
 		
 		valueLabel = new JLabel(VALUE);
-//		valueLabel.setEnabled(false);
+		valueLabel.setEnabled(false);
 		add(valueLabel);
 		
 		valueText = new JTextField(STAR, 15);
-//		valueText.setEnabled(false);
+		valueText.setEnabled(false);
 		add(valueText);
 		
 		searchButton = new JButton(GO);
-//		searchButton.setEnabled(false);
+		searchButton.setEnabled(false);
 		add(searchButton);
 		
 		initCallbacks();
