@@ -57,7 +57,7 @@ public class ControllerTest {
 			
 			@Override
 			public void onClickNode(String code) {
-				String description = TypeUtils.describeKnownType(type);
+				String description = TypeUtils.describeFullType(type);
 				view.setKnownObjectText(code+"\n\n"+description);
 			}
 		};

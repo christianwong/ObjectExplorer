@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import com.logexplorer.view.events.TextViewCallback;
@@ -34,7 +35,8 @@ public class ObjectTextViewPanel extends JPanel {
 		knownObjectText = new JTextArea();
 		knownObjectText.setEnabled(false);
 		add(knownObjectText, BorderLayout.CENTER);
-		
+		add(new JScrollPane(knownObjectText));
+
 		viewFullObjectButton = new JButton(VIEW_FULL_OBJECT);
 		viewFullObjectButton.setEnabled(false);
 		add(viewFullObjectButton, BorderLayout.SOUTH);

@@ -10,7 +10,14 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Object object = Tester.run(FILENAME);
+		String filename = FILENAME;
+		if (0 == args.length) {
+			Tester.createObject(filename);
+		} else {
+			filename = args[0];
+		}
+		
+		Object object = Tester.run(filename);
 		AbstractType type = TypeFactory.getType("bin_object", object);
 		
 		// expand root type

@@ -12,7 +12,6 @@ import java.util.Map;
 public class Tester {
 	
 	public static Object run(String filename) {
-		createObject(filename);
 		return readBinaryObject(filename);
 	}
 
@@ -43,7 +42,7 @@ public class Tester {
 		}
 	}
 
-	private static void createObject(String filename) {
+	public static void createObject(String filename) {
 		GuessClass gc = new GuessClass();
 		gc.setaInteger(123);
 		gc.setaDouble(543.756);
