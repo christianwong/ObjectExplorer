@@ -59,6 +59,7 @@ public class ObjectTreeViewPanel extends JPanel {
 		renderer.setOpenIcon(null);
 		renderer.setDisabledIcon(null);
 		tree.setCellRenderer(renderer);
+		tree.setEnabled(false);
 		
 		initCallbacks();
 		

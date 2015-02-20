@@ -36,7 +36,10 @@ public class ControllerTest {
 		view.setNodeCallback(nodeCallback);
 		view.setTextViewCallback(textViewCallback);
 		view.setSearchCallback(searchCallback);
-
+		
+		// display full object as for now.
+		view.setKnownObjectText(TypeUtils.describeFullType(this.type));
+		
 		// set up frame
 		frame = new JFrame();
 		frame.add(view, BorderLayout.CENTER);
@@ -81,7 +84,7 @@ public class ControllerTest {
 	
 	public void show() {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("Panel Demo");
+		frame.setTitle("Object Explorer");
 		frame.pack();
 		frame.setVisible(true);
 	}
