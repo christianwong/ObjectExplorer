@@ -2,9 +2,9 @@ package com.logexplorer.view.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 
 import com.logexplorer.model.types.AbstractType;
 import com.logexplorer.view.events.NodeCallback;
@@ -26,19 +26,17 @@ public class ObjectExplorerPanel extends JPanel {
 		searchPanel = new ObjectSearchBarPanel();
 		add(searchPanel, BorderLayout.NORTH);
 		
-		GridLayout bodyPanelLayout = new GridLayout(1,2);
-		bodyPanelLayout.setHgap(5);
-
-		JPanel bodyPanel = new JPanel();
-		bodyPanel.setLayout(bodyPanelLayout);
-		add(bodyPanel, BorderLayout.CENTER);
-		
 		treePanel = new ObjectTreeViewPanel(type);
-		bodyPanel.add(treePanel);
+		treePanel.setMinimumSize(new Dimension(150, 500));
 		
 		textPanel = new ObjectTextViewPanel();
-		bodyPanel.add(textPanel);
-				
+		textPanel.setMinimumSize(new Dimension(150, 500));
+		
+		JSplitPane splitPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treePanel, textPanel);
+		splitPanel.setOneTouchExpandable(true);
+		splitPanel.setDividerLocation(150);
+		add(splitPanel, BorderLayout.CENTER);
+
 		// set up the frame
 		setMinimumSize(new Dimension(300,300));
 		this.setVisible(true);
