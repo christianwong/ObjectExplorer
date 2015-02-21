@@ -1,3 +1,4 @@
+import com.logexplorer.controller.test.ControllerTest;
 import com.logexplorer.model.factory.TypeFactory;
 import com.logexplorer.model.test.Tester;
 import com.logexplorer.model.types.AbstractType;
@@ -9,7 +10,14 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Object object = Tester.run(FILENAME);
+		String filename = FILENAME;
+		if (0 == args.length) {
+			Tester.createObject(filename);
+		} else {
+			filename = args[0];
+		}
+		
+		Object object = Tester.run(filename);
 		AbstractType type = TypeFactory.getType("bin_object", object);
 		
 		// expand root type
@@ -20,6 +28,14 @@ public class Main {
 		
 		String fullType = TypeUtils.describeFullType(type);
 		System.out.println("###### FULL TYPE\n"+fullType);
+
+//		TreeDemo.run();
+//		ViewTest.runTreeDemo(type);
+//		ViewTest.runTextDemo();
+//		ViewTest.runSearchDemo();
+//		ViewTest.run(type);
+		
+		ControllerTest.run(type);
 	}
 
 }

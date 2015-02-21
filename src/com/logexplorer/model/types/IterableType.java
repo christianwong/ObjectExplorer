@@ -34,4 +34,9 @@ public class IterableType extends AbstractType {
 		addFirstChild(TypeConstants.ATTR_LENGTH, index);
 	}
 
+	@Override
+	public boolean hasChilds() {
+		return true;
+	}
+
 }

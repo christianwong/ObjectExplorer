@@ -92,7 +92,7 @@ public class TypeUtils {
 		String indentation = getIndentation(level);
 		String typeString = indentation+name+":"+value;
 
-		if (forceExpand || type.hasChilds()) {
+		if (forceExpand || type.hasKnownChilds()) {
 			List<AbstractType> childs = type.getChilds();
 
 			for(AbstractType child : childs) {
