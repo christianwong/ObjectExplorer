@@ -3,6 +3,7 @@ package com.logexplorer.model.types;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.logexplorer.model.consts.TypeConstants;
 import com.logexplorer.model.factory.TypeFactory;
 import com.logexplorer.model.util.TypeUtils;
 
@@ -38,7 +39,7 @@ public abstract class AbstractType {
 	public abstract boolean hasChilds();
 	
 	public String getDisplayValue() {
-		return TypeUtils.formatClassName(object.getClass().toString())+":"+objectID;
+		return null==object ? TypeConstants.NULL : TypeUtils.formatClassName(object.getClass().toString())+":"+objectID;
 	}
 	
 	public String getDisplayName() {

@@ -33,6 +33,9 @@ public class ObjectType extends AbstractType {
 	}
 
 	private Field[] getFields() {
+		if (null == object) {
+			return new Field[0];
+		}
 		Class<? extends Object> objClass = object.getClass();
 		return objClass.getDeclaredFields();
 	}

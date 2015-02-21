@@ -1,5 +1,7 @@
 package com.logexplorer.model.types;
 
+import com.logexplorer.model.consts.TypeConstants;
+
 public class BasicType extends AbstractType {
 
 	public BasicType(String name, Object object) {
@@ -23,7 +25,7 @@ public class BasicType extends AbstractType {
 
 	@Override
 	public String getDisplayValue() {
-		return object.toString();
+		return null==object ? TypeConstants.NULL : object.toString();
 	}
 
 	@Override
