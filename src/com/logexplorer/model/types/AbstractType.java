@@ -39,7 +39,7 @@ public abstract class AbstractType {
 	public abstract boolean hasChilds();
 	
 	public String getDisplayValue() {
-		return null==object ? TypeConstants.NULL : TypeUtils.formatClassName(object.getClass().toString())+":"+objectID;
+		return null==object ? TypeConstants.NULL : TypeUtils.formatClassName(object.getClass().toString());//+":"+objectID;
 	}
 	
 	public String getDisplayName() {
