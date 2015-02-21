@@ -33,7 +33,7 @@ public class ObjectExplorerPanel extends JPanel {
 		textPanel.setMinimumSize(new Dimension(150, 500));
 		
 		JSplitPane splitPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treePanel, textPanel);
-		splitPanel.setOneTouchExpandable(true);
+		splitPanel.setOneTouchExpandable(false);
 		splitPanel.setDividerLocation(150);
 		add(splitPanel, BorderLayout.CENTER);
 
