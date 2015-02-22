@@ -10,7 +10,8 @@ public final class TypeConstants {
 	public static final String CLASS = "class ";
 	public static final String DOT = ".";
 	public static final String ARRAY_NOTATION = "[";
-
+	public static final String NULL = "null";
+	
 	public static Map<String, String> typesMap = new HashMap<String, String>();
 	
 	static {
