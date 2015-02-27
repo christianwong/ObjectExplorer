@@ -6,9 +6,9 @@ public class SimpleClass implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	protected int abc = 123;
+	protected String str = "str str str";
 	
 	public String toString() {
-		return "abc=123";
-		
+		return "SimpleClass";
 	}
 }
