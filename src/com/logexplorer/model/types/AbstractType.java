@@ -22,10 +22,9 @@ public abstract class AbstractType {
 	public AbstractType(String name, Object object) {
 		this.name = name;
 		this.object = object;
-		this.objectID = Integer.toString(System.identityHashCode(object));
 		this.childs = new ArrayList<AbstractType>();
 		
-		DataHelper.getObjectID(this.object);
+		this.objectID = DataHelper.getObjectID(this.object);
 	}
 	
 	public List<AbstractType> getChilds() {
@@ -41,7 +40,7 @@ public abstract class AbstractType {
 	public abstract boolean hasChilds();
 	
 	public String getDisplayValue() {
-		return null==object ? TypeConstants.NULL : TypeUtils.formatClassName(object.getClass().toString());//+":"+objectID;
+		return null==object ? TypeConstants.NULL : TypeUtils.formatClassName(object.getClass().toString())+" (id="+objectID+")";
 	}
 	
 	public String getDisplayName() {
