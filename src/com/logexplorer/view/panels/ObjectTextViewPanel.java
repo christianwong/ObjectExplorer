@@ -34,6 +34,7 @@ public class ObjectTextViewPanel extends JPanel {
 		
 		knownObjectText = new JTextArea();
 //		knownObjectText.setEnabled(false);
+		knownObjectText.setEditable(false);
 		add(knownObjectText, BorderLayout.CENTER);
 		add(new JScrollPane(knownObjectText));
 
