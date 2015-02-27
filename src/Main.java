@@ -29,12 +29,6 @@ public class Main {
 		String fullType = TypeUtils.describeFullType(type);
 		System.out.println("###### FULL TYPE\n"+fullType);
 
-//		TreeDemo.run();
-//		ViewTest.runTreeDemo(type);
-//		ViewTest.runTextDemo();
-//		ViewTest.runSearchDemo();
-//		ViewTest.run(type);
-		
 		ControllerTest.run(type);
 	}
 
