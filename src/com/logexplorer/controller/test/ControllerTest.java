@@ -38,7 +38,7 @@ public class ControllerTest {
 		view.setSearchCallback(searchCallback);
 		
 		// display full object as for now.
-		view.setKnownObjectText(TypeUtils.describeFullType(this.type));
+		view.setKnownObjectText(TypeUtils.describeKnownType(this.type));
 		
 		// set up frame
 		frame = new JFrame();
