@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.logexplorer.model.consts.TypeConstants;
 import com.logexplorer.model.factory.TypeFactory;
+import com.logexplorer.model.helper.DataHelper;
 import com.logexplorer.model.util.TypeUtils;
 
 
@@ -23,6 +24,8 @@ public abstract class AbstractType {
 		this.object = object;
 		this.objectID = Integer.toString(System.identityHashCode(object));
 		this.childs = new ArrayList<AbstractType>();
+		
+		DataHelper.getObjectID(this.object);
 	}
 	
 	public List<AbstractType> getChilds() {

@@ -23,20 +23,19 @@ public class DataHelper {
 		return instance;
 	}
 	
-//	protected Map<String,String> map;
 	protected List<Integer> list;
-	protected int index;
+	protected List<Object> objects;
+	
 	private DataHelper() {
-//		map = new HashMap<String, String>();
 		list = new ArrayList<Integer>();
-//		index = 0;
+		objects = new ArrayList<Object>();
 	};
 	
 	private int getObjectHash(Object object) {
 		return System.identityHashCode(object);
 	}
 	
-	public synchronized String addData(Object object) {
+	private synchronized String processObject(Object object) {
 		int objectHash = getObjectHash(object);
 		String objectID = Integer.toString(list.size());
 		
@@ -45,34 +44,27 @@ public class DataHelper {
 			objectID = Integer.toString(indexOf)+"D";
 		} else {
 			list.add(objectHash);
+			objects.add(object);
 		}
-//		String value = Integer.toString(index++);
-		
-//		// put will return a value different than null in case the object is duplicated.
-//		String oldValue = map.put(key, value);
-//		if (null != oldValue) {
-//			value = value+"D";
-//		}
-		
-//		if (map.containsKey(key)) {
-//			value = map.get(key)+"D";
-//		} else {
-//			map.put(key, value);
-//		}
-		
+
+		System.out.println("object Hash: '"+objectHash+"' was assigned to objectID: '"+objectID+"'.. Object is: '"+object.toString()+"'.");
 		return objectID;
 	}
-
-	public String getObjectID(Object object) {
-		int objectHash = getObjectHash(object);
-		String objectID = null;
-		
-		int indexOf = list.indexOf(objectHash);
-		if (indexOf > 0) {
-			objectID = Integer.toString(indexOf);
-		} 
-
-		return objectID;
+	
+	public static String getObjectID(Object object) {
+		return DataHelper.getInstance().processObject(object);
 	}
+
+//	public String getObjectID(Object object) {
+//		int objectHash = getObjectHash(object);
+//		String objectID = null;
+//		
+//		int indexOf = list.indexOf(objectHash);
+//		if (indexOf > 0) {
+//			objectID = Integer.toString(indexOf);
+//		} 
+//
+//		return objectID;
+//	}
 
 }
