@@ -16,10 +16,6 @@ public class MapType extends AbstractType {
 		return object instanceof Map;
 	}
 	
-	protected void processObject() {
-		System.out.println(" ##MAP:"+name+"="+getDisplayValue());
-	}
-
 	@Override
 	public void processChilds() {
 		

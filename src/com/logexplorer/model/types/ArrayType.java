@@ -14,10 +14,6 @@ public class ArrayType extends AbstractType {
 		return null != object && object.getClass().isArray();
 	}
 	
-	protected void processObject() {
-		System.out.println(" ##ARRAY:"+name+"="+getDisplayValue());
-	}
-
 	@Override
 	public void processChilds() {
 		int length = Array.getLength(object);

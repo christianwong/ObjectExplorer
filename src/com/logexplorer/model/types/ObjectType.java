@@ -12,11 +12,6 @@ public class ObjectType extends AbstractType {
 	}
 	
 	@Override
-	protected void processObject() {
-		System.out.println(" ##OBJECT:"+name+"="+getDisplayValue());
-	}
-
-	@Override
 	public void processChilds() {
 		Field[] fields = getFields();
 		

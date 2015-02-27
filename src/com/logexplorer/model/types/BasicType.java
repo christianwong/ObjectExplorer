@@ -16,11 +16,6 @@ public class BasicType extends AbstractType {
 	}
 
 	@Override
-	protected void processObject() {
-		System.out.println(" ##BASIC:"+name+"="+getDisplayValue());
-	}
-
-	@Override
 	public void processChilds() {}
 
 	@Override

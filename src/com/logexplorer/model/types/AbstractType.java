@@ -23,7 +23,6 @@ public abstract class AbstractType {
 		this.object = object;
 		this.objectID = Integer.toString(System.identityHashCode(object));
 		this.childs = new ArrayList<AbstractType>();
-		//processObject();
 	}
 	
 	public List<AbstractType> getChilds() {
@@ -50,7 +49,6 @@ public abstract class AbstractType {
 		childs.clear();
 	}
 	
-	protected abstract void processObject();
 	protected abstract void processChilds();
 
 	protected void addChild(String name, Object child) {
