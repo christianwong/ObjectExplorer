@@ -15,6 +15,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreePath;
 
 import com.logexplorer.model.types.AbstractType;
+import com.logexplorer.model.util.TypeUtils;
 import com.logexplorer.view.events.NodeCallback;
 
 public class ObjectTreeViewPanel extends JPanel {
@@ -37,11 +38,11 @@ public class ObjectTreeViewPanel extends JPanel {
 	}
 
 	private void initTree(AbstractType type) {
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode(type.getDisplayName());
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode(type.getNameWithID());
 
 		// add childs to tree
 		for (AbstractType child : type.getChilds()) {
-			DefaultMutableTreeNode dummyChild = new DefaultMutableTreeNode(child.getDisplayName());
+			DefaultMutableTreeNode dummyChild = new DefaultMutableTreeNode(child.getNameWithID());
 			if (child.hasChilds()) {
 				dummyChild.add(new DefaultMutableTreeNode(DUMMY_LEAF));
 			}
@@ -59,7 +60,6 @@ public class ObjectTreeViewPanel extends JPanel {
 		renderer.setOpenIcon(null);
 		renderer.setDisabledIcon(null);
 		tree.setCellRenderer(renderer);
-		tree.setEnabled(false);
 		
 		initCallbacks();
 		
@@ -74,7 +74,7 @@ public class ObjectTreeViewPanel extends JPanel {
 			@Override
 			public void treeExpanded(TreeExpansionEvent event) {
 				TreePath path = event.getPath();
-				String code = path.getLastPathComponent().toString();
+				String code = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
 				if (null != callback) {
 					callback.onExpandNode(code);
 				}
@@ -83,7 +83,7 @@ public class ObjectTreeViewPanel extends JPanel {
 			@Override
 			public void treeCollapsed(TreeExpansionEvent event) {
 				TreePath path = event.getPath();
-				String code = path.getLastPathComponent().toString();
+				String code = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
 				if (null != callback) {
 					callback.onCollapseNode(code);
 				}
@@ -95,7 +95,7 @@ public class ObjectTreeViewPanel extends JPanel {
 			@Override
 			public void valueChanged(TreeSelectionEvent event) {
 				TreePath path = event.getPath();
-				String code = path.getLastPathComponent().toString();
+				String code = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
 				if (null != callback) {
 					callback.onClickNode(code);
 				}

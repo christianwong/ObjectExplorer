@@ -47,6 +47,10 @@ public abstract class AbstractType {
 		return name;
 	}
 	
+	public String getNameWithID() {
+		return name+" (id="+objectID+")";
+	}
+	
 	public void resetChilds() {
 		childs.clear();
 	}
