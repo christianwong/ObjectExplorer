@@ -2,8 +2,8 @@ package com.logexplorer.view.events;
 
 public interface NodeCallback {
 
-	public void onExpandNode(String code);
-	public void onCollapseNode(String code);
-	public void onClickNode(String code);
+	public void onExpandNode(int code);
+	public void onCollapseNode(int code);
+	public void onClickNode(int code);
 	
 }

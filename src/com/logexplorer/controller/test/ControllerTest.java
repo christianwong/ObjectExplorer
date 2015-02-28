@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import com.logexplorer.model.helper.DataHelper;
 import com.logexplorer.model.types.AbstractType;
 import com.logexplorer.model.util.TypeUtils;
 import com.logexplorer.view.events.NodeCallback;
@@ -49,19 +50,20 @@ public class ControllerTest {
 		nodeCallback = new NodeCallback() {
 			
 			@Override
-			public void onExpandNode(String code) {
+			public void onExpandNode(int code) {
 				System.out.println("onExpandNode called: "+code);
 			}
 			
 			@Override
-			public void onCollapseNode(String code) {
+			public void onCollapseNode(int code) {
 				System.out.println("onCollapseNode called: "+code);
 			}
 			
 			@Override
-			public void onClickNode(String code) {
-//				String description = TypeUtils.describeFullType(type);
-				view.setKnownObjectText(code/*+"\n\n"+description*/);
+			public void onClickNode(int code) {
+				AbstractType selectedType = DataHelper.getInstance().getStoredType(code);
+				String description = TypeUtils.describeKnownType(selectedType);
+				view.setKnownObjectText(description);
 			}
 		};
 		

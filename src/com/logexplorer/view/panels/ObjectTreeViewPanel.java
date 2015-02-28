@@ -74,7 +74,7 @@ public class ObjectTreeViewPanel extends JPanel {
 			@Override
 			public void treeExpanded(TreeExpansionEvent event) {
 				TreePath path = event.getPath();
-				String code = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
+				int code = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
 				if (null != callback) {
 					callback.onExpandNode(code);
 				}
@@ -83,7 +83,7 @@ public class ObjectTreeViewPanel extends JPanel {
 			@Override
 			public void treeCollapsed(TreeExpansionEvent event) {
 				TreePath path = event.getPath();
-				String code = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
+				int code = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
 				if (null != callback) {
 					callback.onCollapseNode(code);
 				}
@@ -95,7 +95,7 @@ public class ObjectTreeViewPanel extends JPanel {
 			@Override
 			public void valueChanged(TreeSelectionEvent event) {
 				TreePath path = event.getPath();
-				String code = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
+				int code = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
 				if (null != callback) {
 					callback.onClickNode(code);
 				}

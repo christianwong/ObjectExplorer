@@ -61,5 +61,9 @@ public class DataHelper {
 	public static String getObjectID(Object object, AbstractType type) {
 		return DataHelper.getInstance().processObject(object, type);
 	}
+	
+	public AbstractType getStoredType(int index) {
+		return list.get(index).getObjectType();
+	}
 
 }
