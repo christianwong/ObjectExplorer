@@ -1,6 +1,7 @@
 package com.logexplorer.model.helper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.logexplorer.model.types.AbstractType;
@@ -25,46 +26,30 @@ public class DataHelper {
 		return instance;
 	}
 	
-	protected List<Integer> list;
-	// TODO store reference to object and AbstractType in the list.
+	protected List<DataHelperInstance> list;
 	
 	private DataHelper() {
-		list = new ArrayList<Integer>();
+		list = new ArrayList<DataHelperInstance>();
 	};
 	
-	private int getObjectHash(Object object) {
-		return System.identityHashCode(object);
-	}
-	
 	private synchronized String processObject(Object object, AbstractType type) {
-		int objectHash = getObjectHash(object);
+		
+		DataHelperInstance instance = new DataHelperInstance(object, type);
 		String objectID = Integer.toString(list.size());
 		
-		int indexOf = list.indexOf(objectHash);
+		int indexOf = Collections.binarySearch(list, instance, new DataHelperInstanceComparator());
 		if (indexOf >= 0) {
 			objectID = Integer.toString(indexOf)+"D";
 		} else {
-			list.add(objectHash);
+			list.add(instance);
 		}
 
-		System.out.println("object Hash: '"+objectHash+"' was assigned to objectID: '"+objectID+"'.. Object is: '"+object.toString()+"'.");
+		System.out.println("object Hash: '"+instance.getObjectHash()+"' was assigned to objectID: '"+objectID+"'.. Object is: '"+object.toString()+"'.");
 		return objectID;
 	}
 	
 	public static String getObjectID(Object object, AbstractType type) {
 		return DataHelper.getInstance().processObject(object, type);
 	}
-
-//	public String getObjectID(Object object) {
-//		int objectHash = getObjectHash(object);
-//		String objectID = null;
-//		
-//		int indexOf = list.indexOf(objectHash);
-//		if (indexOf > 0) {
-//			objectID = Integer.toString(indexOf);
-//		} 
-//
-//		return objectID;
-//	}
 
 }
