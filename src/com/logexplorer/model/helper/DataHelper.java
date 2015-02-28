@@ -1,7 +1,6 @@
 package com.logexplorer.model.helper;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.logexplorer.model.types.AbstractType;
@@ -32,12 +31,23 @@ public class DataHelper {
 		list = new ArrayList<DataHelperInstance>();
 	};
 	
+	// warning: ugly code!
 	private synchronized String processObject(Object object, AbstractType type) {
 		
 		DataHelperInstance instance = new DataHelperInstance(object, type);
 		String objectID = Integer.toString(list.size());
 		
-		int indexOf = Collections.binarySearch(list, instance, new DataHelperInstanceComparator());
+		// somehow indexOf is not calling DataHelperInstance.equals()
+//		int indexOf = ((ArrayList<DataHelperInstance>)list).indexOf(instance);
+		int indexOf = -1;
+		for (int idx=0; idx<list.size(); idx++) {
+			DataHelperInstance inst = list.get(idx);
+			if (inst.getObjectHash() == instance.getObjectHash()) {
+				indexOf = idx;
+				break;
+			}
+		}
+		
 		if (indexOf >= 0) {
 			objectID = Integer.toString(indexOf)+"D";
 		} else {

@@ -10,7 +10,7 @@ public class DataHelperInstance {
 	
 	public DataHelperInstance(Object object, AbstractType objectType) {
 		this.setObject(object);
-		this.setObjectHash(System.identityHashCode(object));
+		this.setObjectHash(getHashCode(object));
 		this.setObjectType(objectType);
 	}
 
@@ -37,5 +37,23 @@ public class DataHelperInstance {
 	protected void setObjectType(AbstractType objectType) {
 		this.objectType = objectType;
 	}
+	
+	public static int getHashCode(Object object) {
+		return System.identityHashCode(object);
+	}
+	
+//	@Override
+//	public boolean equals(Object object) {
+//		int objectHash2 = getObjectHash();
+//		int hashCode = getHashCode(object);
+//		return objectHash2 == hashCode;
+//		
+//		if (object instanceof DataHelperInstance) {
+//			DataHelperInstance instance = (DataHelperInstance) object;
+//			return this.hashCode() == instance.hashCode();
+//		}
+//		
+//		return false;
+//	}
 	
 }

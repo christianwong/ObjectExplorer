@@ -24,7 +24,7 @@ public abstract class AbstractType {
 		this.object = object;
 		this.childs = new ArrayList<AbstractType>();
 		
-		this.objectID = DataHelper.getObjectID(this.object, this);
+		this.objectID = DataHelper.getObjectID(object, this);
 	}
 	
 	public List<AbstractType> getChilds() {
