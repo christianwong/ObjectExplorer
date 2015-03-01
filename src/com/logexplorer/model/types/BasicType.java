@@ -20,7 +20,7 @@ public class BasicType extends AbstractType {
 
 	@Override
 	public String getDisplayValue() {
-		return null==object ? TypeConstants.NULL : object.toString();
+		return null==getObject() ? TypeConstants.NULL : getObject().toString();
 	}
 
 	@Override

@@ -19,7 +19,7 @@ public class MapType extends AbstractType {
 	@Override
 	public void processChilds() {
 		
-		Map<?,?> map = (Map<?, ?>) object;
+		Map<?,?> map = (Map<?, ?>) getObject();
 		Iterator<?> iterator = map.keySet().iterator();
 		while(iterator.hasNext()) {
 			String name = (String) iterator.next();

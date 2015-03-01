@@ -32,38 +32,47 @@ public class DataHelper {
 	};
 	
 	// warning: ugly code!
-	private synchronized String processObject(Object object, AbstractType type) {
+	private synchronized int processObject(Object object, AbstractType type) {
 		
-		DataHelperInstance instance = new DataHelperInstance(object, type);
-		String objectID = Integer.toString(list.size());
+//		DataHelperInstance instance = ;
+		int objectID = list.size();
 		
 		// somehow indexOf is not calling DataHelperInstance.equals()
 //		int indexOf = ((ArrayList<DataHelperInstance>)list).indexOf(instance);
+		int indexOf = getObjectID(object);
+		
+		if (indexOf >= 0) {
+			objectID = indexOf;//+"D";
+		} else {
+			list.add(new DataHelperInstance(object, type));
+		}
+
+//		System.out.println("object Hash: '"+DataHelperInstance.getHashCode(object)+"' was assigned to objectID: '"+objectID+"'.. Object is: '"+object.toString()+"'.");
+		return objectID;
+	}
+
+	public int getObjectID(Object object) {
 		int indexOf = -1;
 		for (int idx=0; idx<list.size(); idx++) {
 			DataHelperInstance inst = list.get(idx);
-			if (inst.getObjectHash() == instance.getObjectHash()) {
+			if (inst.getObjectHash() == DataHelperInstance.getHashCode(object)) {
 				indexOf = idx;
 				break;
 			}
 		}
-		
-		if (indexOf >= 0) {
-			objectID = Integer.toString(indexOf)+"D";
-		} else {
-			list.add(instance);
-		}
-
-		System.out.println("object Hash: '"+instance.getObjectHash()+"' was assigned to objectID: '"+objectID+"'.. Object is: '"+object.toString()+"'.");
-		return objectID;
+		return indexOf;
 	}
 	
-	public static String getObjectID(Object object, AbstractType type) {
+	public static int getObjectID(Object object, AbstractType type) {
 		return DataHelper.getInstance().processObject(object, type);
 	}
 	
 	public AbstractType getStoredType(int index) {
 		return list.get(index).getObjectType();
+	}
+
+	public Object getStoredObject(int index) {
+		return list.get(index).getObject();
 	}
 
 }

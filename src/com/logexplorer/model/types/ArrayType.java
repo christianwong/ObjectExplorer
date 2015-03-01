@@ -16,12 +16,12 @@ public class ArrayType extends AbstractType {
 	
 	@Override
 	public void processChilds() {
-		int length = Array.getLength(object);
+		int length = Array.getLength(getObject());
 		addChild(TypeConstants.ATTR_LENGTH, length);
 		
 		for (int idx = 0; idx < length; idx++) {
 			String name = Integer.toString(idx);
-			Object child = Array.get(object, idx);
+			Object child = Array.get(getObject(), idx);
 			addChild(name, child);
 		}
 	}

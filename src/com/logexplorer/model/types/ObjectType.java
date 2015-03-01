@@ -20,7 +20,7 @@ public class ObjectType extends AbstractType {
 			boolean accessible = TypeUtils.enableAccessible(field);
 			
 			String name = field.getName();
-			Object child = TypeUtils.getFieldValue(object, field);
+			Object child = TypeUtils.getFieldValue(getObject(), field);
 			addChild(name, child);
 			
 			TypeUtils.resetAccessible(field, accessible);
@@ -28,10 +28,10 @@ public class ObjectType extends AbstractType {
 	}
 
 	private Field[] getFields() {
-		if (null == object) {
+		if (null == getObject()) {
 			return new Field[0];
 		}
-		Class<? extends Object> objClass = object.getClass();
+		Class<? extends Object> objClass = getObject().getClass();
 		return objClass.getDeclaredFields();
 	}
 

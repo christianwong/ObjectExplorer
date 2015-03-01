@@ -18,7 +18,7 @@ public class IterableType extends AbstractType {
 	@Override
 	public void processChilds() {
 		
-		Iterator<?> iterator = ((Iterable<?>) object).iterator();
+		Iterator<?> iterator = ((Iterable<?>) getObject()).iterator();
 		int index = 0;
 		while(iterator.hasNext()) {
 			String name = Integer.toString(index++);

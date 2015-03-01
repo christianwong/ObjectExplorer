@@ -6,14 +6,15 @@ import java.util.List;
 import com.logexplorer.model.consts.TypeConstants;
 import com.logexplorer.model.factory.TypeFactory;
 import com.logexplorer.model.helper.DataHelper;
+import com.logexplorer.model.helper.DataHelperInstance;
 import com.logexplorer.model.util.TypeUtils;
 
 
 public abstract class AbstractType {
 
 	protected String name;
-	protected Object object;
-	protected String objectID;
+//	protected Object object;
+	protected int objectID;
 	protected List<AbstractType> childs;
 	
 	@SuppressWarnings("unused")
@@ -21,10 +22,14 @@ public abstract class AbstractType {
 	
 	public AbstractType(String name, Object object) {
 		this.name = name;
-		this.object = object;
+//		this.object = object;
 		this.childs = new ArrayList<AbstractType>();
 		
 		this.objectID = DataHelper.getObjectID(object, this);
+		
+		System.out.println("Type created for object with ID = '"+DataHelperInstance.getHashCode(object)+"'");
+		new Exception().printStackTrace();
+		System.out.flush();
 	}
 	
 	public List<AbstractType> getChilds() {
@@ -40,7 +45,12 @@ public abstract class AbstractType {
 	public abstract boolean hasChilds();
 	
 	public String getDisplayValue() {
+		Object object = getObject();
 		return null==object ? TypeConstants.NULL : TypeUtils.formatClassName(object.getClass().toString())+" (id="+objectID+")";
+	}
+	
+	protected Object getObject() {
+		return DataHelper.getInstance().getStoredObject(this.objectID);
 	}
 	
 	public String getDisplayName() {
