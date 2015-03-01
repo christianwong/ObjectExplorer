@@ -13,7 +13,6 @@ import com.logexplorer.model.util.TypeUtils;
 public abstract class AbstractType {
 
 	protected String name;
-//	protected Object object;
 	protected int objectID;
 	protected List<AbstractType> childs;
 	
@@ -22,7 +21,6 @@ public abstract class AbstractType {
 	
 	public AbstractType(String name, Object object) {
 		this.name = name;
-//		this.object = object;
 		this.childs = new ArrayList<AbstractType>();
 		
 		this.objectID = DataHelper.getObjectID(object, this);
