@@ -4,7 +4,7 @@ import com.logexplorer.model.types.AbstractType;
 
 public class DataHelperInstance {
 	
-	private Object data;
+	private Object object;
 	private int objectHash;
 	private AbstractType objectType;
 	
@@ -15,11 +15,11 @@ public class DataHelperInstance {
 	}
 
 	public Object getObject() {
-		return data;
+		return object;
 	}
 
 	protected void setObject(Object data) {
-		this.data = data;
+		this.object = data;
 	}
 
 	public int getObjectHash() {
