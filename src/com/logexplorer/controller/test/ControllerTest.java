@@ -1,6 +1,7 @@
 package com.logexplorer.controller.test;
 
 import java.awt.BorderLayout;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -52,11 +53,27 @@ public class ControllerTest {
 			@Override
 			public void onExpandNode(int code) {
 				System.out.println("onExpandNode called: "+code);
+				
+				AbstractType selectedType = DataHelper.getInstance().getStoredType(code);
+				List<AbstractType> childs = selectedType.getChilds();
+				
+				// TODO 
+				// add childs to expanded node
+				
+				onClickNode(code);
 			}
 			
 			@Override
 			public void onCollapseNode(int code) {
 				System.out.println("onCollapseNode called: "+code);
+				
+				AbstractType selectedType = DataHelper.getInstance().getStoredType(code);
+				selectedType.resetChilds();
+				
+				// TODO 
+				// remove childs from collapsed node
+				
+				onClickNode(code);
 			}
 			
 			@Override
