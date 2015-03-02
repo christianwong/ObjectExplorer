@@ -6,6 +6,9 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
 
 import com.logexplorer.model.helper.DataHelper;
@@ -17,6 +20,8 @@ import com.logexplorer.view.events.TextViewCallback;
 import com.logexplorer.view.panels.ObjectExplorerPanel;
 
 public class ControllerTest {
+
+	private static final String DUMMY_LEAF = "dummy";
 
 	private NodeCallback nodeCallback;
 	private TextViewCallback textViewCallback;
@@ -53,27 +58,50 @@ public class ControllerTest {
 		nodeCallback = new NodeCallback() {
 			
 			@Override
-			public void onExpandNode(JTree tree, int code) {
-				System.out.println("onExpandNode called: "+code);
+			public void onExpandNode(JTree tree, TreePath path, int code) {
 				
+				// get childs from model
 				AbstractType selectedType = DataHelper.getInstance().getStoredType(code);
-				List<AbstractType> childs = selectedType.getChilds();
+				List<AbstractType> typeChilds = selectedType.getChilds();
 				
-				// TODO 
-				// add childs to expanded node
+				// copy childs from model to view
+				MutableTreeNode node = (MutableTreeNode)path.getLastPathComponent();
+				DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
+				for (AbstractType type : typeChilds) {
+					String nodeDescription = type.getNameWithID();
+					DefaultMutableTreeNode newChild = new DefaultMutableTreeNode(nodeDescription);
+					model.insertNodeInto(newChild, node, node.getChildCount());
+					if (type.hasChilds()) {
+						newChild.add(new DefaultMutableTreeNode(DUMMY_LEAF));
+					}
+
+				}
 				
+				// remove dummy leaf
+				MutableTreeNode dummyLeaf = (MutableTreeNode) node.getChildAt(0);
+				model.removeNodeFromParent(dummyLeaf);
+
 				onClickNode(tree, code);
 			}
 			
 			@Override
-			public void onCollapseNode(JTree tree, int code) {
-				System.out.println("onCollapseNode called: "+code);
+			public void onCollapseNode(JTree tree, TreePath path, int code) {
 				
+				// remove childs from model
 				AbstractType selectedType = DataHelper.getInstance().getStoredType(code);
 				selectedType.resetChilds();
 				
-				// TODO 
-				// remove childs from collapsed node
+				// remvoe childs from view
+				MutableTreeNode node = (MutableTreeNode)path.getLastPathComponent();
+				DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
+				for (int idx=node.getChildCount()-1; idx >= 0; idx--) {
+					MutableTreeNode dummyLeaf = (MutableTreeNode) node.getChildAt(idx);
+					model.removeNodeFromParent(dummyLeaf);
+				}
+				
+				// add dummy leaf to view
+				DefaultMutableTreeNode newChild = new DefaultMutableTreeNode(DUMMY_LEAF);
+				model.insertNodeInto(newChild, node, node.getChildCount());
 				
 				onClickNode(tree, code);
 			}

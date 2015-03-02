@@ -77,7 +77,7 @@ public class ObjectTreeViewPanel extends JPanel {
 				TreePath path = event.getPath();
 				int code = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
 				if (null != callback) {
-					callback.onExpandNode(tree, code);
+					callback.onExpandNode(tree, path, code);
 				}
 			}
 
@@ -86,7 +86,7 @@ public class ObjectTreeViewPanel extends JPanel {
 				TreePath path = event.getPath();
 				int code = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
 				if (null != callback) {
-					callback.onCollapseNode(tree, code);
+					callback.onCollapseNode(tree, path, code);
 				}
 			}
 		});

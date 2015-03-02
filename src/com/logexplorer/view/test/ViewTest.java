@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
+import javax.swing.tree.TreePath;
 
 import com.logexplorer.model.types.AbstractType;
 import com.logexplorer.view.events.NodeCallback;
@@ -25,12 +26,12 @@ public class ViewTest {
 		nodeCallback = new NodeCallback() {
 			
 			@Override
-			public void onExpandNode(JTree tree, int code) {
+			public void onExpandNode(JTree tree, TreePath path, int code) {
 				System.out.println("onExpandNode called: "+code);
 			}
 			
 			@Override
-			public void onCollapseNode(JTree tree, int code) {
+			public void onCollapseNode(JTree tree, TreePath path, int code) {
 				System.out.println("onCollapseNode called: "+code);
 			}
 			
