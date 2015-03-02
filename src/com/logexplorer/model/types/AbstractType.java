@@ -26,8 +26,6 @@ public abstract class AbstractType {
 		this.objectID = DataHelper.getObjectID(object, this);
 		
 		System.out.println("Type created for object with ID = '"+DataHelperInstance.getHashCode(object)+"'");
-		new Exception().printStackTrace();
-		System.out.flush();
 	}
 	
 	public List<AbstractType> getChilds() {
