@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JTree;
 import javax.swing.SwingUtilities;
+import javax.swing.tree.TreePath;
 
 import com.logexplorer.model.helper.DataHelper;
 import com.logexplorer.model.types.AbstractType;
@@ -51,7 +53,7 @@ public class ControllerTest {
 		nodeCallback = new NodeCallback() {
 			
 			@Override
-			public void onExpandNode(int code) {
+			public void onExpandNode(JTree tree, int code) {
 				System.out.println("onExpandNode called: "+code);
 				
 				AbstractType selectedType = DataHelper.getInstance().getStoredType(code);
@@ -60,11 +62,11 @@ public class ControllerTest {
 				// TODO 
 				// add childs to expanded node
 				
-				onClickNode(code);
+				onClickNode(tree, code);
 			}
 			
 			@Override
-			public void onCollapseNode(int code) {
+			public void onCollapseNode(JTree tree, int code) {
 				System.out.println("onCollapseNode called: "+code);
 				
 				AbstractType selectedType = DataHelper.getInstance().getStoredType(code);
@@ -73,14 +75,25 @@ public class ControllerTest {
 				// TODO 
 				// remove childs from collapsed node
 				
-				onClickNode(code);
+				onClickNode(tree, code);
 			}
 			
 			@Override
-			public void onClickNode(int code) {
-				AbstractType selectedType = DataHelper.getInstance().getStoredType(code);
-				String description = TypeUtils.describeKnownType(selectedType);
-				view.setKnownObjectText(description);
+			public void onClickNode(JTree tree, int code) {
+			    String description = "";
+			    TreePath[] paths = tree.getSelectionPaths();
+			    
+			    if (1 != paths.length) {
+			    	description += "Displaying " + paths.length + " selected objects.\n\n";
+			    }
+			    
+			    for (TreePath path : paths) {
+			    	int pathCode = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
+
+					AbstractType selectedType = DataHelper.getInstance().getStoredType(pathCode);
+					description += TypeUtils.describeKnownType(selectedType) + "\n\n";
+				}
+			    view.setKnownObjectText(description);
 			}
 		};
 		

@@ -3,6 +3,7 @@ package com.logexplorer.view.test;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 
 import com.logexplorer.model.types.AbstractType;
@@ -24,17 +25,17 @@ public class ViewTest {
 		nodeCallback = new NodeCallback() {
 			
 			@Override
-			public void onExpandNode(int code) {
+			public void onExpandNode(JTree tree, int code) {
 				System.out.println("onExpandNode called: "+code);
 			}
 			
 			@Override
-			public void onCollapseNode(int code) {
+			public void onCollapseNode(JTree tree, int code) {
 				System.out.println("onCollapseNode called: "+code);
 			}
 			
 			@Override
-			public void onClickNode(int code) {
+			public void onClickNode(JTree tree, int code) {
 				System.out.println("onClickNode called: "+code);
 			}
 		};
