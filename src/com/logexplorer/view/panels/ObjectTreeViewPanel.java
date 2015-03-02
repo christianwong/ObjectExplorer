@@ -52,6 +52,7 @@ public class ObjectTreeViewPanel extends JPanel {
 		// set up the tree
 		tree = new JTree(root);
 		tree.setShowsRootHandles(true);
+		tree.setSelectionPath(new TreePath(root.getPath()));
 		
 		// Hide icons from tree
 		DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
