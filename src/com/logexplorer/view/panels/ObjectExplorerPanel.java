@@ -34,7 +34,7 @@ public class ObjectExplorerPanel extends JPanel {
 		
 		JSplitPane splitPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treePanel, textPanel);
 		splitPanel.setOneTouchExpandable(false);
-		splitPanel.setDividerLocation(150);
+		splitPanel.setDividerLocation(200);
 		add(splitPanel, BorderLayout.CENTER);
 
 		// set up the frame

@@ -2,6 +2,7 @@ package com.logexplorer.view.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -33,9 +34,12 @@ public class ObjectTextViewPanel extends JPanel {
 		add(knownObjectLabel, BorderLayout.NORTH);
 		
 		knownObjectText = new JTextArea();
-//		knownObjectText.setEnabled(false);
+		knownObjectText.setEditable(false);
 		add(knownObjectText, BorderLayout.CENTER);
 		add(new JScrollPane(knownObjectText));
+		Font font = new Font("Courier", Font.BOLD, 12);
+		knownObjectText.setFont(font);
+//		knownObjectText.setForeground(Color.BLUE);
 
 		viewFullObjectButton = new JButton(VIEW_FULL_OBJECT);
 		viewFullObjectButton.setEnabled(false);

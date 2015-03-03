@@ -16,14 +16,10 @@ public class MapType extends AbstractType {
 		return object instanceof Map;
 	}
 	
-	protected void processObject() {
-		System.out.println(" ##MAP:"+name+"="+getDisplayValue());
-	}
-
 	@Override
 	public void processChilds() {
 		
-		Map<?,?> map = (Map<?, ?>) object;
+		Map<?,?> map = (Map<?, ?>) getObject();
 		Iterator<?> iterator = map.keySet().iterator();
 		while(iterator.hasNext()) {
 			String name = (String) iterator.next();
