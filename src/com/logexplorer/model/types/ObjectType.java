@@ -1,6 +1,9 @@
 package com.logexplorer.model.types;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import com.logexplorer.model.util.TypeUtils;
 
@@ -12,37 +15,40 @@ public class ObjectType extends AbstractType {
 	}
 	
 	@Override
-	protected void processObject() {
-		System.out.println(" ##OBJECT:"+name+"="+getDisplayValue());
-	}
-
-	@Override
 	public void processChilds() {
-		Field[] fields = getFields();
+		List<Field> fields = getFields();
 		
 		for (Field field : fields) {
 			
 			boolean accessible = TypeUtils.enableAccessible(field);
 			
 			String name = field.getName();
-			Object child = TypeUtils.getFieldValue(object, field);
+			Object child = TypeUtils.getFieldValue(getObject(), field);
 			addChild(name, child);
 			
 			TypeUtils.resetAccessible(field, accessible);
 		}
 	}
 
-	private Field[] getFields() {
-		if (null == object) {
-			return new Field[0];
+	private List<Field> getFields() {
+		List<Field> fieldList = new ArrayList<Field>();
+
+		if (null == getObject()) {
+			return fieldList;
 		}
-		Class<? extends Object> objClass = object.getClass();
-		return objClass.getDeclaredFields();
+
+		Class<? extends Object> objClass = getObject().getClass();
+		while (objClass != null) {
+			fieldList.addAll(Arrays.asList(objClass.getDeclaredFields()));
+			objClass = objClass.getSuperclass();
+		}
+
+		return fieldList;
 	}
 
 	@Override
 	public boolean hasChilds() {
-		return getFields().length > 0;
+		return getFields().size() > 0;
 	}
 
 }
