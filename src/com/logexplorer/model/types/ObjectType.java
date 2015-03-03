@@ -1,6 +1,9 @@
 package com.logexplorer.model.types;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import com.logexplorer.model.util.TypeUtils;
 
@@ -13,7 +16,7 @@ public class ObjectType extends AbstractType {
 	
 	@Override
 	public void processChilds() {
-		Field[] fields = getFields();
+		List<Field> fields = getFields();
 		
 		for (Field field : fields) {
 			
@@ -27,17 +30,25 @@ public class ObjectType extends AbstractType {
 		}
 	}
 
-	private Field[] getFields() {
+	private List<Field> getFields() {
+		List<Field> fieldList = new ArrayList<Field>();
+
 		if (null == getObject()) {
-			return new Field[0];
+			return fieldList;
 		}
+
 		Class<? extends Object> objClass = getObject().getClass();
-		return objClass.getDeclaredFields();
+		while (objClass != null) {
+			fieldList.addAll(Arrays.asList(objClass.getDeclaredFields()));
+			objClass = objClass.getSuperclass();
+		}
+
+		return fieldList;
 	}
 
 	@Override
 	public boolean hasChilds() {
-		return getFields().length > 0;
+		return getFields().size() > 0;
 	}
 
 }
