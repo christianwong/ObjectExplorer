@@ -6,7 +6,6 @@ import java.util.List;
 import com.logexplorer.model.consts.TypeConstants;
 import com.logexplorer.model.factory.TypeFactory;
 import com.logexplorer.model.helper.DataHelper;
-import com.logexplorer.model.helper.DataHelperInstance;
 import com.logexplorer.model.util.TypeUtils;
 
 
@@ -25,7 +24,7 @@ public abstract class AbstractType {
 		
 		this.objectID = DataHelper.getObjectID(object, this);
 		
-		System.out.println("Type created for object with ID = '"+DataHelperInstance.getHashCode(object)+"'");
+//		System.out.println("Type created for object ("+this.name+") with ID = '"+DataHelperInstance.getHashCode(object)+"'");
 	}
 	
 	public List<AbstractType> getChilds() {
