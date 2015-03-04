@@ -46,6 +46,13 @@ public class ObjectType extends AbstractType {
 			objClass = objClass.getSuperclass();
 		}
 
+		// WA to avoid inclusion of composition object reference "this$"
+		for (int idx=fieldList.size()-1; idx>=0; idx--) {
+			if (fieldList.get(idx).getName().contains("this$")) {
+				fieldList.remove(idx);
+			}
+		}
+
 		return fieldList;
 	}
 
