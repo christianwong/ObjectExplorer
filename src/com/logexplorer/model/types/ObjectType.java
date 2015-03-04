@@ -1,6 +1,7 @@
 package com.logexplorer.model.types;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,9 +23,11 @@ public class ObjectType extends AbstractType {
 			
 			boolean accessible = TypeUtils.enableAccessible(field);
 			
-			String name = field.getName();
-			Object child = TypeUtils.getFieldValue(getObject(), field);
-			addChild(name, child);
+			if (!Modifier.isStatic(field.getModifiers())) {
+				String childName = field.getName();
+				Object child = TypeUtils.getFieldValue(getObject(), field);
+				addChild(childName, child);
+			}
 			
 			TypeUtils.resetAccessible(field, accessible);
 		}
