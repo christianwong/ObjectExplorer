@@ -37,17 +37,15 @@ public class ControllerTest {
 		initCallbacks();
 
 		// set up view
-		view = new ObjectExplorerPanel(this.type);
-		view.setNodeCallback(nodeCallback);
-		view.setTextViewCallback(textViewCallback);
+		view = new ObjectExplorerPanel();
 		
 		// set up callbacks
-		view.setNodeCallback(nodeCallback);
-		view.setTextViewCallback(textViewCallback);
-		view.setSearchCallback(searchCallback);
+		view.getTreeViewPanel().setCallback(nodeCallback);
+		view.getTextViewPanel().setCallback(textViewCallback);
+		view.getSearchBarPanel().setCallback(searchCallback);
 		
 		// display full object as for now.
-		view.setKnownObjectText(TypeUtils.describeKnownType(this.type));
+		view.getTextViewPanel().setKnownObjectText(TypeUtils.describeKnownType(this.type));
 		
 		// set up frame
 		frame = new JFrame();
@@ -121,7 +119,7 @@ public class ControllerTest {
 					AbstractType selectedType = DataHelper.getInstance().getStoredType(pathCode);
 					description += TypeUtils.describeKnownType(selectedType) + "\n\n";
 				}
-			    view.setKnownObjectText(description);
+			    view.getTextViewPanel().setKnownObjectText(description);
 			}
 		};
 		

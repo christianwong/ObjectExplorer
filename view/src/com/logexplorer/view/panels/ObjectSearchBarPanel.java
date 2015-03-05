@@ -80,7 +80,7 @@ public class ObjectSearchBarPanel extends JPanel {
 		});
 	}
 	
-	public void setSearchCallback(final SearchCallback callback) {
+	public void setCallback(final SearchCallback callback) {
 		this.callback = callback;
 	}
 	

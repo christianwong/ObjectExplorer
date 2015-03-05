@@ -66,9 +66,9 @@ public class ViewTest {
 				frame.pack();
 				frame.setVisible(true);
 				
-				panel.getTreeViewPanel().setNodeCallback(nodeCallback);
-				panel.getTextViewPanel().setTextViewCallback(textViewCallback);
-				panel.getSearchBarPanel().setSearchCallback(searchCallback);
+				panel.getTreeViewPanel().setCallback(nodeCallback);
+				panel.getTextViewPanel().setCallback(textViewCallback);
+				panel.getSearchBarPanel().setCallback(searchCallback);
 			}
 		});
 	}

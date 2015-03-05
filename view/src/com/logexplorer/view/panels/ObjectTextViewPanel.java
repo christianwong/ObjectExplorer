@@ -65,7 +65,7 @@ public class ObjectTextViewPanel extends JPanel {
 		});
 	}
 	
-	public void setTextViewCallback(final TextViewCallback callback) {
+	public void setCallback(final TextViewCallback callback) {
 		this.callback = callback;
 	}
 	

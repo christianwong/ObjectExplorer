@@ -107,7 +107,7 @@ public class ObjectTreeViewPanel extends JPanel {
 		});
 	}
 
-	public void setNodeCallback(final NodeCallback callback) {
+	public void setCallback(final NodeCallback callback) {
 		this.callback = callback;
 	}
 
