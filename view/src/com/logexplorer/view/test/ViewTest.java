@@ -54,7 +54,7 @@ public class ViewTest {
 		};
 	}
 	
-	public static void run() {
+	public static void main(String args[]) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -71,10 +71,6 @@ public class ViewTest {
 				panel.getSearchBarPanel().setSearchCallback(searchCallback);
 			}
 		});
-	}
-
-	public static void main(String args[]) {
-		ViewTest.run();
 	}
 
 }

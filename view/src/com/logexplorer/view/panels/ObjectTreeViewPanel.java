@@ -19,7 +19,7 @@ import com.logexplorer.view.util.TypeUtils;
 
 public class ObjectTreeViewPanel extends JPanel {
 
-	private static final String DUMMY_LEAF = "dummy";
+//	private static final String DUMMY_LEAF = "dummy";
 	private static final long serialVersionUID = 1L;
 	private JTree tree;
 	private NodeCallback callback;
