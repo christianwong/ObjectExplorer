@@ -11,9 +11,6 @@ import com.logexplorer.view.events.NodeCallback;
 import com.logexplorer.view.events.SearchCallback;
 import com.logexplorer.view.events.TextViewCallback;
 import com.logexplorer.view.panels.ObjectExplorerPanel;
-import com.logexplorer.view.panels.ObjectSearchBarPanel;
-import com.logexplorer.view.panels.ObjectTextViewPanel;
-import com.logexplorer.view.panels.ObjectTreeViewPanel;
 
 public class ViewTest {
 	
@@ -76,54 +73,6 @@ public class ViewTest {
 		});
 	}
 
-	public static void runTreeDemo() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				JFrame frame = new JFrame();
-				ObjectTreeViewPanel panel = new ObjectTreeViewPanel();
-				panel.setNodeCallback(nodeCallback);
-				frame.add(panel, BorderLayout.CENTER);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.setTitle("Panel Demo");
-				frame.pack();
-				frame.setVisible(true);
-			}
-		});
-	}
-	
-	public static void runTextDemo() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				JFrame frame = new JFrame();
-				ObjectTextViewPanel panel = new ObjectTextViewPanel();
-				panel.setTextViewCallback(textViewCallback);
-				frame.add(panel, BorderLayout.CENTER);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.setTitle("Panel Demo");
-				frame.pack();
-				frame.setVisible(true);
-			}
-		});
-	}
-
-	public static void runSearchDemo() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				JFrame frame = new JFrame();
-				ObjectSearchBarPanel panel = new ObjectSearchBarPanel();
-				panel.setSearchCallback(searchCallback);
-				frame.add(panel, BorderLayout.CENTER);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.setTitle("Panel Demo");
-				frame.pack();
-				frame.setVisible(true);
-			}
-		});
-	}
-	
 	public static void main(String args[]) {
 		ViewTest.run();
 	}
