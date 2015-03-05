@@ -12,6 +12,11 @@ public class TypeFactory {
 	
 	public static AbstractType getType(String name, Object object) {
 
+		// needed to avoid indexing of null objects
+		if (null == object) {
+			object = "null";
+		}
+
 		// if the object exists in DataHelper, don't create a new one.
 		int index = DataHelper.getInstance().getObjectID(object);
 		if (index>=0) {
