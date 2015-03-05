@@ -9,6 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.logexplorer.model.factory.TypeFactory;
+import com.logexplorer.model.types.AbstractType;
+import com.logexplorer.model.util.TypeUtils;
+
 public class Tester {
 	
 	public static Object run(String filename) {
@@ -77,6 +81,19 @@ public class Tester {
 		gc.setaComplexMap(aComplexMap);
 
 		writeBinaryObject(filename, gc);
+	}
+	
+	public static void main(String args[]) {
+		String filename = "GuessClass.bin";
+		
+		// Create and load the object
+		Tester.createObject(filename);
+		Object object = Tester.run(filename);
+		
+		// process object and print
+		AbstractType type = TypeFactory.getType(filename, object);
+		String describeFullType = TypeUtils.describeFullType(type);
+		System.out.println(describeFullType);
 	}
 
 }
