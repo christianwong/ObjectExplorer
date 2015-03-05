@@ -144,7 +144,7 @@ public class ControllerTest {
 	
 	public void show() {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("Object Explorer");
+		frame.setTitle("Object Explorer - by Christian Wong");
 		frame.pack();
 		frame.setVisible(true);
 	}
