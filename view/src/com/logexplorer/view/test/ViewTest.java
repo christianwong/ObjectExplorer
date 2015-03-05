@@ -7,7 +7,6 @@ import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.TreePath;
 
-import com.logexplorer.model.types.AbstractType;
 import com.logexplorer.view.events.NodeCallback;
 import com.logexplorer.view.events.SearchCallback;
 import com.logexplorer.view.events.TextViewCallback;
@@ -58,12 +57,12 @@ public class ViewTest {
 		};
 	}
 	
-	public static void run(final AbstractType type) {
+	public static void run() {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				JFrame frame = new JFrame();
-				ObjectExplorerPanel panel = new ObjectExplorerPanel(type);
+				ObjectExplorerPanel panel = new ObjectExplorerPanel();
 				frame.add(panel, BorderLayout.CENTER);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setTitle("Panel Demo");
@@ -77,12 +76,12 @@ public class ViewTest {
 		});
 	}
 
-	public static void runTreeDemo(final AbstractType type) {
+	public static void runTreeDemo(/*final AbstractType type*/) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				JFrame frame = new JFrame();
-				ObjectTreeViewPanel panel = new ObjectTreeViewPanel(type);
+				ObjectTreeViewPanel panel = new ObjectTreeViewPanel();
 				panel.setNodeCallback(nodeCallback);
 				frame.add(panel, BorderLayout.CENTER);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

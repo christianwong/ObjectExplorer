@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import com.logexplorer.model.types.AbstractType;
 import com.logexplorer.view.events.NodeCallback;
 import com.logexplorer.view.events.SearchCallback;
 import com.logexplorer.view.events.TextViewCallback;
@@ -18,7 +17,7 @@ public class ObjectExplorerPanel extends JPanel {
 	private ObjectTreeViewPanel treePanel;
 	private ObjectTextViewPanel textPanel;
 	
-	public ObjectExplorerPanel(AbstractType type) {	
+	public ObjectExplorerPanel() {	
 		
 		setLayout(new BorderLayout());
 
@@ -26,7 +25,7 @@ public class ObjectExplorerPanel extends JPanel {
 		searchPanel = new ObjectSearchBarPanel();
 		add(searchPanel, BorderLayout.NORTH);
 		
-		treePanel = new ObjectTreeViewPanel(type);
+		treePanel = new ObjectTreeViewPanel();
 		treePanel.setMinimumSize(new Dimension(150, 500));
 		
 		textPanel = new ObjectTextViewPanel();

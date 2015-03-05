@@ -14,9 +14,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreePath;
 
-import com.logexplorer.model.types.AbstractType;
-import com.logexplorer.model.util.TypeUtils;
 import com.logexplorer.view.events.NodeCallback;
+import com.logexplorer.view.util.TypeUtils;
 
 public class ObjectTreeViewPanel extends JPanel {
 
@@ -25,29 +24,30 @@ public class ObjectTreeViewPanel extends JPanel {
 	private JTree tree;
 	private NodeCallback callback;
 
-	public ObjectTreeViewPanel(AbstractType type) {
+	public ObjectTreeViewPanel() {
 
 		setLayout(new BorderLayout());
 
 		// init components
-		initTree(type);
+		initTree();
 
 		// set up the frame
 		this.setMinimumSize(new Dimension(500, 600));
 		this.setVisible(true);
 	}
 
-	private void initTree(AbstractType type) {
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode(type.getNameWithID());
+	private void initTree() {
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("?????");
+//		DefaultMutableTreeNode root = new DefaultMutableTreeNode(type.getNameWithID());
 
 		// add childs to tree
-		for (AbstractType child : type.getChilds()) {
-			DefaultMutableTreeNode dummyChild = new DefaultMutableTreeNode(child.getNameWithID());
-			if (child.hasChilds()) {
-				dummyChild.add(new DefaultMutableTreeNode(DUMMY_LEAF));
-			}
-			root.add(dummyChild);
-		}
+//		for (AbstractType child : type.getChilds()) {
+//			DefaultMutableTreeNode dummyChild = new DefaultMutableTreeNode(child.getNameWithID());
+//			if (child.hasChilds()) {
+//				dummyChild.add(new DefaultMutableTreeNode(DUMMY_LEAF));
+//			}
+//			root.add(dummyChild);
+//		}
 		
 		// set up the tree
 		tree = new JTree(root);
