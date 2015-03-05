@@ -6,10 +6,6 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import com.logexplorer.view.events.NodeCallback;
-import com.logexplorer.view.events.SearchCallback;
-import com.logexplorer.view.events.TextViewCallback;
-
 public class ObjectExplorerPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -41,20 +37,16 @@ public class ObjectExplorerPanel extends JPanel {
 		this.setVisible(true);
 	}
 	
-	public void setNodeCallback(final NodeCallback callback) {
-		treePanel.setNodeCallback(callback);
+	public ObjectTreeViewPanel getTreeViewPanel() {
+		return treePanel;
 	}
 	
-	public void setTextViewCallback(final TextViewCallback callback) {
-		textPanel.setTextViewCallback(callback);
+	public ObjectTextViewPanel getTextViewPanel() {
+		return textPanel;
 	}
 	
-	public void setSearchCallback(final SearchCallback callback) {
-		searchPanel.setSearchCallback(callback);
-	}
-	
-	public void setKnownObjectText(String description) {
-		textPanel.setKnownObjectText(description);
+	public ObjectSearchBarPanel getSearchBarPanel() {
+		return searchPanel;
 	}
 	
 }

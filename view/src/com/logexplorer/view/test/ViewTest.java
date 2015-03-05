@@ -69,14 +69,14 @@ public class ViewTest {
 				frame.pack();
 				frame.setVisible(true);
 				
-				panel.setNodeCallback(nodeCallback);
-				panel.setTextViewCallback(textViewCallback);
-				panel.setSearchCallback(searchCallback);
+				panel.getTreeViewPanel().setNodeCallback(nodeCallback);
+				panel.getTextViewPanel().setTextViewCallback(textViewCallback);
+				panel.getSearchBarPanel().setSearchCallback(searchCallback);
 			}
 		});
 	}
 
-	public static void runTreeDemo(/*final AbstractType type*/) {
+	public static void runTreeDemo() {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -122,6 +122,10 @@ public class ViewTest {
 				frame.setVisible(true);
 			}
 		});
+	}
+	
+	public static void main(String args[]) {
+		ViewTest.run();
 	}
 
 }
