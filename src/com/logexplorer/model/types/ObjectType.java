@@ -23,11 +23,9 @@ public class ObjectType extends AbstractType {
 			
 			boolean accessible = TypeUtils.enableAccessible(field);
 			
-			if (!Modifier.isStatic(field.getModifiers())) {
-				String childName = field.getName();
-				Object child = TypeUtils.getFieldValue(getObject(), field);
-				addChild(childName, child);
-			}
+			String childName = field.getName();
+			Object child = TypeUtils.getFieldValue(getObject(), field);
+			addChild(childName, child);
 			
 			TypeUtils.resetAccessible(field, accessible);
 		}
@@ -48,7 +46,8 @@ public class ObjectType extends AbstractType {
 
 		// WA to avoid inclusion of composition object reference "this$"
 		for (int idx=fieldList.size()-1; idx>=0; idx--) {
-			if (fieldList.get(idx).getName().contains("this$")) {
+			if (fieldList.get(idx).getName().contains("this$") ||
+					Modifier.isStatic(fieldList.get(idx).getModifiers())) {
 				fieldList.remove(idx);
 			}
 		}
