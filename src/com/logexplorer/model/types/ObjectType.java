@@ -1,6 +1,7 @@
 package com.logexplorer.model.types;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,9 +23,9 @@ public class ObjectType extends AbstractType {
 			
 			boolean accessible = TypeUtils.enableAccessible(field);
 			
-			String name = field.getName();
+			String childName = field.getName();
 			Object child = TypeUtils.getFieldValue(getObject(), field);
-			addChild(name, child);
+			addChild(childName, child);
 			
 			TypeUtils.resetAccessible(field, accessible);
 		}
@@ -41,6 +42,14 @@ public class ObjectType extends AbstractType {
 		while (objClass != null) {
 			fieldList.addAll(Arrays.asList(objClass.getDeclaredFields()));
 			objClass = objClass.getSuperclass();
+		}
+
+		// WA to avoid inclusion of composition object reference "this$"
+		for (int idx=fieldList.size()-1; idx>=0; idx--) {
+			if (fieldList.get(idx).getName().contains("this$") ||
+					Modifier.isStatic(fieldList.get(idx).getModifiers())) {
+				fieldList.remove(idx);
+			}
 		}
 
 		return fieldList;
