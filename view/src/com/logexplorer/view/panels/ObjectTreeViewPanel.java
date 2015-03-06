@@ -15,13 +15,16 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreePath;
 
 import com.logexplorer.view.events.NodeCallback;
-import com.logexplorer.view.util.TypeUtils;
+import com.logexplorer.view.utils.ViewUtils;
 
 public class ObjectTreeViewPanel extends JPanel {
 
 //	private static final String DUMMY_LEAF = "dummy";
 	private static final long serialVersionUID = 1L;
+
 	private JTree tree;
+	private DefaultMutableTreeNode root;
+
 	private NodeCallback callback;
 
 	public ObjectTreeViewPanel() {
@@ -37,8 +40,7 @@ public class ObjectTreeViewPanel extends JPanel {
 	}
 
 	private void initTree() {
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode("?????");
-//		DefaultMutableTreeNode root = new DefaultMutableTreeNode(type.getNameWithID());
+		root = new DefaultMutableTreeNode("?????");
 
 		// add childs to tree
 //		for (AbstractType child : type.getChilds()) {
@@ -75,7 +77,7 @@ public class ObjectTreeViewPanel extends JPanel {
 			@Override
 			public void treeExpanded(TreeExpansionEvent event) {
 				TreePath path = event.getPath();
-				int code = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
+				int code = ViewUtils.getCodeFromName(path.getLastPathComponent().toString());
 				if (null != callback) {
 					callback.onExpandNode(tree, path, code);
 				}
@@ -84,7 +86,7 @@ public class ObjectTreeViewPanel extends JPanel {
 			@Override
 			public void treeCollapsed(TreeExpansionEvent event) {
 				TreePath path = event.getPath();
-				int code = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
+				int code = ViewUtils.getCodeFromName(path.getLastPathComponent().toString());
 				if (null != callback) {
 					callback.onCollapseNode(tree, path, code);
 				}
@@ -96,7 +98,7 @@ public class ObjectTreeViewPanel extends JPanel {
 			@Override
 			public void valueChanged(TreeSelectionEvent event) {
 				TreePath path = event.getPath();
-				int code = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
+				int code = ViewUtils.getCodeFromName(path.getLastPathComponent().toString());
 				if (null != callback) {
 					callback.onClickNode(tree, code);
 				}

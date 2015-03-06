@@ -115,9 +115,4 @@ public class TypeUtils {
 		return indentation;
 	}
 	
-	public static int getCodeFromName(String name) {
-		String code=name.substring(name.lastIndexOf("=")+1, name.lastIndexOf(")"));
-		return Integer.parseInt(code);
-	}
-	
 }
