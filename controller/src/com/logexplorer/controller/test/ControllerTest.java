@@ -18,6 +18,7 @@ import com.logexplorer.view.events.NodeCallback;
 import com.logexplorer.view.events.SearchCallback;
 import com.logexplorer.view.events.TextViewCallback;
 import com.logexplorer.view.panels.ObjectExplorerPanel;
+import com.logexplorer.view.utils.ViewUtils;
 
 public class ControllerTest {
 
@@ -114,7 +115,7 @@ public class ControllerTest {
 			    }
 			    
 			    for (TreePath path : paths) {
-			    	int pathCode = TypeUtils.getCodeFromName(path.getLastPathComponent().toString());
+			    	int pathCode = ViewUtils.getCodeFromName(path.getLastPathComponent().toString());
 
 					AbstractType selectedType = DataHelper.getInstance().getStoredType(pathCode);
 					description += TypeUtils.describeKnownType(selectedType) + "\n\n";
