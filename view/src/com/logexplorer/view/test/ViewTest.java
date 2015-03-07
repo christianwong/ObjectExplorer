@@ -7,7 +7,6 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import com.logexplorer.view.events.NodeCallback;
 import com.logexplorer.view.events.SearchCallback;
 import com.logexplorer.view.events.TextViewCallback;
 import com.logexplorer.view.handlers.NodeHandler;
@@ -17,32 +16,10 @@ import com.logexplorer.view.utils.ViewUtils;
 
 public class ViewTest {
 	
-	private static NodeCallback nodeCallback;
 	private static TextViewCallback textViewCallback;
 	private static SearchCallback searchCallback;
 	
 	static {
-		nodeCallback = new NodeCallback() {
-			
-			@Override
-			public void expandNode(Object object) {
-				int code = ViewUtils.decodeNodeName(object.toString());
-				System.out.println("onExpandNode called: "+code);
-			}
-			
-			@Override
-			public void collapseNode(Object object) {
-				int code = ViewUtils.decodeNodeName(object.toString());
-				System.out.println("onCollapseNode called: "+code);
-			}
-			
-//			@Override
-//			public void clickNode(Object object) {
-//				int code = ViewUtils.decodeNodeName(object.toString());
-//				System.out.println("onClickNode called: "+code);
-//			}
-		};
-		
 		textViewCallback = new TextViewCallback() {
 			
 			@Override
@@ -115,7 +92,6 @@ public class ViewTest {
 				frame.pack();
 				frame.setVisible(true);
 				
-				panel.getTreeViewPanel().setCallback(nodeCallback);
 				panel.getTextViewPanel().setCallback(textViewCallback);
 				panel.getSearchBarPanel().setCallback(searchCallback);
 				

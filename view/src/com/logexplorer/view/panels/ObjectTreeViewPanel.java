@@ -14,10 +14,11 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
 
 import com.logexplorer.view.consts.ViewConsts;
-import com.logexplorer.view.events.NodeCallback;
 
 public class ObjectTreeViewPanel extends JPanel {
 
@@ -27,7 +28,6 @@ public class ObjectTreeViewPanel extends JPanel {
 	private DefaultMutableTreeNode root;
 
 	private ObjectExplorerPanel parent;
-	private NodeCallback callback;
 
 	public ObjectTreeViewPanel(ObjectExplorerPanel parent, Object rootSource) {
 
@@ -70,36 +70,61 @@ public class ObjectTreeViewPanel extends JPanel {
 	}
 
 	private void initCallbacks() {
-		callback = null;
 		tree.addTreeExpansionListener(new TreeExpansionListener() {
 
 			@Override
 			public void treeExpanded(TreeExpansionEvent event) {
-				
-				if (null != callback) {
-					TreePath path = event.getPath();
-					Object object = path.getLastPathComponent();
-					
-					callback.expandNode(object);
-//					MutableTreeNode node = (MutableTreeNode)path.getLastPathComponent();
-//					
-//					if (node.getChildCount() >= 0) {
-//						tree.expandPath(path);
-//					}
-					
-					processSelectedObjects();
+
+				TreePath path = event.getPath();
+
+				// get children from model
+				Object selected = ((DefaultMutableTreeNode) path.getLastPathComponent()).getUserObject();
+				List<?> children = parent.getHandler().getChildren(selected);
+
+				// mark node as expanded
+				parent.getHandler().setExpanded(selected, true);
+
+				// copy children from model to view
+				MutableTreeNode node = (MutableTreeNode) path.getLastPathComponent();
+				DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
+				for (Object child : children) {
+					DefaultMutableTreeNode newChild = new DefaultMutableTreeNode(child);
+					model.insertNodeInto(newChild, node, node.getChildCount());
+					if (parent.getHandler().hasChildren(child)) {
+						newChild.add(new DefaultMutableTreeNode(ViewConsts.DUMMY_LEAF));
+					}
 				}
+
+				// remove dummy leaf
+				MutableTreeNode dummyLeaf = (MutableTreeNode) node.getChildAt(0);
+				model.removeNodeFromParent(dummyLeaf);
+
+				// update selected objects
+				processSelectedObjects();
 			}
 
 			@Override
 			public void treeCollapsed(TreeExpansionEvent event) {
-				if (null != callback) {
-					TreePath path = event.getPath();
-					Object object = path.getLastPathComponent();
-					callback.collapseNode(object);
-					
-					processSelectedObjects();
+
+				TreePath path = event.getPath();
+				
+				// remove children from view
+				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)path.getLastPathComponent();
+				DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
+				for (int idx=selectedNode.getChildCount()-1; idx >= 0; idx--) {
+					MutableTreeNode dummyLeaf = (MutableTreeNode) selectedNode.getChildAt(idx);
+					model.removeNodeFromParent(dummyLeaf);
 				}
+				
+		    	// mark node as collapsed
+		    	parent.getHandler().setExpanded(selectedNode.getUserObject(), false);
+				
+				// add dummy leaf to view
+				DefaultMutableTreeNode newChild = new DefaultMutableTreeNode(ViewConsts.DUMMY_LEAF);
+				model.insertNodeInto(newChild, selectedNode, selectedNode.getChildCount());
+
+				// update selected objects
+				processSelectedObjects();
 			}
 		});
 
@@ -114,10 +139,6 @@ public class ObjectTreeViewPanel extends JPanel {
 		});
 	}
 
-	public void setCallback(final NodeCallback callback) {
-		this.callback = callback;
-	}
-	
 	public Object getRoot() {
 		return this.root;
 	}

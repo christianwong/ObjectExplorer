@@ -37,5 +37,10 @@ public class BasicType extends AbstractType {
 	public boolean hasChilds() {
 		return false;
 	}
+	
+	@Override
+	public void setExpanded(boolean expanded) {
+		this.expanded = false;
+	}
 
 }
