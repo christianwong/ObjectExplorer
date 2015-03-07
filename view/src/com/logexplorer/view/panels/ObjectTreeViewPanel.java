@@ -14,8 +14,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreePath;
 
+import com.logexplorer.view.consts.ViewConsts;
 import com.logexplorer.view.events.NodeCallback;
-import com.logexplorer.view.utils.ViewUtils;
 
 public class ObjectTreeViewPanel extends JPanel {
 
@@ -26,30 +26,21 @@ public class ObjectTreeViewPanel extends JPanel {
 
 	private NodeCallback callback;
 
-	public ObjectTreeViewPanel() {
+	public ObjectTreeViewPanel(Object rootSource) {
 
 		setLayout(new BorderLayout());
 
 		// init components
-		initTree();
+		initTree(rootSource);
 
 		// set up the frame
 		this.setMinimumSize(new Dimension(500, 600));
 		this.setVisible(true);
 	}
 
-	private void initTree() {
-		root = new DefaultMutableTreeNode("?????");
+	private void initTree(Object rootSource) {
+		root = new DefaultMutableTreeNode(rootSource);
 
-		// add childs to tree
-//		for (AbstractType child : type.getChilds()) {
-//			DefaultMutableTreeNode dummyChild = new DefaultMutableTreeNode(child.getNameWithID());
-//			if (child.hasChilds()) {
-//				dummyChild.add(new DefaultMutableTreeNode(DUMMY_LEAF));
-//			}
-//			root.add(dummyChild);
-//		}
-		
 		// set up the tree
 		tree = new JTree(root);
 		tree.setShowsRootHandles(true);
@@ -75,19 +66,15 @@ public class ObjectTreeViewPanel extends JPanel {
 
 			@Override
 			public void treeExpanded(TreeExpansionEvent event) {
-				TreePath path = event.getPath();
-				int code = ViewUtils.getCodeFromName(path.getLastPathComponent().toString());
 				if (null != callback) {
-					callback.onExpandNode(tree, path, code);
+					callback.onExpandNode(event);
 				}
 			}
 
 			@Override
 			public void treeCollapsed(TreeExpansionEvent event) {
-				TreePath path = event.getPath();
-				int code = ViewUtils.getCodeFromName(path.getLastPathComponent().toString());
 				if (null != callback) {
-					callback.onCollapseNode(tree, path, code);
+					callback.onCollapseNode(event);
 				}
 			}
 		});
@@ -96,13 +83,9 @@ public class ObjectTreeViewPanel extends JPanel {
 
 			@Override
 			public void valueChanged(TreeSelectionEvent event) {
-				TreePath path = event.getPath();
-				int code = ViewUtils.getCodeFromName(path.getLastPathComponent().toString());
 				if (null != callback) {
-					callback.onClickNode(tree, code);
+					callback.onClickNode(event);
 				}
-				
-				// TODO mark current node as selected in tree
 			}
 
 		});
@@ -110,6 +93,20 @@ public class ObjectTreeViewPanel extends JPanel {
 
 	public void setCallback(final NodeCallback callback) {
 		this.callback = callback;
+	}
+	
+	public Object getRoot() {
+		return this.root;
+	}
+	
+	public Object addNode(Object parent, Object childSource, boolean hasChilds) {
+		DefaultMutableTreeNode nodeParent = (DefaultMutableTreeNode) parent;
+		DefaultMutableTreeNode nodeChild = new DefaultMutableTreeNode(childSource.toString());
+		if (hasChilds) {
+			nodeChild.add(new DefaultMutableTreeNode(ViewConsts.DUMMY_LEAF));
+		}
+		nodeParent.add(nodeChild);
+		return nodeChild;
 	}
 
 }

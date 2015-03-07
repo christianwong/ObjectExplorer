@@ -13,7 +13,7 @@ public class ObjectExplorerPanel extends JPanel {
 	private ObjectTreeViewPanel treePanel;
 	private ObjectTextViewPanel textPanel;
 	
-	public ObjectExplorerPanel() {	
+	public ObjectExplorerPanel(Object rootSource) {	
 		
 		setLayout(new BorderLayout());
 
@@ -21,7 +21,7 @@ public class ObjectExplorerPanel extends JPanel {
 		searchPanel = new ObjectSearchBarPanel();
 		add(searchPanel, BorderLayout.NORTH);
 		
-		treePanel = new ObjectTreeViewPanel();
+		treePanel = new ObjectTreeViewPanel(rootSource);
 		treePanel.setMinimumSize(new Dimension(150, 500));
 		
 		textPanel = new ObjectTextViewPanel();

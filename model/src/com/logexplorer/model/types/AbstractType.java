@@ -52,7 +52,8 @@ public abstract class AbstractType {
 		return name;
 	}
 	
-	public String getNameWithID() {
+	@Override
+	public String toString() {
 		return name+" (id="+objectID+")";
 	}
 	
