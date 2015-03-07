@@ -12,19 +12,20 @@ import com.logexplorer.model.util.TypeUtils;
 public abstract class AbstractType {
 
 	protected String name;
+	protected Object object;
 	protected int objectID;
 	protected List<AbstractType> childs;
+	protected boolean expanded = false;
 	
 	@SuppressWarnings("unused")
 	private AbstractType() {}
 	
 	public AbstractType(String name, Object object) {
 		this.name = name;
+		this.object = object;
 		this.childs = new ArrayList<AbstractType>();
 		
 		this.objectID = DataHelper.getObjectID(object, this);
-		
-//		System.out.println("Type created for object ("+this.name+") with ID = '"+DataHelperInstance.getHashCode(object)+"'");
 	}
 	
 	public List<AbstractType> getChilds() {
@@ -45,7 +46,7 @@ public abstract class AbstractType {
 	}
 	
 	protected Object getObject() {
-		return DataHelper.getInstance().getStoredObject(this.objectID);
+		return object;
 	}
 	
 	public String getName() {
@@ -53,7 +54,7 @@ public abstract class AbstractType {
 	}
 	
 	public String getType() {
-		String rawType = DataHelper.getInstance().getStoredObject(this.objectID).getClass().toString();
+		String rawType = getObject().getClass().toString();
 		return TypeUtils.formatClassName(rawType);
 	}
 	
