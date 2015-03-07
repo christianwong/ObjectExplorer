@@ -102,15 +102,13 @@ public class ObjectTextViewPanel extends JPanel {
 		String id = parent.getHandler().getObjectID(object);
 		String value = parent.getHandler().getObjectValue(object);
 		
-		String indentation = getIndentation(level);
-
 		if (!parent.getHandler().hasChildren(object)) {
-			appendToPane(indentation, Color.BLACK);
+			indentLine(level, false);
 			appendToPane(name, Color.BLACK);
 			appendToPane("=", Color.BLACK);
 			appendToPane(value, Color.BLUE);
 		} else {
-			appendToPane(indentation, Color.BLACK);
+			indentLine(level, !parent.getHandler().isExpanded(object));
 			appendToPane(name, Color.BLACK);
 			appendToPane("<"+type+"> ", Color.GRAY);
 			appendToPane("(id="+id+")", Color.BLACK);
@@ -126,16 +124,20 @@ public class ObjectTextViewPanel extends JPanel {
 		}
 	}
 
-	private static String getIndentation(int level) {
+	private void indentLine(int level, boolean canExpand) {
 		String indentation = "";
 		for (int idx = 0; idx < level; idx++) {
 			if (idx == level - 1) {
-				indentation += " |- ";
+				if (canExpand) {
+					indentation += " |+ ";
+				} else {
+					indentation += " |- ";
+				}
 			} else {
 				indentation += " | ";
 			}
 		}
-		return indentation;
+		appendToPane(indentation, Color.BLACK);
 	}
 	
     private void appendToPane(String text, Color color) {
