@@ -36,11 +36,11 @@ public class ViewTest {
 				System.out.println("onCollapseNode called: "+code);
 			}
 			
-			@Override
-			public void clickNode(Object object) {
-				int code = ViewUtils.decodeNodeName(object.toString());
-				System.out.println("onClickNode called: "+code);
-			}
+//			@Override
+//			public void clickNode(Object object) {
+//				int code = ViewUtils.decodeNodeName(object.toString());
+//				System.out.println("onClickNode called: "+code);
+//			}
 		};
 		
 		textViewCallback = new TextViewCallback() {
@@ -70,14 +70,37 @@ public class ViewTest {
 							
 							@Override
 							public boolean hasChildren(Object object) {
-								// TODO Auto-generated method stub
 								return false;
 							}
 							
 							@Override
 							public List<Object> getChildren(Object object) {
-								// TODO Auto-generated method stub
 								return new ArrayList<Object>();
+							}
+
+							@Override
+							public String getObjectName(Object object) {
+								return "";
+							}
+
+							@Override
+							public String getObjectType(Object object) {
+								return "";
+							}
+
+							@Override
+							public String getObjectID(Object object) {
+								return "";
+							}
+
+							@Override
+							public boolean hasKnownChildren(Object object) {
+								return false;
+							}
+
+							@Override
+							public String getObjectValue(Object object) {
+								return "";
 							}
 						});
 				frame.add(panel, BorderLayout.CENTER);

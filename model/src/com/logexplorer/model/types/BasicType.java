@@ -19,8 +19,18 @@ public class BasicType extends AbstractType {
 	public void processChilds() {}
 
 	@Override
-	public String getDisplayValue() {
-		return null==getObject() ? TypeConstants.NULL : getObject().toString();
+	public String getValue() {
+		return null==getObject() ? TypeConstants.NULL : formatValue();
+	}
+
+	private String formatValue() {
+		String value = getObject().toString();
+		if (getObject() instanceof Character) {
+			value = "'"+value+"'";
+		} else if (getObject() instanceof String) {
+			value = "\""+value+"\"";
+		}
+		return value;
 	}
 
 	@Override

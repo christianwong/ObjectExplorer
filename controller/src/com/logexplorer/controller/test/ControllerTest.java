@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import com.logexplorer.model.types.AbstractType;
-import com.logexplorer.model.util.TypeUtils;
 import com.logexplorer.view.events.NodeCallback;
 import com.logexplorer.view.events.SearchCallback;
 import com.logexplorer.view.events.TextViewCallback;
@@ -22,11 +21,11 @@ public class ControllerTest {
 	private SearchCallback searchCallback;
 	
 	private ObjectExplorerPanel view;
-	private AbstractType type;
+//	private AbstractType type;
 	private JFrame frame;
 	
 	public ControllerTest(AbstractType type) {
-		this.type = type;
+//		this.type = type;
 		
 		initCallbacks();
 
@@ -38,13 +37,10 @@ public class ControllerTest {
 		view.getTextViewPanel().setCallback(textViewCallback);
 		view.getSearchBarPanel().setCallback(searchCallback);
 		
-		// display full object as for now.
-		view.getTextViewPanel().setKnownObjectText(TypeUtils.describeKnownType(this.type));
-		
 		// set up frame
 		frame = new JFrame();
 		frame.add(view, BorderLayout.CENTER);
-}
+	}
 
 	private void initCallbacks() {
 		
@@ -56,8 +52,33 @@ public class ControllerTest {
 			}
 			
 			@Override
-			public List<Object> getChildren(Object object) {
+			public List<?> getChildren(Object object) {
 				return ((AbstractType) object).getChilds();
+			}
+
+			@Override
+			public String getObjectName(Object object) {
+				return ((AbstractType) object).getName();
+			}
+
+			@Override
+			public String getObjectType(Object object) {
+				return ((AbstractType) object).getType();
+			}
+
+			@Override
+			public String getObjectID(Object object) {
+				return ((AbstractType) object).getID();
+			}
+
+			@Override
+			public boolean hasKnownChildren(Object object) {
+				return ((AbstractType) object).hasKnownChilds();
+			}
+
+			@Override
+			public String getObjectValue(Object object) {
+				return ((AbstractType) object).getValue();
 			}
 		};
 		
@@ -86,7 +107,7 @@ public class ControllerTest {
 //				MutableTreeNode dummyLeaf = (MutableTreeNode) node.getChildAt(0);
 //				model.removeNodeFromParent(dummyLeaf);
 
-				clickNode(object);
+//				clickNode(object);
 			}
 			
 			@Override
@@ -108,11 +129,11 @@ public class ControllerTest {
 //				DefaultMutableTreeNode newChild = new DefaultMutableTreeNode(DUMMY_LEAF);
 //				model.insertNodeInto(newChild, node, node.getChildCount());
 				
-				clickNode(object);
+//				clickNode(object);
 			}
 			
-			@Override
-			public void clickNode(Object object) {
+//			@Override
+//			public void clickNode(Object object) {
 //			    String description = "";
 //			    TreePath[] paths = tree.getSelectionPaths();
 //			    
@@ -127,7 +148,7 @@ public class ControllerTest {
 //					description += TypeUtils.describeKnownType(selectedType) + "\n\n";
 //				}
 //			    view.getTextViewPanel().setKnownObjectText(description);
-			}
+//			}
 		};
 		
 		textViewCallback = new TextViewCallback() {

@@ -86,14 +86,14 @@ public class TypeUtils {
 	}
 
 	private static String describeType(AbstractType type, boolean forceExpand, int level) {
-		String name = type.getDisplayName();
-		String value = type.getDisplayValue();
+		String name = type.getName();
+		String value = type.getValue();
 		
 		String indentation = getIndentation(level);
 		String typeString = indentation+name+":"+value;
 
 		if (forceExpand || type.hasKnownChilds()) {
-			List<Object> childs = type.getChilds();
+			List<?> childs = type.getChilds();
 
 			for(Object oChild : childs) {
 				AbstractType child = (AbstractType) oChild;

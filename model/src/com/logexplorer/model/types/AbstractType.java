@@ -13,21 +13,21 @@ public abstract class AbstractType {
 
 	protected String name;
 	protected int objectID;
-	protected List<Object> childs;
+	protected List<AbstractType> childs;
 	
 	@SuppressWarnings("unused")
 	private AbstractType() {}
 	
 	public AbstractType(String name, Object object) {
 		this.name = name;
-		this.childs = new ArrayList<Object>();
+		this.childs = new ArrayList<AbstractType>();
 		
 		this.objectID = DataHelper.getObjectID(object, this);
 		
 //		System.out.println("Type created for object ("+this.name+") with ID = '"+DataHelperInstance.getHashCode(object)+"'");
 	}
 	
-	public List<Object> getChilds() {
+	public List<AbstractType> getChilds() {
 		resetChilds();
 		processChilds();
 		return childs;
@@ -39,7 +39,7 @@ public abstract class AbstractType {
 	
 	public abstract boolean hasChilds();
 	
-	public String getDisplayValue() {
+	public String getValue() {
 		Object object = getObject();
 		return null==object ? TypeConstants.NULL : TypeUtils.formatClassName(object.getClass().toString())+" (id="+objectID+")";
 	}
@@ -48,8 +48,17 @@ public abstract class AbstractType {
 		return DataHelper.getInstance().getStoredObject(this.objectID);
 	}
 	
-	public String getDisplayName() {
+	public String getName() {
 		return name;
+	}
+	
+	public String getType() {
+		String rawType = DataHelper.getInstance().getStoredObject(this.objectID).getClass().toString();
+		return TypeUtils.formatClassName(rawType);
+	}
+	
+	public String getID() {
+		return Integer.toString(this.objectID);
 	}
 	
 	@Override

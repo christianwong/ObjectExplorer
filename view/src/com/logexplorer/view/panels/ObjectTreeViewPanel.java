@@ -2,6 +2,7 @@ package com.logexplorer.view.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -17,24 +18,23 @@ import javax.swing.tree.TreePath;
 
 import com.logexplorer.view.consts.ViewConsts;
 import com.logexplorer.view.events.NodeCallback;
-import com.logexplorer.view.handlers.NodeHandler;
 
 public class ObjectTreeViewPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	private JTree tree;
 	private DefaultMutableTreeNode root;
 
+	private ObjectExplorerPanel parent;
 	private NodeCallback callback;
-	private NodeHandler handler;
 
-	public ObjectTreeViewPanel(Object rootSource, NodeHandler handler) {
+	public ObjectTreeViewPanel(ObjectExplorerPanel parent, Object rootSource) {
 
 		setLayout(new BorderLayout());
 
 		// init components
-		this.handler = handler;
+		this.parent = parent;
 		initTree(rootSource);
 		initCallbacks();
 
@@ -46,9 +46,9 @@ public class ObjectTreeViewPanel extends JPanel {
 	private void initTree(Object rootSource) {
 		// set root with childs
 		root = new DefaultMutableTreeNode(rootSource);
-		List<Object> children = handler.getChildren(root.getUserObject());
+		List<?> children = parent.getHandler().getChildren(root.getUserObject());
 		for (Object child : children) {
-			addNode(root, child, handler.hasChildren(child));
+			addNode(root, child, parent.getHandler().hasChildren(child));
 		}
 
 		// set up the tree
@@ -85,6 +85,8 @@ public class ObjectTreeViewPanel extends JPanel {
 //					if (node.getChildCount() >= 0) {
 //						tree.expandPath(path);
 //					}
+					
+					processSelectedObjects();
 				}
 			}
 
@@ -94,6 +96,8 @@ public class ObjectTreeViewPanel extends JPanel {
 					TreePath path = event.getPath();
 					Object object = path.getLastPathComponent();
 					callback.collapseNode(object);
+					
+					processSelectedObjects();
 				}
 			}
 		});
@@ -102,11 +106,8 @@ public class ObjectTreeViewPanel extends JPanel {
 
 			@Override
 			public void valueChanged(TreeSelectionEvent event) {
-				if (null != callback) {
-					TreePath path = event.getPath();
-					Object object = path.getLastPathComponent();
-					callback.clickNode(object);
-				}
+				
+			    processSelectedObjects();
 			}
 
 		});
@@ -122,7 +123,7 @@ public class ObjectTreeViewPanel extends JPanel {
 	
 	public Object addNode(Object parent, Object childSource, boolean hasChilds) {
 		DefaultMutableTreeNode nodeParent = (DefaultMutableTreeNode) parent;
-		DefaultMutableTreeNode nodeChild = new DefaultMutableTreeNode(childSource.toString());
+		DefaultMutableTreeNode nodeChild = new DefaultMutableTreeNode(childSource);
 		if (hasChilds) {
 			nodeChild.add(new DefaultMutableTreeNode(ViewConsts.DUMMY_LEAF));
 		}
@@ -135,6 +136,17 @@ public class ObjectTreeViewPanel extends JPanel {
 		DefaultMutableTreeNode nodeChild = new DefaultMutableTreeNode(ViewConsts.DUMMY_LEAF);
 		nodeParent.add(nodeChild);
 		return nodeChild;
+	}
+	
+	public void processSelectedObjects() {
+		TreePath[] paths = tree.getSelectionPaths();
+	    List<Object> objects = new ArrayList<Object>();
+	    for (TreePath path : paths) {
+	    	DefaultMutableTreeNode object = (DefaultMutableTreeNode) path.getLastPathComponent();
+	    	objects.add(object.getUserObject());
+		}
+	    
+	    parent.getTextViewPanel().updateText(objects);
 	}
 
 }
