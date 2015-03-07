@@ -94,13 +94,19 @@ public class ViewTest {
 							}
 
 							@Override
-							public boolean hasKnownChildren(Object object) {
+							public boolean isExpanded(Object object) {
 								return false;
 							}
 
 							@Override
 							public String getObjectValue(Object object) {
 								return "";
+							}
+
+							@Override
+							public void setExpanded(Object object,
+									boolean expanded) {
+								;
 							}
 						});
 				frame.add(panel, BorderLayout.CENTER);

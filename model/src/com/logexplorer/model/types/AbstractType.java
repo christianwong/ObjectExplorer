@@ -26,16 +26,26 @@ public abstract class AbstractType {
 		this.childs = new ArrayList<AbstractType>();
 		
 		this.objectID = DataHelper.getObjectID(object, this);
+		
+		processChilds();
 	}
 	
 	public List<AbstractType> getChilds() {
-		resetChilds();
-		processChilds();
+//		resetChilds();
+//		processChilds();
 		return childs;
 	}
 	
-	public boolean hasKnownChilds() {
-		return !childs.isEmpty();
+//	public boolean hasKnownChilds() {
+//		return !childs.isEmpty();
+//	}
+	
+	public boolean isExpanded() {
+		return expanded;
+	}
+	
+	public void setExpanded(boolean expanded) {
+		this.expanded = expanded;
 	}
 	
 	public abstract boolean hasChilds();
@@ -67,9 +77,9 @@ public abstract class AbstractType {
 		return name+" (id="+objectID+")";
 	}
 	
-	public void resetChilds() {
-		childs.clear();
-	}
+//	public void resetChilds() {
+//		childs.clear();
+//	}
 	
 	protected abstract void processChilds();
 

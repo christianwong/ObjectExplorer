@@ -6,7 +6,8 @@ public interface NodeHandler {
 	
 	public List<?> getChildren(Object object);
 	public boolean hasChildren(Object object);
-	public boolean hasKnownChildren(Object object);
+	public void setExpanded(Object object, boolean expanded);
+	public boolean isExpanded(Object object);
 	
 	public String getObjectName(Object object);
 	public String getObjectType(Object object);

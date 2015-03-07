@@ -109,7 +109,7 @@ public class ObjectTextViewPanel extends JPanel {
 		} else {
 			typeString = indentation+name+"<"+type+"> (id="+id+")";
 			
-			if (parent.getHandler().hasKnownChildren(object)) {
+			if (parent.getHandler().isExpanded(object)) {
 				List<?> childs = parent.getHandler().getChildren(object);
 
 				for (Object oChild : childs) {

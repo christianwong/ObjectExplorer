@@ -50,6 +50,7 @@ public class ObjectTreeViewPanel extends JPanel {
 		for (Object child : children) {
 			addNode(root, child, parent.getHandler().hasChildren(child));
 		}
+		parent.getHandler().setExpanded(root.getUserObject(), true);
 
 		// set up the tree
 		tree = new JTree(root);

@@ -72,13 +72,18 @@ public class ControllerTest {
 			}
 
 			@Override
-			public boolean hasKnownChildren(Object object) {
-				return ((AbstractType) object).hasKnownChilds();
+			public boolean isExpanded(Object object) {
+				return ((AbstractType) object).isExpanded();
 			}
 
 			@Override
 			public String getObjectValue(Object object) {
 				return ((AbstractType) object).getValue();
+			}
+
+			@Override
+			public void setExpanded(Object object, boolean expanded) {
+				((AbstractType) object).setExpanded(expanded);
 			}
 		};
 		
