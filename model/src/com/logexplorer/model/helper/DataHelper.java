@@ -18,7 +18,7 @@ public class DataHelper {
 	 * Singleton method to retrieve instance.
 	 * @return
 	 */
-	public static DataHelper getInstance() {
+	private static DataHelper getInstance() {
 		if (null == instance) {
 			instance = new DataHelper();
 		}
