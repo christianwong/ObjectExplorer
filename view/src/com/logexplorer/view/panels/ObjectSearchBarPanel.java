@@ -14,7 +14,7 @@ import com.logexplorer.view.utils.ViewUtils;
 
 public class ObjectSearchBarPanel extends JPanel {
 
-	private static final String STAR = "*";
+	private static final String STAR = ".*";
 	private static final String GO = "Go!";
 	private static final String VALUE = "value";
 	private static final String ATTRIBUTE = "attribute";
@@ -38,25 +38,25 @@ public class ObjectSearchBarPanel extends JPanel {
 		add(searchLabel);
 		
 		attributeLabel = new JLabel(ATTRIBUTE);
-		attributeLabel.setEnabled(false);
+//		attributeLabel.setEnabled(false);
 		add(attributeLabel);
 		
 		attributeText = new JTextField(STAR, 15);
-		attributeText.setEnabled(false);
+//		attributeText.setEnabled(false);
 //		attributeText.setBackground(Color.ORANGE);
 		add(attributeText);
 		
 		valueLabel = new JLabel(VALUE);
-		valueLabel.setEnabled(false);
+//		valueLabel.setEnabled(false);
 		add(valueLabel);
 		
 		valueText = new JTextField(STAR, 15);
-		valueText.setEnabled(false);
+//		valueText.setEnabled(false);
 //		valueText.setBackground(Color.CYAN);
 		add(valueText);
 		
 		searchButton = new JButton(GO);
-		searchButton.setEnabled(false);
+//		searchButton.setEnabled(false);
 		add(searchButton);
 		
 		initCallbacks();

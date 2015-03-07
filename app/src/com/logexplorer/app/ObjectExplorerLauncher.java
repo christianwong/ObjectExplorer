@@ -26,7 +26,7 @@ public class ObjectExplorerLauncher {
 
 //		String fullType = TypeUtils.describeFullType(type);
 //		System.out.println("###### FULL TYPE\n"+fullType);
-
+		
 		ControllerTest.run(type);
 	}
 

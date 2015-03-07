@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import com.logexplorer.model.index.TypeIndex;
 import com.logexplorer.model.types.AbstractType;
 import com.logexplorer.view.events.SearchCallback;
 import com.logexplorer.view.events.TextViewCallback;
@@ -93,7 +94,13 @@ public class ControllerTest {
 			
 			@Override
 			public void onSearch(String attribute, String value) {
-				System.out.println("setSearchCallback('"+attribute+"', '"+value+"') called");
+				
+				List<AbstractType> search = TypeIndex.getInstance().search(attribute, value);
+				System.out.println("Found "+search.size()+" items:");
+				for (AbstractType result : search) {
+					System.out.println(result.getID()+" -> name='"+result.getName()+"' value='"+result.getValue()+"'");
+				}
+
 			}
 		};
 	}

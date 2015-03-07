@@ -1,5 +1,6 @@
 package com.logexplorer.model.factory;
 
+import com.logexplorer.model.index.TypeIndex;
 import com.logexplorer.model.types.AbstractType;
 import com.logexplorer.model.types.ArrayType;
 import com.logexplorer.model.types.BasicType;
@@ -35,6 +36,13 @@ public class TypeFactory {
 		} else {
 			type = new ObjectType(name, object);
 		}
+		
+		String typeName = type.getName();
+		String typeValue = type.getValue();
+
+		// add new type to index
+		TypeIndex.getInstance().add(typeName, typeValue, type);
+		
 		return type;
 	}
 
