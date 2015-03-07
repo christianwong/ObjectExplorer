@@ -1,6 +1,8 @@
 package com.logexplorer.view.test;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -8,6 +10,7 @@ import javax.swing.SwingUtilities;
 import com.logexplorer.view.events.NodeCallback;
 import com.logexplorer.view.events.SearchCallback;
 import com.logexplorer.view.events.TextViewCallback;
+import com.logexplorer.view.handlers.NodeHandler;
 import com.logexplorer.view.panels.ObjectExplorerPanel;
 import com.logexplorer.view.panels.ObjectTreeViewPanel;
 import com.logexplorer.view.utils.ViewUtils;
@@ -62,7 +65,21 @@ public class ViewTest {
 			@Override
 			public void run() {
 				JFrame frame = new JFrame();
-				ObjectExplorerPanel panel = new ObjectExplorerPanel(ViewUtils.encodeNodeName("demo", 0));
+				ObjectExplorerPanel panel = new ObjectExplorerPanel(ViewUtils.encodeNodeName("demo", 0), 
+						new NodeHandler() {
+							
+							@Override
+							public boolean hasChildren(Object object) {
+								// TODO Auto-generated method stub
+								return false;
+							}
+							
+							@Override
+							public List<Object> getChildren(Object object) {
+								// TODO Auto-generated method stub
+								return new ArrayList<Object>();
+							}
+						});
 				frame.add(panel, BorderLayout.CENTER);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setTitle("Panel Demo");

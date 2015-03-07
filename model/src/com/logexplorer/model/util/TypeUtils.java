@@ -93,9 +93,10 @@ public class TypeUtils {
 		String typeString = indentation+name+":"+value;
 
 		if (forceExpand || type.hasKnownChilds()) {
-			List<AbstractType> childs = type.getChilds();
+			List<Object> childs = type.getChilds();
 
-			for(AbstractType child : childs) {
+			for(Object oChild : childs) {
+				AbstractType child = (AbstractType) oChild;
 				typeString += "\n"+describeType(child, forceExpand, level+1);
 			}
 		}

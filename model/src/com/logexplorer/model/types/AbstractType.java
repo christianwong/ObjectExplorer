@@ -13,21 +13,21 @@ public abstract class AbstractType {
 
 	protected String name;
 	protected int objectID;
-	protected List<AbstractType> childs;
+	protected List<Object> childs;
 	
 	@SuppressWarnings("unused")
 	private AbstractType() {}
 	
 	public AbstractType(String name, Object object) {
 		this.name = name;
-		this.childs = new ArrayList<AbstractType>();
+		this.childs = new ArrayList<Object>();
 		
 		this.objectID = DataHelper.getObjectID(object, this);
 		
 //		System.out.println("Type created for object ("+this.name+") with ID = '"+DataHelperInstance.getHashCode(object)+"'");
 	}
 	
-	public List<AbstractType> getChilds() {
+	public List<Object> getChilds() {
 		resetChilds();
 		processChilds();
 		return childs;

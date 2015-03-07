@@ -1,6 +1,7 @@
 package com.logexplorer.controller.test;
 
 import java.awt.BorderLayout;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -10,10 +11,12 @@ import com.logexplorer.model.util.TypeUtils;
 import com.logexplorer.view.events.NodeCallback;
 import com.logexplorer.view.events.SearchCallback;
 import com.logexplorer.view.events.TextViewCallback;
+import com.logexplorer.view.handlers.NodeHandler;
 import com.logexplorer.view.panels.ObjectExplorerPanel;
 
 public class ControllerTest {
 
+	private NodeHandler nodeHandler;
 	private NodeCallback nodeCallback;
 	private TextViewCallback textViewCallback;
 	private SearchCallback searchCallback;
@@ -28,7 +31,7 @@ public class ControllerTest {
 		initCallbacks();
 
 		// set up view
-		view = new ObjectExplorerPanel(type);
+		view = new ObjectExplorerPanel(type, nodeHandler);
 		
 		// set up callbacks
 		view.getTreeViewPanel().setCallback(nodeCallback);
@@ -44,6 +47,20 @@ public class ControllerTest {
 }
 
 	private void initCallbacks() {
+		
+		nodeHandler = new NodeHandler() {
+			
+			@Override
+			public boolean hasChildren(Object object) {
+				return ((AbstractType) object).hasChilds();
+			}
+			
+			@Override
+			public List<Object> getChildren(Object object) {
+				return ((AbstractType) object).getChilds();
+			}
+		};
+		
 		nodeCallback = new NodeCallback() {
 			
 			@Override
