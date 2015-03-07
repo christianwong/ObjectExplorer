@@ -22,7 +22,7 @@ public class ArrayType extends AbstractType {
 		for (int idx = 0; idx < length; idx++) {
 			String name = Integer.toString(idx);
 			Object child = Array.get(getObject(), idx);
-			addChild(name, child);
+			addChild("["+name+"]", child);
 		}
 	}
 

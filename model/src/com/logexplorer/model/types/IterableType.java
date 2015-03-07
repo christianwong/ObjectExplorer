@@ -24,7 +24,7 @@ public class IterableType extends AbstractType {
 			String name = Integer.toString(index++);
 			Object child = iterator.next();
 			
-			addChild(name, child);
+			addChild("["+name+"]", child);
 		}
 		
 		addFirstChild(TypeConstants.ATTR_LENGTH, index);

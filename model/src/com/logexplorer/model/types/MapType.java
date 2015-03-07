@@ -25,7 +25,7 @@ public class MapType extends AbstractType {
 			String name = (String) iterator.next();
 			Object child = map.get(name);
 			
-			addChild(name, child);
+			addChild("["+name+"]", child);
 		}
 		
 		addFirstChild(TypeConstants.ATTR_LENGTH, map.keySet().size());
