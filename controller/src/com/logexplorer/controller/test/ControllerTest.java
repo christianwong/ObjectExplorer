@@ -19,12 +19,9 @@ public class ControllerTest {
 	private SearchCallback searchCallback;
 	
 	private ObjectExplorerPanel view;
-//	private AbstractType type;
 	private JFrame frame;
 	
 	public ControllerTest(AbstractType type) {
-//		this.type = type;
-		
 		initCallbacks();
 
 		// set up view
