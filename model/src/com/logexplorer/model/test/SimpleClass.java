@@ -7,6 +7,7 @@ public class SimpleClass extends BaseClass implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected int abc = 123;
 	protected String str = "str str str";
+	Object nullObject = null;
 	
 	public String toString() {
 		return "SimpleClass";
