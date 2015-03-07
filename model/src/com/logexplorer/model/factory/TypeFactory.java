@@ -1,6 +1,5 @@
 package com.logexplorer.model.factory;
 
-import com.logexplorer.model.helper.DataHelper;
 import com.logexplorer.model.types.AbstractType;
 import com.logexplorer.model.types.ArrayType;
 import com.logexplorer.model.types.BasicType;
@@ -18,10 +17,10 @@ public class TypeFactory {
 		}
 
 		// if the object exists in DataHelper, don't create a new one.
-		int index = DataHelper.getInstance().getObjectID(object);
-		if (index>=0) {
-			return DataHelper.getInstance().getStoredType(index);
-		}
+//		int index = DataHelper.getInstance().getObjectID(object);
+//		if (index>=0) {
+//			return DataHelper.getInstance().getStoredType(index);
+//		}
 		
 		AbstractType type = null;
 		
