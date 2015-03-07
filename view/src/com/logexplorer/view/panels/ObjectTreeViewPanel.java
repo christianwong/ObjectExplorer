@@ -67,14 +67,14 @@ public class ObjectTreeViewPanel extends JPanel {
 			@Override
 			public void treeExpanded(TreeExpansionEvent event) {
 				if (null != callback) {
-					callback.onExpandNode(event);
+					callback.expandNode(event);
 				}
 			}
 
 			@Override
 			public void treeCollapsed(TreeExpansionEvent event) {
 				if (null != callback) {
-					callback.onCollapseNode(event);
+					callback.collapseNode(event);
 				}
 			}
 		});
@@ -84,7 +84,7 @@ public class ObjectTreeViewPanel extends JPanel {
 			@Override
 			public void valueChanged(TreeSelectionEvent event) {
 				if (null != callback) {
-					callback.onClickNode(event);
+					callback.clickNode(event);
 				}
 			}
 

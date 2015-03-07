@@ -26,7 +26,7 @@ public class ViewTest {
 		nodeCallback = new NodeCallback() {
 			
 			@Override
-			public void onExpandNode(EventObject event) {
+			public void expandNode(EventObject event) {
 				TreePath path = ((TreeExpansionEvent) event).getPath();
 				int code = ViewUtils.decodeNodeName(path.getLastPathComponent().toString());
 
@@ -34,7 +34,7 @@ public class ViewTest {
 			}
 			
 			@Override
-			public void onCollapseNode(EventObject event) {
+			public void collapseNode(EventObject event) {
 				TreePath path = ((TreeExpansionEvent) event).getPath();
 				int code = ViewUtils.decodeNodeName(path.getLastPathComponent().toString());
 
@@ -42,7 +42,7 @@ public class ViewTest {
 			}
 			
 			@Override
-			public void onClickNode(EventObject event) {
+			public void clickNode(EventObject event) {
 				TreePath path = ((TreeSelectionEvent) event).getPath();
 				int code = ViewUtils.decodeNodeName(path.getLastPathComponent().toString());
 
