@@ -43,4 +43,9 @@ public class BasicType extends AbstractType {
 		this.expanded = false;
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
+	
 }

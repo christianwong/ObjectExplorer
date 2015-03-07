@@ -31,14 +31,8 @@ public abstract class AbstractType {
 	}
 	
 	public List<AbstractType> getChilds() {
-//		resetChilds();
-//		processChilds();
 		return childs;
 	}
-	
-//	public boolean hasKnownChilds() {
-//		return !childs.isEmpty();
-//	}
 	
 	public boolean isExpanded() {
 		return expanded;
@@ -76,10 +70,6 @@ public abstract class AbstractType {
 	public String toString() {
 		return name+" (id="+objectID+")";
 	}
-	
-//	public void resetChilds() {
-//		childs.clear();
-//	}
 	
 	protected abstract void processChilds();
 
