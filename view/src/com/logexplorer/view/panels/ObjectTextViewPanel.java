@@ -1,8 +1,8 @@
 package com.logexplorer.view.panels;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -11,7 +11,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
 
 import com.logexplorer.view.events.TextViewCallback;
 
@@ -22,7 +26,7 @@ public class ObjectTextViewPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private JLabel knownObjectLabel;
-	private JTextArea knownObjectText;
+	private JTextPane knownObjectText;
 	private JButton viewFullObjectButton;
 
 	private ObjectExplorerPanel parent;
@@ -37,12 +41,12 @@ public class ObjectTextViewPanel extends JPanel {
 		knownObjectLabel = new JLabel(KNOWN_OBJECT);
 		add(knownObjectLabel, BorderLayout.NORTH);
 		
-		knownObjectText = new JTextArea();
+		knownObjectText = new JTextPane();
 		knownObjectText.setEditable(false);
 		add(knownObjectText, BorderLayout.CENTER);
 		add(new JScrollPane(knownObjectText));
-		Font font = new Font("Courier", Font.BOLD, 12);
-		knownObjectText.setFont(font);
+//		Font font = new Font("Courier", Font.BOLD, 12);
+//		knownObjectText2.setFont(font);
 //		knownObjectText.setForeground(Color.BLUE);
 
 		viewFullObjectButton = new JButton(VIEW_FULL_OBJECT);
@@ -73,52 +77,53 @@ public class ObjectTextViewPanel extends JPanel {
 		this.callback = callback;
 	}
 	
-	public void setKnownObjectText(String description) {
-		knownObjectText.setText(description);
-	}
+	public synchronized void updateText(List<Object> objects) {
+		knownObjectText.setEditable(true);
+		knownObjectText.setText("");
 
-	public void updateText(List<Object> objects) {
-		String description = "";
-		
 		if (objects.size() > 1) {
-			description += "Displaying "+objects.size()+" selected objects.\n\n";
+			appendToPane("Displaying "+objects.size()+" selected objects:\n\n", Color.BLACK);
 		}
 		
 		for (Object object : objects) {
-			description += formatObject(object)+"\n\n";
+			formatObject(object);
 		}
-		
-		setKnownObjectText(description);
+		knownObjectText.setEditable(false);
 	}
 
-	private String formatObject(Object object) {
-		return describeType(object, 0);
+	private void formatObject(Object object) {
+		describeType(object, 0);//+"\n\n";
+		appendToPane("\n\n", Color.BLACK);
 	}
 	
-	private String describeType(Object object, int level) {
+	private void describeType(Object object, int level) {
 		String name = parent.getHandler().getObjectName(object);
 		String type = parent.getHandler().getObjectType(object);
 		String id = parent.getHandler().getObjectID(object);
 		String value = parent.getHandler().getObjectValue(object);
 		
 		String indentation = getIndentation(level);
-		String typeString = "";
 
 		if (!parent.getHandler().hasChildren(object)) {
-			typeString = indentation+name+"="+value;
+			appendToPane(indentation, Color.BLACK);
+			appendToPane(name, Color.BLACK);
+			appendToPane("=", Color.BLACK);
+			appendToPane(value, Color.BLUE);
 		} else {
-			typeString = indentation+name+"<"+type+"> (id="+id+")";
+			appendToPane(indentation, Color.BLACK);
+			appendToPane(name, Color.BLACK);
+			appendToPane("<"+type+"> ", Color.GRAY);
+			appendToPane("(id="+id+")", Color.BLACK);
 			
 			if (parent.getHandler().isExpanded(object)) {
 				List<?> childs = parent.getHandler().getChildren(object);
 
 				for (Object oChild : childs) {
-					typeString += "\n" + describeType(oChild, level + 1);
+					appendToPane("\n", Color.BLACK);
+					describeType(oChild, level + 1);
 				}
 			}
 		}
-		
-		return typeString;
 	}
 
 	private static String getIndentation(int level) {
@@ -133,4 +138,17 @@ public class ObjectTextViewPanel extends JPanel {
 		return indentation;
 	}
 	
+    private void appendToPane(String text, Color color) {
+        StyleContext sc = StyleContext.getDefaultStyleContext();
+        AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, color);
+
+        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Courier");
+        aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_LEFT);
+
+        int len = knownObjectText.getDocument().getLength();
+        knownObjectText.setCaretPosition(len);
+        knownObjectText.setCharacterAttributes(aset, false);
+        knownObjectText.replaceSelection(text);
+    }
+
 }
