@@ -43,6 +43,7 @@ public class ObjectSearchBarPanel extends JPanel {
 		
 		attributeText = new JTextField(STAR, 15);
 		attributeText.setEnabled(false);
+//		attributeText.setBackground(Color.ORANGE);
 		add(attributeText);
 		
 		valueLabel = new JLabel(VALUE);
@@ -51,6 +52,7 @@ public class ObjectSearchBarPanel extends JPanel {
 		
 		valueText = new JTextField(STAR, 15);
 		valueText.setEnabled(false);
+//		valueText.setBackground(Color.CYAN);
 		add(valueText);
 		
 		searchButton = new JButton(GO);
