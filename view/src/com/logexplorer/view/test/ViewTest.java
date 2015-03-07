@@ -1,13 +1,9 @@
 package com.logexplorer.view.test;
 
 import java.awt.BorderLayout;
-import java.util.EventObject;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import javax.swing.event.TreeExpansionEvent;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.tree.TreePath;
 
 import com.logexplorer.view.events.NodeCallback;
 import com.logexplorer.view.events.SearchCallback;
@@ -26,26 +22,20 @@ public class ViewTest {
 		nodeCallback = new NodeCallback() {
 			
 			@Override
-			public void expandNode(EventObject event) {
-				TreePath path = ((TreeExpansionEvent) event).getPath();
-				int code = ViewUtils.decodeNodeName(path.getLastPathComponent().toString());
-
+			public void expandNode(Object object) {
+				int code = ViewUtils.decodeNodeName(object.toString());
 				System.out.println("onExpandNode called: "+code);
 			}
 			
 			@Override
-			public void collapseNode(EventObject event) {
-				TreePath path = ((TreeExpansionEvent) event).getPath();
-				int code = ViewUtils.decodeNodeName(path.getLastPathComponent().toString());
-
+			public void collapseNode(Object object) {
+				int code = ViewUtils.decodeNodeName(object.toString());
 				System.out.println("onCollapseNode called: "+code);
 			}
 			
 			@Override
-			public void clickNode(EventObject event) {
-				TreePath path = ((TreeSelectionEvent) event).getPath();
-				int code = ViewUtils.decodeNodeName(path.getLastPathComponent().toString());
-
+			public void clickNode(Object object) {
+				int code = ViewUtils.decodeNodeName(object.toString());
 				System.out.println("onClickNode called: "+code);
 			}
 		};

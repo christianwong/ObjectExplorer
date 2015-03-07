@@ -1,7 +1,6 @@
 package com.logexplorer.controller.test;
 
 import java.awt.BorderLayout;
-import java.util.EventObject;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -48,7 +47,7 @@ public class ControllerTest {
 		nodeCallback = new NodeCallback() {
 			
 			@Override
-			public void expandNode(EventObject event) {
+			public void expandNode(Object object) {
 				
 //				// get childs from model
 //				AbstractType selectedType = DataHelper.getInstance().getStoredType(code);
@@ -70,11 +69,11 @@ public class ControllerTest {
 //				MutableTreeNode dummyLeaf = (MutableTreeNode) node.getChildAt(0);
 //				model.removeNodeFromParent(dummyLeaf);
 
-				clickNode(event);
+				clickNode(object);
 			}
 			
 			@Override
-			public void collapseNode(EventObject event) {
+			public void collapseNode(Object object) {
 				
 //				// remove childs from model
 //				AbstractType selectedType = DataHelper.getInstance().getStoredType(code);
@@ -92,11 +91,11 @@ public class ControllerTest {
 //				DefaultMutableTreeNode newChild = new DefaultMutableTreeNode(DUMMY_LEAF);
 //				model.insertNodeInto(newChild, node, node.getChildCount());
 				
-				clickNode(event);
+				clickNode(object);
 			}
 			
 			@Override
-			public void clickNode(EventObject event) {
+			public void clickNode(Object object) {
 //			    String description = "";
 //			    TreePath[] paths = tree.getSelectionPaths();
 //			    

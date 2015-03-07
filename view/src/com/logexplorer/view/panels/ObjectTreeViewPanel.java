@@ -66,15 +66,26 @@ public class ObjectTreeViewPanel extends JPanel {
 
 			@Override
 			public void treeExpanded(TreeExpansionEvent event) {
+				
 				if (null != callback) {
-					callback.expandNode(event);
+					TreePath path = event.getPath();
+					Object object = path.getLastPathComponent();
+					
+					callback.expandNode(object);
+//					MutableTreeNode node = (MutableTreeNode)path.getLastPathComponent();
+//					
+//					if (node.getChildCount() >= 0) {
+//						tree.expandPath(path);
+//					}
 				}
 			}
 
 			@Override
 			public void treeCollapsed(TreeExpansionEvent event) {
 				if (null != callback) {
-					callback.collapseNode(event);
+					TreePath path = event.getPath();
+					Object object = path.getLastPathComponent();
+					callback.collapseNode(object);
 				}
 			}
 		});
@@ -84,7 +95,9 @@ public class ObjectTreeViewPanel extends JPanel {
 			@Override
 			public void valueChanged(TreeSelectionEvent event) {
 				if (null != callback) {
-					callback.clickNode(event);
+					TreePath path = event.getPath();
+					Object object = path.getLastPathComponent();
+					callback.clickNode(object);
 				}
 			}
 
