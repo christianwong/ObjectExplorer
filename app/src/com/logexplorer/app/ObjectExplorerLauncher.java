@@ -2,6 +2,7 @@ package com.logexplorer.app;
 
 import com.logexplorer.controller.test.ControllerTest;
 import com.logexplorer.model.factory.TypeFactory;
+import com.logexplorer.model.io.ObjectReader;
 import com.logexplorer.model.test.Tester;
 import com.logexplorer.model.types.AbstractType;
 
@@ -18,7 +19,7 @@ public class ObjectExplorerLauncher {
 			filename = args[0];
 		}
 		
-		Object object = Tester.run(filename);
+		Object object = ObjectReader.loadObjectFromFile(filename);
 		AbstractType type = TypeFactory.getType("bin_object", object);
 		
 //		String knownType = TypeUtils.describeKnownType(type);
