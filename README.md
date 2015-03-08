@@ -5,8 +5,6 @@
 Run release X with this command:
 java -cp "ObjectExplorer_release_X.jar;lib/*" com.logexplorer.app.ObjectExplorerLauncher filename.bin
 
-This README would normally document whatever steps are necessary to get your application up and running.
-
 ### What is this repository for? ###
 
 * Quick summary
