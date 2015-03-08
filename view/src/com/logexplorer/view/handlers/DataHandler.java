@@ -2,7 +2,7 @@ package com.logexplorer.view.handlers;
 
 import java.util.List;
 
-public interface NodeHandler {
+public interface DataHandler {
 	
 	public List<?> getChildren(Object object);
 	public boolean hasChildren(Object object);

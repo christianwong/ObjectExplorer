@@ -6,7 +6,7 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import com.logexplorer.view.handlers.NodeHandler;
+import com.logexplorer.view.handlers.DataHandler;
 
 public class ObjectExplorerPanel extends JPanel {
 
@@ -14,9 +14,9 @@ public class ObjectExplorerPanel extends JPanel {
 	private ObjectSearchBarPanel searchPanel;
 	private ObjectTreeViewPanel treePanel;
 	private ObjectTextViewPanel textPanel;
-	private NodeHandler handler;
+	private DataHandler handler;
 	
-	public ObjectExplorerPanel(Object rootSource, NodeHandler handler) {	
+	public ObjectExplorerPanel(Object rootSource, DataHandler handler) {	
 		
 		setLayout(new BorderLayout());
 		this.handler = handler;
@@ -54,7 +54,7 @@ public class ObjectExplorerPanel extends JPanel {
 		return searchPanel;
 	}
 	
-	public NodeHandler getHandler() {
+	public DataHandler getHandler() {
 		return handler;
 	}
 

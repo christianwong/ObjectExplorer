@@ -8,12 +8,12 @@ import javax.swing.SwingUtilities;
 
 import com.logexplorer.model.index.TypeIndex;
 import com.logexplorer.model.types.AbstractType;
-import com.logexplorer.view.handlers.NodeHandler;
+import com.logexplorer.view.handlers.DataHandler;
 import com.logexplorer.view.panels.ObjectExplorerPanel;
 
 public class ControllerTest {
 
-	private NodeHandler nodeHandler;
+	private DataHandler nodeHandler;
 	
 	private ObjectExplorerPanel view;
 	private JFrame frame;
@@ -32,7 +32,7 @@ public class ControllerTest {
 
 	private void initCallbacks() {
 		
-		nodeHandler = new NodeHandler() {
+		nodeHandler = new DataHandler() {
 			
 			@Override
 			public boolean hasChildren(Object object) {
