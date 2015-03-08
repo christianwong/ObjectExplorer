@@ -27,9 +27,13 @@ public class TypeIndex {
 	}
 	
 	protected List<TypeIndexInstance> list;
+	protected String searchName;
+	protected String searchValue;
 	
 	private TypeIndex() {
 		list = new ArrayList<TypeIndexInstance>();
+		searchName = "a{10000}";
+		searchValue = "a{10000}";
 	}
 
 	public void add(String typeName, String typeValue, AbstractType type) {
@@ -47,18 +51,31 @@ public class TypeIndex {
 	}
 	
 	public List<AbstractType> search(String name, String value) {
+		searchName = name;
+		searchValue = value;
 		List<AbstractType> result = new ArrayList<AbstractType>();
 		
-		Pattern pName = Pattern.compile(name);
-		Pattern pValue = Pattern.compile(value);
+		Pattern pName = Pattern.compile(searchName);
+		Pattern pValue = Pattern.compile(searchValue);
 
 		for (TypeIndexInstance item : list) {
-			if (pName.matcher(item.getName()).matches() && pValue.matcher(item.getValue()).matches()) {
+			if (matches(pName, pValue, item.getName(), item.getValue())) {
 				result.add(item.getType());
 			}
 		}
 		
 		return result;
+	}
+	
+	public boolean matches(String name, String value) {
+		Pattern pName = Pattern.compile(searchName);
+		Pattern pValue = Pattern.compile(searchValue);
+
+		return matches(pName, pValue, name, value);
+	}
+
+	private boolean matches(Pattern pName, Pattern pValue, String name, String value) {
+		return pName.matcher(name).matches() && pValue.matcher(value).matches();
 	}
 	
 }

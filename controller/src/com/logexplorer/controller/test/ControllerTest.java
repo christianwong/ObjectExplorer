@@ -80,6 +80,12 @@ public class ControllerTest {
 			public void setExpanded(Object object, boolean expanded) {
 				((AbstractType) object).setExpanded(expanded);
 			}
+
+			@Override
+			public boolean isHighlighted(Object object) {
+				AbstractType type = (AbstractType) object;
+				return TypeIndex.getInstance().matches(type.getName(), type.getValue());
+			}
 		};
 		
 		textViewCallback = new TextViewCallback() {
@@ -100,6 +106,8 @@ public class ControllerTest {
 				for (AbstractType result : search) {
 					System.out.println(result.getID()+" -> name='"+result.getName()+"' value='"+result.getValue()+"'");
 				}
+				
+				view.getTreeViewPanel().processSelectedObjects();
 
 			}
 		};

@@ -85,6 +85,11 @@ public class ViewTest {
 									boolean expanded) {
 								;
 							}
+
+							@Override
+							public boolean isHighlighted(Object object) {
+								return false;
+							}
 						});
 				frame.add(panel, BorderLayout.CENTER);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -17,6 +17,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
+import com.logexplorer.view.consts.ViewConsts;
 import com.logexplorer.view.events.TextViewCallback;
 
 public class ObjectTextViewPanel extends JPanel {
@@ -82,7 +83,7 @@ public class ObjectTextViewPanel extends JPanel {
 		knownObjectText.setText("");
 
 		if (objects.size() > 1) {
-			appendToPane("Displaying "+objects.size()+" selected objects:\n\n", Color.BLACK);
+			appendToPane("Displaying "+objects.size()+" selected objects:\n\n", ViewConsts.TEXT_DEFAULT_COLOR, ViewConsts.BG_DEFAULT_COLOR);
 		}
 		
 		for (Object object : objects) {
@@ -93,7 +94,7 @@ public class ObjectTextViewPanel extends JPanel {
 
 	private void formatObject(Object object) {
 		describeType(object, 0);//+"\n\n";
-		appendToPane("\n\n", Color.BLACK);
+		appendToPane("\n\n", ViewConsts.TEXT_DEFAULT_COLOR, ViewConsts.BG_DEFAULT_COLOR);
 	}
 	
 	private void describeType(Object object, int level) {
@@ -102,22 +103,31 @@ public class ObjectTextViewPanel extends JPanel {
 		String id = parent.getHandler().getObjectID(object);
 		String value = parent.getHandler().getObjectValue(object);
 		
+		Color nameHightlight = ViewConsts.BG_DEFAULT_COLOR;
+		Color valueHightlight = ViewConsts.BG_DEFAULT_COLOR;
+		if (parent.getHandler().isHighlighted(object)) {
+			nameHightlight = ViewConsts.BG_NAME_COLOR;
+			valueHightlight = ViewConsts.BG_VALUE_COLOR;
+		}
+		
 		if (!parent.getHandler().hasChildren(object)) {
+			// Process leaves
 			indentLine(level, false);
-			appendToPane(name, Color.BLACK);
-			appendToPane("=", Color.BLACK);
-			appendToPane(value, Color.BLUE);
+			appendToPane(name, ViewConsts.TEXT_DEFAULT_COLOR, nameHightlight);
+			appendToPane("=", ViewConsts.TEXT_DEFAULT_COLOR, ViewConsts.BG_DEFAULT_COLOR);
+			appendToPane(value, ViewConsts.TEXT_VALUE_COLOR, valueHightlight);
 		} else {
+			// Process nodes with children
 			indentLine(level, !parent.getHandler().isExpanded(object));
-			appendToPane(name, Color.BLACK);
-			appendToPane("<"+type+"> ", Color.GRAY);
-			appendToPane("(id="+id+")", Color.BLACK);
+			appendToPane(name, ViewConsts.TEXT_DEFAULT_COLOR, nameHightlight);
+			appendToPane("<"+type+"> ", ViewConsts.TEXT_TYPE_COLOR, valueHightlight);
+			appendToPane("(id="+id+")", ViewConsts.TEXT_DEFAULT_COLOR, valueHightlight);
 			
 			if (parent.getHandler().isExpanded(object)) {
 				List<?> childs = parent.getHandler().getChildren(object);
 
 				for (Object oChild : childs) {
-					appendToPane("\n", Color.BLACK);
+					appendToPane("\n", ViewConsts.TEXT_DEFAULT_COLOR, ViewConsts.BG_DEFAULT_COLOR);
 					describeType(oChild, level + 1);
 				}
 			}
@@ -137,20 +147,20 @@ public class ObjectTextViewPanel extends JPanel {
 				indentation += " | ";
 			}
 		}
-		appendToPane(indentation, Color.BLACK);
+		appendToPane(indentation, ViewConsts.BG_INDENT_COLOR, ViewConsts.BG_DEFAULT_COLOR);
 	}
 	
-    private void appendToPane(String text, Color color) {
-        StyleContext sc = StyleContext.getDefaultStyleContext();
-        AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, color);
+	private void appendToPane(String text, Color textFont, Color textHighlight) {
+		StyleContext sc = StyleContext.getDefaultStyleContext();
+		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, textFont);
+		aset = sc.addAttribute(aset, StyleConstants.Background, textHighlight);
+		aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Courier");
+		aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_LEFT);
 
-        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Courier");
-        aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_LEFT);
-
-        int len = knownObjectText.getDocument().getLength();
-        knownObjectText.setCaretPosition(len);
-        knownObjectText.setCharacterAttributes(aset, false);
-        knownObjectText.replaceSelection(text);
-    }
+		int len = knownObjectText.getDocument().getLength();
+		knownObjectText.setCaretPosition(len);
+		knownObjectText.setCharacterAttributes(aset, false);
+		knownObjectText.replaceSelection(text);
+	}
 
 }
