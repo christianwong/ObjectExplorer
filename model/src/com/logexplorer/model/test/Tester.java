@@ -1,8 +1,6 @@
 package com.logexplorer.model.test;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,33 +9,6 @@ import java.util.Map;
 
 public class Tester {
 	
-	public static Object run(String filename) {
-		return readBinaryObject(filename);
-	}
-
-	private static Object readBinaryObject(String filename) {
-		Object object = null;
-
-		try {
-			FileInputStream fin = new FileInputStream(filename);
-			ObjectInputStream ois = new ObjectInputStream(fin);
-			object = ois.readObject();
-			ois.close();
-		} catch (Throwable exception) {
-			if (null == object) {
-				object = exception;
-			} else {
-				Object objectMessage[] = new Object[2];
-				objectMessage[0] = exception;
-				objectMessage[1] = object;
-				
-				object = objectMessage;
-			}
-		}
-
-		return object;
-	}
-
 	private static void writeBinaryObject(String filename, Object object) {
 		try {
 			FileOutputStream fout = new FileOutputStream(filename);
