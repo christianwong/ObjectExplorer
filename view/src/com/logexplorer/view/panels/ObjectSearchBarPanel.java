@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.logexplorer.view.consts.ViewConsts;
-import com.logexplorer.view.events.SearchCallback;
 
 public class ObjectSearchBarPanel extends JPanel {
 
@@ -60,9 +59,11 @@ public class ObjectSearchBarPanel extends JPanel {
 	private JTextField valueText;
 	private JButton searchButton;
 	private JButton resetButton;
-	private SearchCallback callback;
 	
-	public ObjectSearchBarPanel() {
+	private ObjectExplorerPanel parent;
+	
+	public ObjectSearchBarPanel(ObjectExplorerPanel parent) {
+		this.parent = parent;
 		
 		setLayout(new FlowLayout());
 		
@@ -94,7 +95,6 @@ public class ObjectSearchBarPanel extends JPanel {
 	}
 
 	private void initCallbacks() {
-		callback = null;
 		searchButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -115,15 +115,8 @@ public class ObjectSearchBarPanel extends JPanel {
 		});
 	}
 	
-	public void setCallback(final SearchCallback callback) {
-		this.callback = callback;
-		doSearch();
-	}
-
-	private void doSearch() {
-		if (callback != null) {
-			callback.onSearch(attributeText.getText(), valueText.getText());
-		}
+	public void doSearch() {
+		parent.getHandler().doSearch(attributeText.getText(), valueText.getText());
 	}
 	
 }

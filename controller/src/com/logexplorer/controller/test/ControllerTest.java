@@ -8,14 +8,12 @@ import javax.swing.SwingUtilities;
 
 import com.logexplorer.model.index.TypeIndex;
 import com.logexplorer.model.types.AbstractType;
-import com.logexplorer.view.events.SearchCallback;
 import com.logexplorer.view.handlers.NodeHandler;
 import com.logexplorer.view.panels.ObjectExplorerPanel;
 
 public class ControllerTest {
 
 	private NodeHandler nodeHandler;
-	private SearchCallback searchCallback;
 	
 	private ObjectExplorerPanel view;
 	private JFrame frame;
@@ -25,9 +23,7 @@ public class ControllerTest {
 
 		// set up view
 		view = new ObjectExplorerPanel(type, nodeHandler);
-		
-		// set up callbacks
-		view.getSearchBarPanel().setCallback(searchCallback);
+		view.doPostInit();
 		
 		// set up frame
 		frame = new JFrame();
@@ -83,13 +79,9 @@ public class ControllerTest {
 				AbstractType type = (AbstractType) object;
 				return TypeIndex.getInstance().matches(type.getName(), type.getValue());
 			}
-		};
-		
-		searchCallback = new SearchCallback() {
-			
+
 			@Override
-			public void onSearch(String attribute, String value) {
-				
+			public void doSearch(String attribute, String value) {
 				List<AbstractType> search = TypeIndex.getInstance().search(attribute, value);
 				System.out.println("Found "+search.size()+" items:");
 				for (AbstractType result : search) {
@@ -97,7 +89,6 @@ public class ControllerTest {
 				}
 				
 				view.getTreeViewPanel().processSelectedObjects();
-
 			}
 		};
 	}

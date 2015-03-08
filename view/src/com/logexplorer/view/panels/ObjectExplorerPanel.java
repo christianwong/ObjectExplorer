@@ -19,11 +19,10 @@ public class ObjectExplorerPanel extends JPanel {
 	public ObjectExplorerPanel(Object rootSource, NodeHandler handler) {	
 		
 		setLayout(new BorderLayout());
-		
 		this.handler = handler;
 
 		// init components
-		searchPanel = new ObjectSearchBarPanel();
+		searchPanel = new ObjectSearchBarPanel(this);
 		add(searchPanel, BorderLayout.NORTH);
 		
 		treePanel = new ObjectTreeViewPanel(this, rootSource);
@@ -32,9 +31,6 @@ public class ObjectExplorerPanel extends JPanel {
 		textPanel = new ObjectTextViewPanel(this);
 		textPanel.setMinimumSize(new Dimension(150, 500));
 		
-		// process initial selection
-		treePanel.processSelectedObjects();
-
 		// set up split pane
 		JSplitPane splitPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, treePanel, textPanel);
 		splitPanel.setOneTouchExpandable(false);
@@ -60,6 +56,10 @@ public class ObjectExplorerPanel extends JPanel {
 	
 	public NodeHandler getHandler() {
 		return handler;
+	}
+
+	public void doPostInit() {
+		getSearchBarPanel().doSearch();
 	}
 	
 }

@@ -14,5 +14,7 @@ public interface NodeHandler {
 	public String getObjectType(Object object);
 	public String getObjectID(Object object);
 	public String getObjectValue(Object object);
+	
+	public void doSearch(String attribute, String value);
 
 }
