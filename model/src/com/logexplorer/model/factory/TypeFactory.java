@@ -7,6 +7,7 @@ import com.logexplorer.model.types.BasicType;
 import com.logexplorer.model.types.IterableType;
 import com.logexplorer.model.types.MapType;
 import com.logexplorer.model.types.ObjectType;
+import com.logexplorer.model.types.util.NullType;
 
 public class TypeFactory {
 	
@@ -14,7 +15,7 @@ public class TypeFactory {
 
 		// needed to avoid indexing of null objects
 		if (null == object) {
-			object = "null";
+			object = new NullType();
 		}
 
 		// if the object exists in DataHelper, don't create a new one.

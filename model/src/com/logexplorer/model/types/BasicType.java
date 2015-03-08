@@ -1,6 +1,7 @@
 package com.logexplorer.model.types;
 
 import com.logexplorer.model.consts.TypeConstants;
+import com.logexplorer.model.types.util.NullType;
 
 public class BasicType extends AbstractType {
 
@@ -12,7 +13,8 @@ public class BasicType extends AbstractType {
 		return object instanceof Number
 				|| object instanceof Boolean
 				|| object instanceof Character
-				|| object instanceof String;
+				|| object instanceof String
+				|| object instanceof NullType;
 	}
 
 	@Override
