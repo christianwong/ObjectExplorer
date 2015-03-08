@@ -32,8 +32,8 @@ public class TypeIndex {
 	
 	private TypeIndex() {
 		list = new ArrayList<TypeIndexInstance>();
-		searchName = "a{10000}";
-		searchValue = "a{10000}";
+		searchName = "";
+		searchValue = "";
 	}
 
 	public void add(String typeName, String typeValue, AbstractType type) {

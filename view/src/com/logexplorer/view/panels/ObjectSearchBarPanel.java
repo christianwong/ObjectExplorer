@@ -13,12 +13,13 @@ import javax.swing.JTextField;
 
 import com.logexplorer.view.consts.ViewConsts;
 import com.logexplorer.view.events.SearchCallback;
-import com.logexplorer.view.utils.ViewUtils;
 
 public class ObjectSearchBarPanel extends JPanel {
 
-	private static final String SEARCH_ALL = ".*";
+	private static final String DEFAULT_ATTRIBUTE_SEARCH = ".*(id|ID|Id).*";
+	private static final String DEFAULT_VALUE_SEARCH = "('|\")?[0-9]+.?('|\")?";
 	private static final String GO = "Go!";
+	private static final String RESET = "Reset";
 	private static final String VALUE = "value";
 	private static final String ATTRIBUTE = "attribute";
 	private static final String SEARCH = "Search:";
@@ -55,12 +56,10 @@ public class ObjectSearchBarPanel extends JPanel {
 }
 
 	private static final long serialVersionUID = 1L;
-	private JLabel searchLabel;
-	private JLabel attributeLabel;
 	private JTextField attributeText;
-	private JLabel valueLabel;
 	private JTextField valueText;
 	private JButton searchButton;
+	private JButton resetButton;
 	private SearchCallback callback;
 	
 	public ObjectSearchBarPanel() {
@@ -68,26 +67,25 @@ public class ObjectSearchBarPanel extends JPanel {
 		setLayout(new FlowLayout());
 		
 		// init components
-		searchLabel = new JLabel(SEARCH);
-		add(searchLabel);
+		add(new JLabel(SEARCH));
 		
-		attributeLabel = new JLabel(ATTRIBUTE);
-		add(attributeLabel);
+		add(new JLabel(ATTRIBUTE));
 		
-		attributeText = new JTextField(SEARCH_ALL, 15);
+		attributeText = new JTextField(DEFAULT_ATTRIBUTE_SEARCH, 15);
 		attributeText.addFocusListener(attributeTextFocusListener);
 		add(attributeText);
 		
-		valueLabel = new JLabel(VALUE);
-		add(valueLabel);
+		add(new JLabel(VALUE));
 		
-		valueText = new JTextField(SEARCH_ALL, 15);
+		valueText = new JTextField(DEFAULT_VALUE_SEARCH, 15);
 		valueText.addFocusListener(valueTextFocusListener);
 		add(valueText);
 		
 		searchButton = new JButton(GO);
-//		searchButton.setEnabled(false);
 		add(searchButton);
+		
+		resetButton = new JButton(RESET);
+		add(resetButton);
 		
 		initCallbacks();
 				
@@ -101,19 +99,31 @@ public class ObjectSearchBarPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				doSearch();
+			}
+		});
+		resetButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				
-				ViewUtils.setDefaultValue(attributeLabel, SEARCH_ALL);
-				ViewUtils.setDefaultValue(valueLabel, SEARCH_ALL);
-
-				if (callback != null) {
-					callback.onSearch(attributeText.getText(), valueText.getText());
-				}
+				attributeText.setText(DEFAULT_ATTRIBUTE_SEARCH);
+				valueText.setText(DEFAULT_VALUE_SEARCH);
+				
+				doSearch();
 			}
 		});
 	}
 	
 	public void setCallback(final SearchCallback callback) {
 		this.callback = callback;
+		doSearch();
+	}
+
+	private void doSearch() {
+		if (callback != null) {
+			callback.onSearch(attributeText.getText(), valueText.getText());
+		}
 	}
 	
 }
