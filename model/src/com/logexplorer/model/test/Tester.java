@@ -9,10 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.logexplorer.model.factory.TypeFactory;
-import com.logexplorer.model.types.AbstractType;
-import com.logexplorer.model.util.TypeUtils;
-
 public class Tester {
 	
 	public static Object run(String filename) {
@@ -20,18 +16,26 @@ public class Tester {
 	}
 
 	private static Object readBinaryObject(String filename) {
-		Object someObject = null;
+		Object object = null;
 
 		try {
 			FileInputStream fin = new FileInputStream(filename);
 			ObjectInputStream ois = new ObjectInputStream(fin);
-			someObject = ois.readObject();
+			object = ois.readObject();
 			ois.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Throwable exception) {
+			if (null == object) {
+				object = exception;
+			} else {
+				Object objectMessage[] = new Object[2];
+				objectMessage[0] = exception;
+				objectMessage[1] = object;
+				
+				object = objectMessage;
+			}
 		}
 
-		return someObject;
+		return object;
 	}
 
 	private static void writeBinaryObject(String filename, Object object) {
@@ -83,17 +87,4 @@ public class Tester {
 		writeBinaryObject(filename, gc);
 	}
 	
-	public static void main(String args[]) {
-		String filename = "GuessClass.bin";
-		
-		// Create and load the object
-		Tester.createObject(filename);
-		Object object = Tester.run(filename);
-		
-		// process object and print
-		AbstractType type = TypeFactory.getType(filename, object);
-		String describeFullType = TypeUtils.describeFullType(type);
-		System.out.println(describeFullType);
-	}
-
 }
