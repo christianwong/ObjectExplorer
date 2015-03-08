@@ -2,85 +2,108 @@ package com.logexplorer.view.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.GridLayout;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
 import com.logexplorer.view.consts.ViewConsts;
-import com.logexplorer.view.events.TextViewCallback;
 
 public class ObjectTextViewPanel extends JPanel {
 
-	private static final String VIEW_FULL_OBJECT = "View full object";
-	private static final String KNOWN_OBJECT = "Known Object:";
+	private static final String FULL_OBJECT = "Full object";
+	private static final String KNOWN_OBJECT = "Known Object";
 	
 	private static final long serialVersionUID = 1L;
-	private JLabel knownObjectLabel;
+	private JTabbedPane tabbedPane;
 	private JTextPane knownObjectText;
-	private JButton viewFullObjectButton;
+	private JTextPane fullObjectText;
+
+	private JComponent knownObjectComponent;
+	private JComponent fullObjectComponent;
+
+	private JTextPane selectedText;
+	private boolean fullTraverse;
 
 	private ObjectExplorerPanel parent;
-	private TextViewCallback callback;
 	
 	public ObjectTextViewPanel(ObjectExplorerPanel parent) {
 		this.parent = parent;
 		
 		setLayout(new BorderLayout());
 		
-		// init components
-		knownObjectLabel = new JLabel(KNOWN_OBJECT);
-		add(knownObjectLabel, BorderLayout.NORTH);
+		// init tabbed pane
+		tabbedPane = new JTabbedPane();
+		add(tabbedPane, BorderLayout.CENTER);
 		
+		// init known object tab
 		knownObjectText = new JTextPane();
 		knownObjectText.setEditable(false);
-		add(knownObjectText, BorderLayout.CENTER);
-		add(new JScrollPane(knownObjectText));
-//		Font font = new Font("Courier", Font.BOLD, 12);
-//		knownObjectText2.setFont(font);
-//		knownObjectText.setForeground(Color.BLUE);
-
-		viewFullObjectButton = new JButton(VIEW_FULL_OBJECT);
-		viewFullObjectButton.setEnabled(false);
-		add(viewFullObjectButton, BorderLayout.SOUTH);
+		knownObjectComponent = buildTextPanel(knownObjectText);
+		tabbedPane.addTab(KNOWN_OBJECT, knownObjectComponent);
+		
+		// init full object tab
+		fullObjectText = new JTextPane();
+		fullObjectText.setEditable(false);
+		fullObjectComponent = buildTextPanel(fullObjectText);
+		tabbedPane.addTab(FULL_OBJECT, fullObjectComponent);
+		fullObjectText.setText("full object text");
 		
 		initCallbacks();
 		
 		// set up the panel
 		this.setMinimumSize(new Dimension(600,600));
 		this.setVisible(true);
+		
+		updateSelectedPane();
+	}
+	
+	protected void updateSelectedPane() {
+		Component selectedComponent = tabbedPane.getSelectedComponent();
+		if (selectedComponent == knownObjectComponent) {
+			this.selectedText = knownObjectText;
+			this.fullTraverse = false;
+		} else {
+			this.selectedText = fullObjectText;
+			this.fullTraverse = true;
+		}
+	}
+	
+	protected JComponent buildTextPanel(JTextPane pane) {
+		JPanel panel = new JPanel(false);
+		panel.setLayout(new GridLayout(1, 1));
+		panel.add(pane);
+		panel.add(new JScrollPane(pane));
+		return panel;
 	}
 
+
 	private void initCallbacks() {
-		callback = null;
-		viewFullObjectButton.addActionListener(new ActionListener() {
+		tabbedPane.addChangeListener(new ChangeListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (null != callback) {
-					callback.onViewFullObject();
-				}
+			public void stateChanged(ChangeEvent e) {
+				updateSelectedPane();
+				parent.getTreeViewPanel().processSelectedObjects();
 			}
 		});
 	}
 	
-	public void setCallback(final TextViewCallback callback) {
-		this.callback = callback;
-	}
-	
 	public synchronized void updateText(List<Object> objects) {
-		knownObjectText.setEditable(true);
-		knownObjectText.setText("");
+		selectedText.setEditable(true);
+		selectedText.setText("");
 
 		if (objects.size() > 1) {
 			appendToPane("Displaying "+objects.size()+" selected objects:\n\n", ViewConsts.TEXT_DEFAULT_COLOR, ViewConsts.BG_DEFAULT_COLOR);
@@ -89,7 +112,7 @@ public class ObjectTextViewPanel extends JPanel {
 		for (Object object : objects) {
 			formatObject(object);
 		}
-		knownObjectText.setEditable(false);
+		selectedText.setEditable(false);
 	}
 
 	private void formatObject(Object object) {
@@ -118,12 +141,12 @@ public class ObjectTextViewPanel extends JPanel {
 			appendToPane(value, ViewConsts.TEXT_VALUE_COLOR, valueHightlight);
 		} else {
 			// Process nodes with children
-			indentLine(level, !parent.getHandler().isExpanded(object));
+			indentLine(level, !parent.getHandler().isExpanded(object) || fullTraverse);
 			appendToPane(name, ViewConsts.TEXT_DEFAULT_COLOR, nameHightlight);
 			appendToPane("<"+type+"> ", ViewConsts.TEXT_TYPE_COLOR, valueHightlight);
 			appendToPane("(id="+id+")", ViewConsts.TEXT_DEFAULT_COLOR, valueHightlight);
 			
-			if (parent.getHandler().isExpanded(object)) {
+			if (parent.getHandler().isExpanded(object) || fullTraverse) {
 				List<?> childs = parent.getHandler().getChildren(object);
 
 				for (Object oChild : childs) {
@@ -157,10 +180,10 @@ public class ObjectTextViewPanel extends JPanel {
 		aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Courier");
 		aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_LEFT);
 
-		int len = knownObjectText.getDocument().getLength();
-		knownObjectText.setCaretPosition(len);
-		knownObjectText.setCharacterAttributes(aset, false);
-		knownObjectText.replaceSelection(text);
+		int len = selectedText.getDocument().getLength();
+		selectedText.setCaretPosition(len);
+		selectedText.setCharacterAttributes(aset, false);
+		selectedText.replaceSelection(text);
 	}
 
 }

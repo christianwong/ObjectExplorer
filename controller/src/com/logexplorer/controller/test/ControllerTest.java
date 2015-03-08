@@ -9,14 +9,12 @@ import javax.swing.SwingUtilities;
 import com.logexplorer.model.index.TypeIndex;
 import com.logexplorer.model.types.AbstractType;
 import com.logexplorer.view.events.SearchCallback;
-import com.logexplorer.view.events.TextViewCallback;
 import com.logexplorer.view.handlers.NodeHandler;
 import com.logexplorer.view.panels.ObjectExplorerPanel;
 
 public class ControllerTest {
 
 	private NodeHandler nodeHandler;
-	private TextViewCallback textViewCallback;
 	private SearchCallback searchCallback;
 	
 	private ObjectExplorerPanel view;
@@ -29,7 +27,6 @@ public class ControllerTest {
 		view = new ObjectExplorerPanel(type, nodeHandler);
 		
 		// set up callbacks
-		view.getTextViewPanel().setCallback(textViewCallback);
 		view.getSearchBarPanel().setCallback(searchCallback);
 		
 		// set up frame
@@ -85,14 +82,6 @@ public class ControllerTest {
 			public boolean isHighlighted(Object object) {
 				AbstractType type = (AbstractType) object;
 				return TypeIndex.getInstance().matches(type.getName(), type.getValue());
-			}
-		};
-		
-		textViewCallback = new TextViewCallback() {
-			
-			@Override
-			public void onViewFullObject() {
-				System.out.println("onViewFullObject called");
 			}
 		};
 		

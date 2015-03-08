@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import com.logexplorer.view.events.SearchCallback;
-import com.logexplorer.view.events.TextViewCallback;
 import com.logexplorer.view.handlers.NodeHandler;
 import com.logexplorer.view.panels.ObjectExplorerPanel;
 import com.logexplorer.view.panels.ObjectTreeViewPanel;
@@ -16,18 +15,9 @@ import com.logexplorer.view.utils.ViewUtils;
 
 public class ViewTest {
 	
-	private static TextViewCallback textViewCallback;
 	private static SearchCallback searchCallback;
 	
 	static {
-		textViewCallback = new TextViewCallback() {
-			
-			@Override
-			public void onViewFullObject() {
-				System.out.println("onViewFullObject called");
-			}
-		};
-		
 		searchCallback = new SearchCallback() {
 			
 			@Override
@@ -97,7 +87,6 @@ public class ViewTest {
 				frame.pack();
 				frame.setVisible(true);
 				
-				panel.getTextViewPanel().setCallback(textViewCallback);
 				panel.getSearchBarPanel().setCallback(searchCallback);
 				
 				ObjectTreeViewPanel treeView = panel.getTreeViewPanel();
