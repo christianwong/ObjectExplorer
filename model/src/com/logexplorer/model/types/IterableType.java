@@ -6,8 +6,8 @@ import com.logexplorer.model.consts.TypeConstants;
 
 public class IterableType extends AbstractType {
 
-	public IterableType(String name, Object object) {
-		super(name, object);
+	public IterableType(String name, Object object, AbstractType parent) {
+		super(name, object, parent);
 	}
 
 	public static boolean isIterable(Object object) {

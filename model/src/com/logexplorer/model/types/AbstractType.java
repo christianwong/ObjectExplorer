@@ -16,20 +16,37 @@ public abstract class AbstractType {
 	protected int objectID;
 	protected List<AbstractType> childs;
 	protected boolean expanded = false;
+	protected String fingerprint = ".";
 	
 	@SuppressWarnings("unused")
 	private AbstractType() {}
 	
-	public AbstractType(String name, Object object) {
+	public AbstractType(String name, Object object, AbstractType parent) {
 		this.name = name;
 		this.object = object;
 		this.childs = new ArrayList<AbstractType>();
 		
 		this.objectID = DataHelper.getObjectID(object, this);
 		
+		if (null != parent) {
+			this.fingerprint = parent.getFingerprint();
+		}
+		this.fingerprint += objectID+".";
+		
+		System.out.println("Created object '"+objectID+"' with fingerprint '"+fingerprint+"'");
+		
 		processChilds();
 	}
 	
+	private String getFingerprint() {
+		return this.fingerprint;
+	}
+	
+	public boolean isChildAllowed(Object object) {
+		String objectID = "."+DataHelper.getObjectID(object, this)+".";
+		return !this.fingerprint.contains(objectID);
+	}
+
 	public List<AbstractType> getChilds() {
 		return childs;
 	}
@@ -74,12 +91,12 @@ public abstract class AbstractType {
 	protected abstract void processChilds();
 
 	protected void addChild(String name, Object child) {
-		AbstractType type = TypeFactory.getType(name, child);
+		AbstractType type = TypeFactory.getType(name, child, this);
 		childs.add(type);
 	}
 	
 	protected void addFirstChild(String name, Object child) {
-		AbstractType type = TypeFactory.getType(name, child);
+		AbstractType type = TypeFactory.getType(name, child, this);
 		childs.add(0, type);
 	}
 	

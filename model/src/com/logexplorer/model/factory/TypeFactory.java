@@ -7,11 +7,16 @@ import com.logexplorer.model.types.BasicType;
 import com.logexplorer.model.types.IterableType;
 import com.logexplorer.model.types.MapType;
 import com.logexplorer.model.types.ObjectType;
+import com.logexplorer.model.types.util.NestedType;
 import com.logexplorer.model.types.util.NullType;
 
 public class TypeFactory {
 	
-	public static AbstractType getType(String name, Object object) {
+	public static AbstractType getType(Object object) {
+		return getType("bin_object", object, null);
+	}
+	
+	public static AbstractType getType(String name, Object object, AbstractType parent) {
 
 		// needed to avoid indexing of null objects
 		if (null == object) {
@@ -24,18 +29,22 @@ public class TypeFactory {
 //			return DataHelper.getInstance().getStoredType(index);
 //		}
 		
+		if (null != parent && !parent.isChildAllowed(object)) {
+			object = new NestedType(parent);
+		}
+		
 		AbstractType type = null;
 		
 		if (ArrayType.isArray(object)) {
-			type = new ArrayType(name, object);
+			type = new ArrayType(name, object, parent);
 		} else if (IterableType.isIterable(object)) {
-			type = new IterableType(name, object);
+			type = new IterableType(name, object, parent);
 		} else if (MapType.isMap(object)) {
-			type = new MapType(name, object);
+			type = new MapType(name, object, parent);
 		} else if (BasicType.isBasicType(object)) {
-			type = new BasicType(name, object);
+			type = new BasicType(name, object, parent);
 		} else {
-			type = new ObjectType(name, object);
+			type = new ObjectType(name, object, parent);
 		}
 		
 		String typeName = type.getName();

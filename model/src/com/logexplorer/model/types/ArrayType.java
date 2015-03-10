@@ -6,8 +6,8 @@ import com.logexplorer.model.consts.TypeConstants;
 
 public class ArrayType extends AbstractType {
 	
-	public ArrayType(String name, Object object) {
-		super(name, object);
+	public ArrayType(String name, Object object, AbstractType parent) {
+		super(name, object, parent);
 	}
 
 	public static boolean isArray(Object object) {

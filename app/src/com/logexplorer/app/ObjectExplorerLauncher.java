@@ -20,7 +20,7 @@ public class ObjectExplorerLauncher {
 		}
 		
 		Object object = ObjectReader.loadObjectFromFile(filename);
-		AbstractType type = TypeFactory.getType("bin_object", object);
+		AbstractType type = TypeFactory.getType(object);
 		
 //		String knownType = TypeUtils.describeKnownType(type);
 //		System.out.println("###### KNOWN TYPE\n"+knownType);
