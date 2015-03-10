@@ -1,12 +1,13 @@
 package com.logexplorer.model.types;
 
 import com.logexplorer.model.consts.TypeConstants;
+import com.logexplorer.model.types.util.NestedType;
 import com.logexplorer.model.types.util.NullType;
 
 public class BasicType extends AbstractType {
 
-	public BasicType(String name, Object object) {
-		super(name, object);
+	public BasicType(String name, Object object, AbstractType parent) {
+		super(name, object, parent);
 	}
 	
 	public static boolean isBasicType(Object object) {
@@ -14,7 +15,8 @@ public class BasicType extends AbstractType {
 				|| object instanceof Boolean
 				|| object instanceof Character
 				|| object instanceof String
-				|| object instanceof NullType;
+				|| object instanceof NullType
+				|| object instanceof NestedType;
 	}
 
 	@Override

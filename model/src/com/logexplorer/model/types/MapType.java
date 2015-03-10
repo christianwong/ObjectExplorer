@@ -7,8 +7,8 @@ import com.logexplorer.model.consts.TypeConstants;
 
 public class MapType extends AbstractType {
 
-	public MapType(String name, Object object) {
-		super(name, object);
+	public MapType(String name, Object object, AbstractType parent) {
+		super(name, object, parent);
 	}
 
 	public static boolean isMap(Object object) {

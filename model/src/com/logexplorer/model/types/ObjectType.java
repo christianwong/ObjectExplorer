@@ -13,8 +13,8 @@ import com.logexplorer.model.util.TypeUtils;
 
 public class ObjectType extends AbstractType {
 	
-	public ObjectType(String name, Object object) {
-		super(name, object);
+	public ObjectType(String name, Object object, AbstractType parent) {
+		super(name, object, parent);
 	}
 	
 	@Override
