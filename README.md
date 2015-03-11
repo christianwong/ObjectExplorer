@@ -29,5 +29,4 @@ Run release X with logs and saving log to file
 
 ### Screenshoot ###
 
-![Alt text](https://bytebucket.org/christianwong/objectexplorer/raw/aff5a4abd112a1bab6cdf9d2d752372fbc5e6ead/doc/img/ObjectX_2.3.3.png?token=4e572927e48b8485f7a9706a5fbc77633005eab5)
-
+![Screenshoot](raw/master/doc/img/ObjectX_2.3.3.png)
