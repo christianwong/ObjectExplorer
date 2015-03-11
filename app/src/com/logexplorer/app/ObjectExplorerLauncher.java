@@ -1,6 +1,6 @@
 package com.logexplorer.app;
 
-import com.logexplorer.controller.test.ControllerTest;
+import com.logexplorer.controller.test.SwingController;
 import com.logexplorer.model.factory.TypeFactory;
 import com.logexplorer.model.io.ObjectReader;
 import com.logexplorer.model.test.Tester;
@@ -28,7 +28,7 @@ public class ObjectExplorerLauncher {
 //		String fullType = TypeUtils.describeFullType(type);
 //		System.out.println("###### FULL TYPE\n"+fullType);
 		
-		ControllerTest.run(type);
+		SwingController.run(type);
 	}
 
 }

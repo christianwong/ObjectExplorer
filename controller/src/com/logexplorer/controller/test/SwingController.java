@@ -11,14 +11,14 @@ import com.logexplorer.model.types.AbstractType;
 import com.logexplorer.view.handlers.DataHandler;
 import com.logexplorer.view.panels.ObjectExplorerPanel;
 
-public class ControllerTest {
+public class SwingController {
 
 	private DataHandler nodeHandler;
 	
 	private ObjectExplorerPanel view;
 	private JFrame frame;
 	
-	public ControllerTest(AbstractType type) {
+	public SwingController(AbstractType type) {
 		initCallbacks();
 
 		// set up view
@@ -104,7 +104,7 @@ public class ControllerTest {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				ControllerTest controller = new ControllerTest(type);
+				SwingController controller = new SwingController(type);
 				controller.show();
 			}
 		});
