@@ -33,8 +33,6 @@ public abstract class AbstractType {
 		}
 		this.fingerprint += objectID+".";
 		
-		System.out.println("Created object '"+objectID+"' with fingerprint '"+fingerprint+"'");
-		
 		processChilds();
 	}
 	

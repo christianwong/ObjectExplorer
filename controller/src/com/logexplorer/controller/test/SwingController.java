@@ -82,12 +82,10 @@ public class SwingController {
 
 			@Override
 			public void doSearch(String attribute, String value) {
-				List<AbstractType> search = TypeIndex.getInstance().search(attribute, value);
-				System.out.println("Found "+search.size()+" items:");
-				for (AbstractType result : search) {
-					System.out.println(result.getID()+" -> name='"+result.getName()+"' value='"+result.getValue()+"'");
-				}
+				// Searching but not using the results
+				TypeIndex.getInstance().search(attribute, value);
 				
+				// re-process tree and text views
 				view.getTreeViewPanel().processSelectedObjects();
 			}
 		};
