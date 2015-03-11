@@ -141,7 +141,7 @@ public class ObjectTextViewPanel extends JPanel {
 			appendToPane(value, ViewConsts.TEXT_VALUE_COLOR, valueHightlight);
 		} else {
 			// Process nodes with children
-			indentLine(level, !parent.getHandler().isExpanded(object) || fullTraverse);
+			indentLine(level, !parent.getHandler().isExpanded(object) && !fullTraverse);
 			appendToPane(name, ViewConsts.TEXT_DEFAULT_COLOR, nameHightlight);
 			appendToPane("<"+type+"> ", ViewConsts.TEXT_TYPE_COLOR, valueHightlight);
 			appendToPane("(id="+id+")", ViewConsts.TEXT_DEFAULT_COLOR, valueHightlight);
