@@ -29,4 +29,4 @@ Run release X with logs and saving log to file
 
 ### Screenshoot ###
 
-![Screenshoot](raw/master/doc/img/ObjectX_2.3.3.png)
+![Screenshoot](doc/img/ObjectX_2.3.3.png)
