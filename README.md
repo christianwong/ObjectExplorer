@@ -29,4 +29,4 @@ Run release X with logs and saving log to file
 
 ### Screenshoot ###
 
-![Screenshoot](doc/img/ObjectX_2.3.3.png)
+![Screenshoot](https://bytebucket.org/christianwong/objectexplorer/raw/c9c5fba4f97c4ebaee225df5f5c5a02100304edb/doc/img/ObjectX_2.3.3.png)
